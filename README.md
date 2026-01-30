@@ -1,4 +1,4 @@
-# Proyecto Académico
+# Proyecto DAM
 
 Este proyecto es un sistema web con **frontend en React** y **backend en Node.js + Express**, preparado para manejo de autenticación y conexión a base de datos SQL.
 
@@ -9,7 +9,7 @@ La estructura del proyecto está pensada para ser escalable, mantenible y clara 
 ## Estructura general del proyecto
 
 ```
-proyecto-academico/
+proyecto-dam/
 │
 ├── backend/
 │   ├── src/
