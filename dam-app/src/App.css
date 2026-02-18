@@ -1,106 +1,55 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  min-height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* Styles for the index page */
+/* Index page container */
 .index-container {
-  text-align: center;
   padding: 2rem 1rem;
 }
-.index-container .hero {
-  margin: 1.25rem auto;
-  padding: 1.25rem;
+
+.index-container header {
+  margin-bottom: 2rem;
+}
+
+.index-container header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.index-container header p {
+  font-size: 1.125rem;
+  color: #6c757d;
+}
+
+/* Hero section */
+.hero {
+  margin: 2rem auto;
+  padding: 3rem;
   max-width: 720px;
-  border-radius: 8px;
-  background: #f6f8ff;
-  box-shadow: 0 6px 18px rgba(16,24,40,0.04);
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f3ff 100%);
+  border-left: 4px solid #0d6efd;
 }
 
-/* Navbar fixed and centered layout adjustments */
-.custom-navbar {
-  box-shadow: 0 2px 6px rgba(16,24,40,0.06);
+.hero h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
 }
 
-/* Reserve space for the fixed navbar so content is not hidden */
+.hero p {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/* Navbar fixed layout */
 .main-content {
-  padding-top: 72px; /* adjust if navbar height changes */
+  padding-top: 72px;
   min-height: calc(100vh - 72px);
-}
-
-/* Center nav links better on wide screens */
-.custom-navbar .navbar-nav {
-  gap: 1rem;
 }
 
 @media (max-width: 575px) {
   .main-content {
-    padding-top: 88px; /* allow extra space for toggler on small screens */
-  }
-}
-
-/* Ensure centered brand doesn't block toggler/collapse on small screens */
-.custom-navbar .navbar-brand {
-  z-index: 1020;
-}
-.custom-navbar .navbar-toggler {
-  z-index: 1030;
-}
-
-/* Center the collapse block while keeping the brand on the left */
-.custom-navbar .navbar-collapse.position-absolute {
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  position: absolute !important;
-  top: auto;
-  z-index: 1015;
-}
-
-/* On small screens make sure the centered collapse becomes full-width below the navbar */
-@media (max-width: 991px) {
-  .custom-navbar .navbar-collapse.position-absolute {
-    position: static !important;
-    transform: none !important;
-    left: auto !important;
-    width: 100%;
-    z-index: 1015;
+    padding-top: 88px;
   }
 }

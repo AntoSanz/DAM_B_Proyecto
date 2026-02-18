@@ -1,7 +1,26 @@
 .card {
-  /* keep default bootstrap look; override if needed */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .card .card-title {
   font-weight: 600;
+  color: #212529;
+}
+
+.card .card-text {
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+.card .btn {
+  width: 100%;
+  margin-top: auto;
 }

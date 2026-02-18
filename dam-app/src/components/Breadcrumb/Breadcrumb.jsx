@@ -23,13 +23,13 @@ function Breadcrumb({ categoryName, showProducts, showProductDetail, productName
           </li>
         )}
         {showProducts && !showProductDetail && (
-          <li className="breadcrumb-item active" aria-current="page">
-            <span className="breadcrumb-active">{t('breadcrumb.products')}</span>
+          <li className="breadcrumb-item active">
+            {t('breadcrumb.products')}
           </li>
         )}
         {showProductDetail && productName && (
-          <li className="breadcrumb-item active" aria-current="page">
-            <span>{productName}</span>
+          <li className="breadcrumb-item active">
+            {productName}
           </li>
         )}
       </ol>
