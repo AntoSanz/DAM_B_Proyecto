@@ -1,15 +1,36 @@
+/**
+ * index.css - Estilos globales de la aplicación
+ * 
+ * Este archivo contiene reglas CSS que se aplican globalmente a toda la aplicación.
+ * Las reglas más específicas de componentes están en sus archivos CSS respectivos.
+ */
+
+/**
+ * Variables globales CSS (:root)
+ * Define la tipografía base, altura de línea, y peso de fuente por defecto
+ */
 :root {
   font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 }
 
+/**
+ * Estilos del element <body>
+ * - Elimina el margen por defecto del navegador
+ * - Asegura altura mínima de 100% del viewport
+ * - Asegura ancho mínimo para soportar dispositivos pequeños
+ */
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
 }
 
+/**
+ * Estilos para todos los encabezados (h1-h6)
+ * Elimina el margen superior para evitar espacios innecesarios
+ */
 h1,
 h2,
 h3,
@@ -19,11 +40,20 @@ h6 {
   margin-top: 0;
 }
 
+/**
+ * Estilos para enlaces <a>
+ * Por defecto: sin subrayado
+ */
 a {
   text-decoration: none;
 }
 
+/**
+ * Estilos para enlaces en hover
+ * Añade subrayado cuando el usuario pasa el ratón sobre el enlace
+ */
 a:hover {
   text-decoration: underline;
 }
+
 
