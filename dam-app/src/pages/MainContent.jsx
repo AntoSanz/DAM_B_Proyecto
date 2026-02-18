@@ -28,6 +28,10 @@ function MainContent({ children }) {
     setSelectedProductDetail(null)
   }
 
+  const handleBackToCategory = () => {
+    setSelectedProductDetail(null)
+  }
+
   const handleHomeClick = () => {
     setSelectedProducts([])
     setSelectedCategory(null)
@@ -47,6 +51,7 @@ function MainContent({ children }) {
               showProductDetail={!!selectedProductDetail}
               productName={selectedProductDetail?.name}
               onHomeClick={handleHomeClick}
+              onBackToCategory={handleBackToCategory}
               onBackToProducts={handleBackToProducts}
             />
           )}

@@ -2,7 +2,7 @@ import React from 'react'
 import { t } from '../../locales/i18n'
 import './Breadcrumb.css'
 
-function Breadcrumb({ categoryName, showProducts, showProductDetail, productName, onHomeClick, onBackToProducts }) {
+function Breadcrumb({ categoryName, showProducts, showProductDetail, productName, onHomeClick, onBackToCategory, onBackToProducts }) {
   return (
     <nav aria-label="breadcrumb" className="breadcrumb-nav">
       <ol className="breadcrumb">
@@ -13,18 +13,18 @@ function Breadcrumb({ categoryName, showProducts, showProductDetail, productName
         </li>
         {categoryName && (
           <li className="breadcrumb-item">
-            <span>{categoryName}</span>
-          </li>
-        )}
-        {showProducts && (
-          <li className="breadcrumb-item">
-            {showProductDetail ? (
-              <button className="breadcrumb-link" onClick={onBackToProducts}>
-                {t('breadcrumb.products')}
+            {showProductDetail || showProducts ? (
+              <button className="breadcrumb-link" onClick={onBackToCategory}>
+                {categoryName}
               </button>
             ) : (
-              <span className="breadcrumb-active">{t('breadcrumb.products')}</span>
+              <span>{categoryName}</span>
             )}
+          </li>
+        )}
+        {showProducts && !showProductDetail && (
+          <li className="breadcrumb-item active" aria-current="page">
+            <span className="breadcrumb-active">{t('breadcrumb.products')}</span>
           </li>
         )}
         {showProductDetail && productName && (
