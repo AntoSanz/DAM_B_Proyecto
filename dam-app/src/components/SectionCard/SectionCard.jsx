@@ -7,7 +7,9 @@ function SectionCard({
   text = 'Some quick example text to build on the card title and make up the bulk of the card’s content.',
   links = [],
   width = '18rem',
-  className = ''
+  className = '',
+  ctaText = null,
+  onCta = null
 }) {
   return (
     <div className={`card ${className}`} style={{ width }}>
@@ -20,6 +22,13 @@ function SectionCard({
             {l.text}
           </a>
         ))}
+        {ctaText && (
+          <div>
+            <button type="button" className="btn btn-primary btn-sm mt-2" onClick={onCta}>
+              {ctaText}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
