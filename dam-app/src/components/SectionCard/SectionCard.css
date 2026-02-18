@@ -1,0 +1,7 @@
+.card {
+  /* keep default bootstrap look; override if needed */
+}
+
+.card .card-title {
+  font-weight: 600;
+}

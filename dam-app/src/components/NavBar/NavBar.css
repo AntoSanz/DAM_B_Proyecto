@@ -1,0 +1,29 @@
+.custom-navbar {
+  box-shadow: 0 2px 6px rgba(16,24,40,0.06);
+}
+
+.custom-navbar .navbar-brand {
+  z-index: 1020;
+}
+
+.custom-navbar .navbar-toggler {
+  z-index: 1030;
+}
+
+.custom-navbar .navbar-collapse.position-absolute {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  position: absolute !important;
+  top: auto;
+  z-index: 1015;
+}
+
+@media (max-width: 991px) {
+  .custom-navbar .navbar-collapse.position-absolute {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    width: 100%;
+    z-index: 1015;
+  }
+}

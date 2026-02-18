@@ -1,5 +1,6 @@
-import '../App.css'
-import { t } from '../locales/i18n'
+import React from 'react'
+import './NavBar.css'
+import { t } from '../../locales/i18n'
 
 function NavBar() {
   return (

@@ -1,4 +1,4 @@
-import NavBar from '../components/NavBar'
+import NavBar from '../components/NavBar/NavBar'
 import MainContent from './MainContent'
 
 function Index() {
