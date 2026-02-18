@@ -321,6 +321,73 @@ La aplicación es completamente responsiva gracias a:
 - **Grande**: ≥ 992px (Desktops)
 - **Extra grande**: ≥ 1200px (Desktops grandes)
 
+## 🧪 Testing
+
+El proyecto incluye una **suite de tests completa** con **67 tests** que cubren:
+
+### Cobertura de Tests
+
+- ✅ **100% Statement Coverage**: Todas las líneas se ejecutan
+- ✅ **100% Function Coverage**: Todas las funciones se prueban
+- ✅ **96.36% Branch Coverage**: La mayoría de condiciones se cubren
+- ✅ **6 Test Files**: Cobertura de componentes, API e i18n
+
+### Ejecutar Tests
+
+```bash
+# Ejecutar tests una vez
+npm test
+
+# Modo watch (re-ejecuta al cambiar archivos)
+npm run test:watch
+
+# Ver cobertura detallada
+npm run test:coverage
+
+# Ver interfaz gráfica interactiva
+npm run test:ui
+```
+
+### Framework de Testing
+
+- **Vitest** (compatible con ES Modules de Vite)
+- **React Testing Library** (testea como un usuario)
+- **@testing-library/jest-dom** (matchers útiles)
+
+### Test Suites
+
+1. **SectionCard.test.jsx** (9 tests)
+   - Renderizado de componentes
+   - Props y estado
+   - Callbacks y eventos
+
+2. **Breadcrumb.test.jsx** (7 tests)
+   - Navegación interactiva
+   - Estados de renderización
+   - Funciones callback
+
+3. **NavBar.test.jsx** (9 tests)
+   - Estructura Bootstrap
+   - Responsive design
+   - Eventos de click
+
+4. **ProductDetailScreen.test.jsx** (16 tests)
+   - Renderizado de datos
+   - Estados de producto
+   - Disponibilidad de stock
+
+5. **api.test.js** (14 tests)
+   - Latencia simulada
+   - Filtrado de productos
+   - Manejo de categorías
+
+6. **i18n.test.js** (12 tests)
+   - Traducción de textos
+   - Cambio de idioma
+   - Acceso a clave anidadas
+
+Para más detalles, consulta [TESTING_GUIDE.md](./TESTING_GUIDE.md).
+
 ## 🚀 Mejoras Futuras
 
 - [ ] Carrito de compras con estado persistente

@@ -44,7 +44,7 @@ const categoryProductsMap = {
  * 
  * Uso: await delay(1000) espera 1 segundo
  */
-function delay(ms) {
+export function delay(ms = DEFAULT_DELAY) {
   return new Promise((res) => setTimeout(res, ms))
 }
 
@@ -77,6 +77,7 @@ export async function getProductsByCategory(categoryId, { delayMs = DEFAULT_DELA
 
 // Exporta las funciones como default para facilitar importaciones
 export default {
+  delay,
   getCategories,
   getProductsByCategory
 }
