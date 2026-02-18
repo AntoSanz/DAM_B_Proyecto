@@ -18,7 +18,16 @@ const es = {
   },
   products: {
     viewButton: 'Ver productos',
-    sectionTitle: 'Productos en {category}'
+    sectionTitle: 'Productos en {category}',
+    detailsButton: 'Ver detalles',
+    closeButton: 'Cerrar',
+    details: 'Detalles del producto',
+    backButton: 'Volver',
+    addToCart: 'Añadir al carrito'
+  },
+  breadcrumb: {
+    home: 'Inicio',
+    products: 'Productos'
   }
 }
 
