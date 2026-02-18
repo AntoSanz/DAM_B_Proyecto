@@ -40,3 +40,67 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Styles for the index page */
+.index-container {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.index-container .hero {
+  margin: 1.25rem auto;
+  padding: 1.25rem;
+  max-width: 720px;
+  border-radius: 8px;
+  background: #f6f8ff;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.04);
+}
+
+/* Navbar fixed and centered layout adjustments */
+.custom-navbar {
+  box-shadow: 0 2px 6px rgba(16,24,40,0.06);
+}
+
+/* Reserve space for the fixed navbar so content is not hidden */
+.main-content {
+  padding-top: 72px; /* adjust if navbar height changes */
+  min-height: calc(100vh - 72px);
+}
+
+/* Center nav links better on wide screens */
+.custom-navbar .navbar-nav {
+  gap: 1rem;
+}
+
+@media (max-width: 575px) {
+  .main-content {
+    padding-top: 88px; /* allow extra space for toggler on small screens */
+  }
+}
+
+/* Ensure centered brand doesn't block toggler/collapse on small screens */
+.custom-navbar .navbar-brand {
+  z-index: 1020;
+}
+.custom-navbar .navbar-toggler {
+  z-index: 1030;
+}
+
+/* Center the collapse block while keeping the brand on the left */
+.custom-navbar .navbar-collapse.position-absolute {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  position: absolute !important;
+  top: auto;
+  z-index: 1015;
+}
+
+/* On small screens make sure the centered collapse becomes full-width below the navbar */
+@media (max-width: 991px) {
+  .custom-navbar .navbar-collapse.position-absolute {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    width: 100%;
+    z-index: 1015;
+  }
+}
