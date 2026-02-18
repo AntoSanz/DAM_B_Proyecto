@@ -18,9 +18,8 @@ import './Breadcrumb.css'
  * - productName: Nombre del producto (para mostrar en detalles)
  * - onHomeClick: Callback para volver al inicio
  * - onBackToCategory: Callback para volver a lista de productos de la categoría
- * - onBackToProducts: Callback no usado actualmente
  */
-function Breadcrumb({ categoryName, showProducts, showProductDetail, productName, onHomeClick, onBackToCategory, onBackToProducts }) {
+function Breadcrumb({ categoryName, showProducts, showProductDetail, productName, onHomeClick, onBackToCategory }) {
   return (
     // Elemento nav semántico con atributo aria-label para accesibilidad
     <nav aria-label="breadcrumb" className="breadcrumb-nav">

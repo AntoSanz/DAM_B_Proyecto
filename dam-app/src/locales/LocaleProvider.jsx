@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useState } from 'react'
 import translations from './i18n'
 import { setLocale as setLocaleModule } from './i18n'
 
@@ -29,10 +29,6 @@ export function LocaleProvider({ children, defaultLocale = 'es-ES' }) {
       {children}
     </LocaleContext.Provider>
   )
-}
-
-export function useLocale() {
-  return useContext(LocaleContext)
 }
 
 export default LocaleProvider

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import '../App.css'
-import { t } from '../locales/i18n'
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb'
 import CategoriesList from '../components/CategoriesList/CategoriesList'
 import ProductsList from '../components/ProductsList/ProductsList'
