@@ -2,6 +2,8 @@
 
 Una aplicación web moderna de e-commerce para la venta de videojuegos, construida con **React**, **Vite** y **Bootstrap 5**.
 
+> 💡 **¿Quieres empezar rápido?** Consulta [QUICK_START.md](./QUICK_START.md) para comandos esenciales.
+
 ## 📋 Características Principales
 
 - ✅ **Sistema de categorías**: Navega entre diferentes tipos de juegos (Juegos de Mesa, PC, Xbox, Nintendo, PS5)
