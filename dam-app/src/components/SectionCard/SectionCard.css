@@ -14,7 +14,7 @@
  * - Transiciones suaves para transform y box-shadow (0.2s)
  * - Sin borde por defecto (border: none)
  * - Sombra sutil (#rgba con opacidad 0.08)
- * - Altura:100% para ocupar todo el ancho del contenedor padre
+ * - Altura: 100% para ocupar todo el ancho del contenedor padre
  */
 .card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
