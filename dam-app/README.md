@@ -429,7 +429,7 @@ npm run dev
 - Limpia la caché del navegador (Ctrl+Shift+Delete)
 
 ### No se muestran las imágenes
-- Verifica que las URLs en los archivos JSON de productos es correctas
+- Verifica que las URLs en los archivos JSON de productos son correctas
 - Asegúrate de que las imágenes están en `src/assets/` o son URLs válidas
 
 ## 📝 Notas de Desarrollo
