@@ -26,7 +26,7 @@ function Breadcrumb({ categoryName, showProducts, showProductDetail, productName
       {/* Lista ordenada de elementos del breadcrumb */}
       <ol className="breadcrumb">
         
-        {/* ELEMENTO 1: Inicio - Always clickeable */}
+        {/* ELEMENTO 1: Inicio - Siempre clickeable */}
         <li className="breadcrumb-item">
           <button className="breadcrumb-link" onClick={onHomeClick}>
             {t('breadcrumb.home')}

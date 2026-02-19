@@ -13,7 +13,8 @@ __tests__/
 ├── NavBar.test.jsx        # Tests del componente NavBar (9 tests)
 ├── ProductDetailScreen.test.jsx  # Tests de detalle de producto (16 tests)
 ├── api.test.js            # Tests de la API mock (14 tests)
-└── i18n.test.js           # Tests del sistema de traducción (12 tests)
+├── i18n.test.js           # Tests del sistema de traducción (12 tests)
+└── MainContent.test.jsx   # Tests de navegación y orquestación (7 tests)
 ```
 
 ## 🚀 Cómo Ejecutar los Tests
@@ -48,23 +49,18 @@ npm run test:coverage
 | **ProductDetailScreen.test.jsx** | 16 | Pantalla de detalle de producto |
 | **api.test.js** | 14 | Mock API con latencia y filtrado |
 | **i18n.test.js** | 12 | Sistema de internacionalización |
-| **TOTAL** | **67 tests** | Cobertura completa |
+| **MainContent.test.jsx** | 7 | Orquestación de estado y navegación |
+| **TOTAL** | **Ver `npm test`** | Total dinámico según suites actuales |
 
 ## 🔍 Archivos de Configuración
 
-### jest.config.js
-Configuración principal de Jest:
+### vitest.config.js
+Configuración principal de Vitest:
 - Entorno: jsdom (simula navegador)
-- Transform: babel-jest (procesa JSX)
 - Patterns: encuentra archivos `*.test.js` y `*.test.jsx`
-- Coverage: umbral mínimo 50%
+- Coverage: reporte con V8
 
-### babel.config.js
-Configuración de Babel para Jest:
-- Transforma JSX a JavaScript
-- Transforma ES6+ a JavaScript compatible
-
-### jest.setup.js
+### vitest.setup.js
 Configuración previa a los tests:
 - Importa matchers de Testing Library
 - Mock de `window.matchMedia`
@@ -72,7 +68,7 @@ Configuración previa a los tests:
 
 ## ✅ Qué se Testea
 
-### Componentes (38 tests)
+### Componentes
 - ✅ Renderizado correcto
 - ✅ Props personalizados
 - ✅ Eventos y callbacks
@@ -104,7 +100,7 @@ test('debe mostrar el título correcto', () => {
 
 // Test con eventos
 test('debe ejecutar callback al clickear', () => {
-  const mock = jest.fn()
+  const mock = vi.fn()
   render(<SectionCard onCta={mock} ctaText="Clickear" />)
   
   const button = screen.getByRole('button')
@@ -122,10 +118,10 @@ test('debe obtener categorías', async () => {
 
 ## 🛠️ Herramientas Utilizadas
 
-- **Jest**: Framework de testing
+- **Vitest**: Framework de testing
 - **@testing-library/react**: Utilidades para testing de React
 - **@testing-library/jest-dom**: Matchers personalizados
-- **babel-jest**: Transforma JSX para Jest
+- **V8 Coverage**: Reportes de cobertura integrados con Vitest
 
 ## 📈 Cobertura
 
@@ -140,7 +136,7 @@ All files                   | 50+     | 50+      | 50+     | 50+
 ## 🐛 Debugging de Tests
 
 ### Ver logs en tests
-Descomenta en `jest.setup.js`:
+Descomenta en `vitest.setup.js`:
 ```javascript
 console.log('Mi variable:', valor)
 ```
@@ -163,20 +159,10 @@ npm run test:watch
 # Presiona 'p' para filtrar archivos
 ```
 
-## 🔄 Próximos Pasos
-
-Tests a agregar en el futuro:
-- [ ] Tests para CategoriesList
-- [ ] Tests para ProductsList
-- [ ] Tests de integración (flujo completo)
-- [ ] Tests de useEffect y hooks
-- [ ] Tests de casos límite (edge cases)
-- [ ] Tests de accesibilidad (a11y)
-
 ## 📞 Preguntas Comunes
 
-**P: ¿Por qué algunos tests usan `jest.fn()`?**
-R: Para crear funciones mock que registran si fueron llamadas y con qué parámetros.
+**P: ¿Por qué algunos tests usan `vi.fn()`?**
+R: En este proyecto se usa `vi.fn()` (Vitest) para crear funciones mock que registran si fueron llamadas y con qué parámetros.
 
 **P: ¿Qué es `screen.getByText()`?**
 R: Una función que busca elementos por texto visible en la pantalla.
@@ -192,8 +178,23 @@ R: Usa `fireEvent.click()`, `fireEvent.change()`, etc.
 1. **Tests descriptivos**: Usa `test('debe...')` para claridad
 2. **AAA Pattern**: Arrange, Act, Assert
 3. **Un assert principal**: Cada test debe probar una cosa
-4. **Mocks**: Usa `jest.fn()` para callbacks
+4. **Mocks**: Usa `vi.fn()` para callbacks
 5. **Coverage**: Apunta a 80%+ cobertura
+
+## 🔮 Future Testing
+
+Componentes sin test unitario dedicado actualmente:
+- [ ] Tests para CategoriesList
+- [ ] Tests para ProductsList
+- [ ] Tests para ProductDetailModal
+- [ ] Tests para Index
+- [ ] Tests para App
+
+Otros pendientes:
+- [ ] Tests de integración (flujo completo)
+- [ ] Tests de useEffect y hooks
+- [ ] Tests de casos límite (edge cases)
+- [ ] Tests de accesibilidad (a11y)
 
 ---
 

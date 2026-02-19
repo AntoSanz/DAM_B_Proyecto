@@ -238,7 +238,7 @@ runtimeConfig.json
 #    - Compartir .env.example, no .env
 #
 # 3. **dist/** e **build/**:
-#    - Se generan automaticamente con npm run build
+#    - Se generan automáticamente con npm run build
 #    - No necesario subir
 #
 # 4. **IDE settings** (.vscode, .idea):

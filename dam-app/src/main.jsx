@@ -12,14 +12,14 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
+import App from './App'
 
 // Importa los estilos CSS de Bootstrap
 // Bootstrap proporciona: componentes UI, grid responsivo, utilidades, variables CSS, etc.
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 // Crea la raíz de React y renderiza el componente App
-// StrictMode detects potential problems in the application during development
+// StrictMode detecta problemas potenciales en la aplicación durante el desarrollo
 // Se busca el elemento HTML <div id="root"></div> y ahí se monta toda la aplicación
 createRoot(document.getElementById('root')).render(
   <StrictMode>

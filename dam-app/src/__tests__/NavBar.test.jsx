@@ -4,7 +4,7 @@
  * Prueba la renderización y comportamiento de la barra de navegación
  */
 
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import NavBar from '../components/NavBar/NavBar'
 
@@ -66,13 +66,15 @@ describe('NavBar Component', () => {
     expect(navbarCollapse).toBeInTheDocument()
   })
 
-  // Test 8: Callback prop existe
-  test('debe aceptar prop onHomeClick', () => {
+  // Test 8: Callback onHomeClick
+  test('debe ejecutar onHomeClick al hacer click en la marca', () => {
     const mockClick = vi.fn()
     render(<NavBar onHomeClick={mockClick} />)
-    
-    // El componente debe renderizarse sin errores
-    expect(screen.getByRole('navigation')).toBeInTheDocument()
+
+    const brand = document.querySelector('.navbar-brand')
+    fireEvent.click(brand)
+
+    expect(mockClick).toHaveBeenCalledTimes(1)
   })
 
   // Test 9: Clases CSS personalizadas

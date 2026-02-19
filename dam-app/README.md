@@ -325,14 +325,15 @@ La aplicación es completamente responsiva gracias a:
 
 ## 🧪 Testing
 
-El proyecto incluye una **suite de tests completa** con **67 tests** que cubren:
+El proyecto incluye una suite de tests automatizados para componentes, API e i18n.
 
 ### Cobertura de Tests
 
-- ✅ **100% Statement Coverage**: Todas las líneas se ejecutan
-- ✅ **100% Function Coverage**: Todas las funciones se prueban
-- ✅ **96.36% Branch Coverage**: La mayoría de condiciones se cubren
-- ✅ **6 Test Files**: Cobertura de componentes, API e i18n
+- ✅ Cobertura de sentencias
+- ✅ Cobertura de funciones
+- ✅ Cobertura de ramas
+
+> Consulta los valores actualizados ejecutando `npm run test:coverage`.
 
 ### Ejecutar Tests
 
@@ -358,35 +359,55 @@ npm run test:ui
 
 ### Test Suites
 
-1. **SectionCard.test.jsx** (9 tests)
+1. **SectionCard.test.jsx**
    - Renderizado de componentes
    - Props y estado
    - Callbacks y eventos
 
-2. **Breadcrumb.test.jsx** (7 tests)
+2. **Breadcrumb.test.jsx**
    - Navegación interactiva
    - Estados de renderización
    - Funciones callback
 
-3. **NavBar.test.jsx** (9 tests)
+3. **NavBar.test.jsx**
    - Estructura Bootstrap
    - Responsive design
    - Eventos de click
 
-4. **ProductDetailScreen.test.jsx** (16 tests)
+4. **ProductDetailScreen.test.jsx**
    - Renderizado de datos
    - Estados de producto
    - Disponibilidad de stock
 
-5. **api.test.js** (14 tests)
+5. **api.test.js**
    - Latencia simulada
    - Filtrado de productos
    - Manejo de categorías
 
-6. **i18n.test.js** (12 tests)
+6. **i18n.test.js**
    - Traducción de textos
    - Cambio de idioma
    - Acceso a clave anidadas
+
+7. **MainContent.test.jsx**
+  - Orquestación de estado y navegación
+  - Handlers principales de flujo
+  - Renderizado condicional de vistas
+
+8. **CategoriesList.test.jsx**
+  - Renderizado de categorías y descripciones
+  - Callback `onCategorySelect`
+  - Grid Bootstrap e integración con SectionCard
+
+### Cobertura pendiente (sin test unitario dedicado)
+
+Actualmente no existe archivo de test específico para:
+- `ProductsList`
+- `ProductDetailModal`
+- `Index`
+- `App`
+
+Estos casos están parcialmente cubiertos de forma indirecta por pruebas de integración entre componentes.
 
 Para más detalles, consulta [TESTING_GUIDE.md](./TESTING_GUIDE.md).
 
@@ -438,6 +459,7 @@ npm run dev
 - **No se usa Redux**: Para este proyecto, el estado es simple y se maneja localmente
 - **CSS**: Se prefiere Bootstrap utilities sobre CSS personalizado
 - **Componentes**: Cada componente está en su propia carpeta con JSX y CSS separados
+- **Convención de extensiones**: Archivos con JSX usan `.jsx`; utilidades, mocks, locales y tests sin JSX usan `.js`; imports internos JS/JSX se escriben sin extensión
 
 ## 🤝 Contribuir
 

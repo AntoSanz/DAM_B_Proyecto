@@ -24,14 +24,16 @@ npm run test:coverage
 ```json
 {
   "devDependencies": {
-    "vitest": "^4.0.18",                  // Framework de testing (compatible con ES Modules)
-    "@vitest/ui": "^4.0.18",              // UI para visualizar tests
-    "@testing-library/react": "^14.1.0",  // Utilidades para testing React
-    "@testing-library/jest-dom": "^6.1.4",// Matchers personalizados
-    "identity-obj-proxy": "^3.0.0"        // Mock para archivos CSS
+    "vitest": "<versión del proyecto>",                  // Framework de testing (compatible con ES Modules)
+    "@vitest/ui": "<versión del proyecto>",              // UI para visualizar tests
+    "@testing-library/react": "<versión del proyecto>",  // Utilidades para testing React
+    "@testing-library/jest-dom": "<versión del proyecto>",// Matchers personalizados
+    "identity-obj-proxy": "<versión del proyecto>"        // Mock para archivos CSS
   }
 }
 ```
+
+> Revisa versiones exactas en `package.json`.
 
 **Nota:** Usamos **Vitest** en lugar de Jest porque:
 - ✅ Soporta nativamente módulos ES (nuestro proyecto usa `"type": "module"`)
@@ -80,6 +82,7 @@ src/
 │   ├── ProductDetailScreen.test.jsx# Tests de ProductDetailScreen
 │   ├── api.test.js                 # Tests de API mock
 │   ├── i18n.test.js                # Tests de internacionalización
+│   ├── MainContent.test.jsx        # Tests de navegación y orquestación
 │   └── README.md                    # Documentación de tests
 │
 ├── components/
@@ -298,8 +301,8 @@ npm run test:coverage
 
 ### Objetivo
 ```
-Mínimo recomendado: 70%
-Bueno: 80%+
+Mínimo: 80%
+Bueno: 85%+
 Excelente: 90%+
 ```
 
@@ -354,7 +357,7 @@ console.log(element.innerHTML)
 ## ❓ FAQ
 
 **P: ¿Cuántos tests necesito?**
-R: Apunta a 70-80% cobertura. Calidad sobre cantidad.
+R: Apunta a 80%+ cobertura. Calidad sobre cantidad.
 
 **P: ¿Debo testear componentes internos?**
 R: Testea comportamiento, no implementación.
