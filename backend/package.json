@@ -1,0 +1,13 @@
+{
+	"name": "dam-b-proyecto-backend",
+	"version": "1.0.0",
+	"private": true,
+	"main": "src/server.js",
+	"type": "commonjs",
+	"scripts": {
+		"start": "node src/server.js"
+	},
+	"dependencies": {
+		"better-sqlite3": "^12.6.2"
+	}
+}
