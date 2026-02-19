@@ -1,7 +1,7 @@
 # Pull Request Checklist
 
 ## 📋 Descripción
- <!-- Describe brevemente los cambios realizados en esta PR  -->
+<!-- Describe brevemente los cambios realizados en esta PR -->
 
 ## ✅ Checklist de Verificación
 
