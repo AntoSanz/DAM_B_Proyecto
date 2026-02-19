@@ -6,7 +6,12 @@ const { mockGetProductsByCategory } = vi.hoisted(() => ({
   mockGetProductsByCategory: vi.fn(),
 }))
 
+const { mockGetCategories } = vi.hoisted(() => ({
+  mockGetCategories: vi.fn(),
+}))
+
 vi.mock('../mocks/api', () => ({
+  getCategories: (...args) => mockGetCategories(...args),
   getProductsByCategory: (...args) => mockGetProductsByCategory(...args),
 }))
 
@@ -65,15 +70,25 @@ vi.mock('../components/Breadcrumb/Breadcrumb', () => ({
 
 describe('MainContent Component', () => {
   beforeEach(() => {
+    mockGetCategories.mockReset()
     mockGetProductsByCategory.mockReset()
+
+    mockGetCategories.mockResolvedValue([
+      { id: 1, name: 'PC Games', description: 'Cat mock' },
+    ])
+
     mockGetProductsByCategory.mockResolvedValue([
       { id: 10, name: 'Mock Product' },
       { id: 11, name: 'Mock Product 2' },
     ])
   })
 
-  test('debe renderizar CategoriesList por defecto', () => {
+  test('debe renderizar CategoriesList por defecto', async () => {
     render(<MainContent />)
+
+    await waitFor(() => {
+      expect(mockGetCategories).toHaveBeenCalled()
+    })
 
     expect(screen.getByTestId('categories-list')).toBeInTheDocument()
     expect(screen.queryByTestId('products-list')).not.toBeInTheDocument()
@@ -81,12 +96,16 @@ describe('MainContent Component', () => {
     expect(screen.queryByTestId('breadcrumb')).not.toBeInTheDocument()
   })
 
-  test('debe renderizar children cuando se proporcionan', () => {
+  test('debe renderizar children cuando se proporcionan', async () => {
     render(
       <MainContent>
         <div data-testid="custom-content">custom</div>
       </MainContent>
     )
+
+    await waitFor(() => {
+      expect(mockGetCategories).toHaveBeenCalled()
+    })
 
     expect(screen.getByTestId('custom-content')).toBeInTheDocument()
     expect(screen.queryByTestId('categories-list')).not.toBeInTheDocument()

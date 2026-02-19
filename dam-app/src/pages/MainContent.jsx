@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../App.css'
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb'
 import CategoriesList from '../components/CategoriesList/CategoriesList'
 import ProductsList from '../components/ProductsList/ProductsList'
 import ProductDetailScreen from '../components/ProductDetailScreen/ProductDetailScreen'
-import categories from '../mocks/categories.json'
-import { getProductsByCategory } from '../mocks/api'
+import { getCategories, getProductsByCategory } from '../mocks/api'
 
 /**
  * MainContent - Componente principal que gestiona toda la navegación y estado de la aplicación
@@ -25,6 +24,28 @@ function MainContent({ children }) {
   
   // Estado: Producto seleccionado para ver detalles
   const [selectedProductDetail, setSelectedProductDetail] = useState(null)
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    let isMounted = true
+
+    async function loadCategories() {
+      try {
+        const data = await getCategories()
+        if (isMounted) {
+          setCategories(data)
+        }
+      } catch (error) {
+        console.error('No se pudieron cargar las categorías:', error)
+      }
+    }
+
+    loadCategories()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   /**
    * Manejador: Se ejecuta cuando el usuario selecciona una categoría

@@ -1,0 +1,14 @@
+{
+  "name": "dam-b-proyecto",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev:full": "npm --prefix dam-app run dev:full",
+    "dev:front": "npm --prefix dam-app run dev",
+    "dev:back": "npm --prefix backend start",
+    "db:reset": "npm --prefix backend run db:reset",
+    "db:seed:users": "npm --prefix backend run db:seed:users",
+    "db:bootstrap": "npm --prefix backend run db:bootstrap",
+    "test:integration:front-back": "node tests/integration/front-back.integration.js"
+  }
+}

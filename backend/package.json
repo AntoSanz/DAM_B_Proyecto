@@ -5,9 +5,14 @@
 	"main": "src/server.js",
 	"type": "commonjs",
 	"scripts": {
-		"start": "node src/server.js"
+		"start": "node src/server.js",
+		"db:reset": "node src/scripts/db-reset.js",
+		"db:seed:users": "node src/scripts/db-seed-users.js",
+		"db:bootstrap": "node src/scripts/db-bootstrap.js"
 	},
 	"dependencies": {
-		"better-sqlite3": "^12.6.2"
+		"better-sqlite3": "^12.6.2",
+		"cors": "^2.8.6",
+		"express": "^5.2.1"
 	}
 }

@@ -1,17 +1,8 @@
 /**
- * API Mock - Simula respuestas de un servidor backend
- * 
- * Este archivo contiene funciones que simulan llamadas a una API backend.
- * Incluye latencia artificial para simular el comportamiento real de una red.
- * 
- * Cuando la aplicación crezca, estas funciones podrán ser reemplazadas
- * por llamadas reales a una API REST o GraphQL sin cambiar el resto del código.
+ * Capa de API - consume el backend Express
  */
 
-// Importa todas las categorías disponibles
-import categories from './categories.json'
-
-// Importa productos de cada categoría (uno por archivo)
+import categoriesMock from './categories.json'
 import boardGames from './products/boardGames.json'
 import pcGames from './products/pcGames.json'
 import xboxGames from './products/xboxGames.json'
@@ -23,19 +14,54 @@ import ps5Games from './products/ps5Games.json'
  * Simula el tiempo que tardaría una solicitud real al servidor
  * Útil para testing de estados de carga (spinners, etc.)
  */
-const DEFAULT_DELAY = 300
+const DEFAULT_DELAY = 0
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api'
+const USE_LOCAL_MOCKS =
+  import.meta.env.MODE === 'test' ||
+  import.meta.env.VITE_USE_API_MOCKS === 'true'
 
-/**
- * Mapeo de categoría a archivo de productos
- * Relaciona cada categoría (por ID) con su archivo JSON de productos
- * Ejemplo: Cuando el usuario selecciona categoría 1, obtenemos boardGames
- */
 const categoryProductsMap = {
-  1: boardGames,    // Juegos de mesa
-  2: pcGames,       // Juegos PC
-  3: xboxGames,     // Juegos Xbox
-  4: nintendoGames, // Juegos Nintendo
-  5: ps5Games       // Juegos PS5
+  1: boardGames,
+  2: pcGames,
+  3: xboxGames,
+  4: nintendoGames,
+  5: ps5Games,
+}
+
+function normalizeCategory(category) {
+  return {
+    id: Number(category.id),
+    name: String(category.name ?? ''),
+    description: String(category.description ?? ''),
+  }
+}
+
+function normalizeProduct(product) {
+  return {
+    id: Number(product.id),
+    categoryId: Number(product.categoryId),
+    name: String(product.name ?? ''),
+    shortDescription: String(product.shortDescription ?? ''),
+    longDescription: String(product.longDescription ?? ''),
+    price: Number(product.price ?? 0),
+    image: String(product.image ?? ''),
+    genre: product.genre ?? null,
+    developer: product.developer ?? null,
+    players: product.players ?? null,
+    releaseDate: product.releaseDate ?? null,
+    inStock: Boolean(product.inStock),
+    rating: product.rating ?? null,
+  }
+}
+
+async function fetchJson(url) {
+  const response = await fetch(url)
+
+  if (!response.ok) {
+    throw new Error(`Error HTTP ${response.status} al consultar ${url}`)
+  }
+
+  return response.json()
 }
 
 /**
@@ -57,7 +83,13 @@ export function delay(ms = DEFAULT_DELAY) {
  */
 export async function getCategories({ delayMs = DEFAULT_DELAY } = {}) {
   await delay(delayMs)
-  return categories
+
+  if (USE_LOCAL_MOCKS) {
+    return categoriesMock.map(normalizeCategory)
+  }
+
+  const response = await fetchJson(`${API_BASE_URL}/categories`)
+  return response.map(normalizeCategory)
 }
 
 /**
@@ -71,8 +103,14 @@ export async function getCategories({ delayMs = DEFAULT_DELAY } = {}) {
  */
 export async function getProductsByCategory(categoryId, { delayMs = DEFAULT_DELAY } = {}) {
   await delay(delayMs)
-  // Retorna los productos de la categoría o un array vacío si la categoría no existe
-  return categoryProductsMap[categoryId] || []
+
+  if (USE_LOCAL_MOCKS) {
+    const products = categoryProductsMap[Number(categoryId)] || []
+    return products.map(normalizeProduct)
+  }
+
+  const response = await fetchJson(`${API_BASE_URL}/categories/${categoryId}/products`)
+  return response.map(normalizeProduct)
 }
 
 // Exporta las funciones como default para facilitar importaciones
