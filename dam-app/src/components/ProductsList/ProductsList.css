@@ -1,0 +1,17 @@
+/**
+ * ProductsList.css - Estilos para el componente ProductsList
+ * 
+ * Este archivo está prácticamente vacío porque ProductsList utiliza
+ * las clases de utilidad de Bootstrap para el grid y los componentes.
+ * 
+ * Bootstrap proporciona:
+ * - row / col-* para la estructura de grid responsivo
+ * - card para las tarjetas de productos
+ * - btn para los botones de acción
+ * - 
+ * No hay estilos personalizados necesarios en este componente.
+ */
+
+/* ProductsList usa grid y componentes de Bootstrap - no se necesitan estilos adicionales */
+
+
