@@ -256,8 +256,8 @@ test('debe validar email', () => {
 render(<Component data-testid="my-element" />)
 screen.getByTestId('my-element')
 
-// Usar jest.fn() para mocks
-const mock = jest.fn()
+// Usar vi.fn() para mocks
+const mock = vi.fn()
 ```
 
 ### ❌ No Hacer
