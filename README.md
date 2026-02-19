@@ -1,6 +1,6 @@
 # DAM_B_Proyecto
 
-Proyecto fullstack con frontend en React/Vite (`dam-app`) y backend en Node.js/Express + SQLite (`backend`).
+Proyecto fullstack con frontend en React/Vite (`frontend`) y backend en Node.js/Express + SQLite (`backend`).
 
 ## Estructura
 
@@ -16,7 +16,7 @@ DAM_B_Proyecto/
 │   │   ├── routes/
 │   │   ├── scripts/
 │   │   └── services/
-├── dam-app/
+├── frontend/
 │   ├── src/
 │   │   ├── components/
 │   │   ├── locales/
@@ -37,7 +37,7 @@ DAM_B_Proyecto/
 1. Instala dependencias del frontend y backend:
 
 ```bash
-npm --prefix dam-app install
+npm --prefix frontend install
 npm --prefix backend install
 ```
 
@@ -68,7 +68,7 @@ El frontend usa `VITE_API_BASE_URL` para apuntar al backend.
 
 Archivo:
 
-- `dam-app/.env`
+- `frontend/.env`
 
 Valor local por defecto:
 

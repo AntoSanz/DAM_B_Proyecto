@@ -4,7 +4,7 @@ const { spawn } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '../..');
 const BACKEND_DIR = path.join(ROOT, 'backend');
-const FRONTEND_DIR = path.join(ROOT, 'dam-app');
+const FRONTEND_DIR = path.join(ROOT, 'frontend');
 
 function parseEnvFile(filePath) {
   if (!fs.existsSync(filePath)) return {};

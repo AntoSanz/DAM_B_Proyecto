@@ -26,7 +26,7 @@ Una aplicación web moderna de e-commerce para la venta de videojuegos, construi
 ## 📁 Estructura del Proyecto
 
 ```
-dam-app/
+frontend/
 ├── src/
 │   ├── pages/
 │   │   ├── Index.jsx              # Página principal
@@ -98,7 +98,7 @@ dam-app/
 1. **Clonar el repositorio**
 ```bash
 git clone <url-del-repositorio>
-cd dam-app
+cd frontend
 ```
 
 2. **Instalar dependencias**
@@ -294,7 +294,7 @@ Vuelve a Productos
 2. Crear archivo de productos en `src/mocks/products/newCategory.json`
 3. Actualizar el mapeo en backend para exponer la nueva categoría
 
-> Nota: mientras los datos estén en archivos JSON del frontend, el backend los lee desde `dam-app/src/mocks`. Si cambias estructura o nombres, actualiza también el backend.
+> Nota: mientras los datos estén en archivos JSON del frontend, el backend los lee desde `frontend/src/mocks`. Si cambias estructura o nombres, actualiza también el backend.
 
 ### Cambiar Colores de Bootstrap
 
