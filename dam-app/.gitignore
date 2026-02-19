@@ -1,0 +1,272 @@
+# ============================================
+# .gitignore - Proyecto DAM Game Store
+# ============================================
+# 
+# Este archivo especifica qué archivos y carpetas 
+# deben ser ignorados por Git y no subidos al repositorio
+
+# Dependencias de Node.js
+# =======================
+node_modules/
+package-lock.json
+yarn.lock
+.pnp
+.pnp.js
+
+# Archivos de build/distribución
+# ===============================
+dist/
+dist-ssr/
+build/
+*.tsbuildinfo
+*.js.map
+*.css.map
+
+# Archivos de Vite
+# ================
+.vite/
+.vite-cache/
+
+# Variables de entorno (CRÍTICO: nunca subir)
+# ============================================
+.env
+.env.local
+.env.*.local
+.env.production.local
+.env.development.local
+.env.test.local
+
+# Logs y ficheros de salida
+# =========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Archivos temporales del sistema operativo
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+*.swp
+*.swo
+*~
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+.directory
+.Trash-*
+
+# IDEs y editores
+# ===============
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.vscode/settings.json
+
+.idea/
+.idea_modules/
+*.iml
+*.iws
+*.ipr
+*.ics
+*.patch
+
+.sublime-project
+.sublime-workspace
+
+.atom/
+.apm/
+
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+.vim/
+Session.vim
+Sessionx.vim
+.netrwhist
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+.vimrc
+.viminfo
+
+# Otros editores
+*.bak
+*.tmp
+*.orig
+*.swn
+*.swo
+
+# Carpetas de testing
+# ===================
+coverage/
+.nyc_output/
+.coverage
+htmlcov/
+*.lcov
+.mocha
+.mocharc*.json
+junit.xml
+.jestrc
+
+# Archivos de desarrollo local
+# =============================
+.eslintcache
+.stylelintcache
+.prettierignore
+
+# Caché de dependencias
+# =====================
+.cache/
+.eslintcache
+.node-gyp/
+
+# Otros cachés
+# ============
+dist/
+.nuxt/
+.next
+out/
+
+# Archivos de módulos/librerías específicas
+# =========================================
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# Build output de herramientas específicas
+# ========================================
+.fusebox/
+.runtimeconfig.json
+runtimeConfig.json
+
+# Archivos de base de datos locales (si aplica)
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+.mongodb/
+
+# Archivos de caché de compilación
+# ================================
+.parcel-cache
+.cache
+
+# Archivos de análisis de código
+# ==============================
+.sonarqube/
+.sonar/
+
+# Archivos de profiling
+# ====================
+*.prof
+*.cpuprofile
+*.heapsnapshot
+
+# Carpetas del sistema
+# ===================
+.fusebox
+.rts2_cache_*
+/tmp
+/temp
+
+# Archivos personalizados
+# =======================
+# Descomenta según sea necesario para tu proyecto:
+
+# Imágenes de desarrollo (si usas muchas locales)
+# /src/assets/images/temp/*
+
+# Archivos de configuración sensible
+# config/secrets.json
+# .aws/
+# .gcloud/
+
+# Subidas/uploads locales
+# /uploads/*
+
+# Documentos temporales
+# *.pdf
+# *.doc
+# *.docx
+
+# ============================================
+# EXCEPCIONES
+# ============================================
+# Usa ! para hacer excepciones a las reglas anteriores
+# Ejemplo: !.gitkeep para mantener carpetas vacías
+
+# Mantener carpeta uploads aunque esté en .gitignore
+# !uploads/.gitkeep
+
+# ============================================
+# NOTAS IMPORTANTES
+# ============================================
+#
+# 1. **node_modules/** - CRÍTICO:
+#    - Nunca subir dependencies instaladas
+#    - Se regeneran con: npm install
+#
+# 2. **.env** - CRÍTICO:
+#    - Contiene datos sensibles (contraseñas, API keys, etc.)
+#    - Crear .env.example como plantilla
+#    - Compartir .env.example, no .env
+#
+# 3. **dist/** e **build/**:
+#    - Se generan automáticamente con npm run build
+#    - No necesario subir
+#
+# 4. **IDE settings** (.vscode, .idea):
+#    - Configuración personal de cada desarrollador
+#    - Pueden compartir .example o estar en un .gitignore local
+#
+# 5. **.local** files:
+#    - Archivos de desarrollo local
+#    - No deben afectar a otros desarrolladores
+#
+# ============================================
+# COMANDOS ÚTILES
+# ============================================
+#
+# Ver archivos ignorados:
+# git status --ignored
+#
+# Forzar agregar un archivo ignorado:
+# git add -f [archivo]
+#
+# Dejar de rastrear sin eliminar:
+# git rm --cached [archivo]
+#
+# Crear archivo .env desde ejemplo:
+# cp .env.example .env
+#
+# ============================================
+# Creado: Febrero 2026
+# Mantenedora: DAM Project Team
+# ============================================
+

@@ -1,0 +1,30 @@
+[
+  {
+    "id": 7,
+    "categoryId": 4,
+    "name": "The Legend of Zelda: Tears of the Kingdom",
+    "shortDescription": "Aventura épica de exploración",
+    "longDescription": "En Tears of the Kingdom, Link regresa para una aventura aún más épica. Explora un mundo vasto lleno de secretos, resuelve acertijos creativos y enfrenta enemigos poderosos. La libertad y la exploración son el corazón de esta obra maestra.",
+    "price": 69.99,
+    "image": "https://via.placeholder.com/300x300?text=Zelda+Tears",
+    "genre": "Aventura, Acción, Puzzle",
+    "developer": "Nintendo EPD",
+    "releaseDate": "2023",
+    "inStock": true,
+    "rating": 4.9
+  },
+  {
+    "id": 8,
+    "categoryId": 4,
+    "name": "Mario Kart 8 Deluxe",
+    "shortDescription": "Carreras arcade arcade con personajes icónicos",
+    "longDescription": "Mario Kart 8 Deluxe es la versión definitiva del clásico juego de carreras. Compite contra amigos o la IA en circuitos creativos, usa power-ups estratégicos y disfruta del caos arcade que Nintendo hace mejor.",
+    "price": 59.99,
+    "image": "https://via.placeholder.com/300x300?text=Mario+Kart+8",
+    "genre": "Carreras, Arcade",
+    "developer": "Nintendo EAD",
+    "releaseDate": "2014",
+    "inStock": true,
+    "rating": 4.8
+  }
+]

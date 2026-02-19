@@ -1,0 +1,17 @@
+/**
+ * CategoriesList.css - Estilos para el componente CategoriesList
+ * 
+ * Este archivo está prácticamente vacío porque CategoriesList utiliza
+ * las clases de utilidad de Bootstrap para el grid y components.
+ * 
+ * Bootstrap proporciona:
+ * - row / col-* para estructura de grid responsivo
+ * - gap-* (col-gap-3, etc.) para espaciado entre columnas
+ * - SectionCard para renderizar cada categoría como tarjeta
+ * 
+ * No hay estilos personalizados necesarios en este componente.
+ */
+
+/* CategoriesList usa grid y componentes de Bootstrap - no se necesitan estilos adicionales */
+
+

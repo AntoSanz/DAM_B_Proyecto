@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Juegos de mesa",
+    "description": "Juegos de mesa para todos los públicos"
+  },
+  {
+    "id": 2,
+    "name": "Juegos PC",
+    "description": "Juegos para ordenador (PC)"
+  },
+  {
+    "id": 3,
+    "name": "Juegos XBOX",
+    "description": "Juegos para consolas Xbox"
+  },
+  {
+    "id": 4,
+    "name": "Juegos Nintendo",
+    "description": "Juegos para consolas Nintendo"
+  },
+  {
+    "id": 5,
+    "name": "Juegos PS5",
+    "description": "Juegos para PlayStation 5"
+  }
+]

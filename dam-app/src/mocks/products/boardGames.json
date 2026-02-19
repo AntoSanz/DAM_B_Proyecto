@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "categoryId": 1,
+    "name": "Catan",
+    "shortDescription": "Juego de estrategia y comercio",
+    "longDescription": "Catan es un juego de estrategia clásico donde los jugadores compiten por construir asentamientos, ciudades y carreteras en una isla. Cada turno implica comerciar recursos con otros jugadores, haciendo que sea un juego dinámico y social.",
+    "price": 34.99,
+    "image": "https://via.placeholder.com/300x300?text=Catan",
+    "genre": "Estrategia, Negociación",
+    "players": "2-4 jugadores",
+    "releaseDate": "1995",
+    "inStock": true,
+    "rating": 4.8
+  },
+  {
+    "id": 2,
+    "categoryId": 1,
+    "name": "Carcassonne",
+    "shortDescription": "Juego de colocación de losetas",
+    "longDescription": "Carcassonne es un juego de construcción de paisajes medievales mediante la colocación de losetas. Los jugadores crean caminos, ciudades y monasterios mientras compiten por puntos. Es un juego accesible pero con profundidad estratégica.",
+    "price": 24.99,
+    "image": "https://via.placeholder.com/300x300?text=Carcassonne",
+    "genre": "Colocación de losetas, Construcción",
+    "players": "2-5 jugadores",
+    "releaseDate": "2000",
+    "inStock": true,
+    "rating": 4.7
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": 3,
+    "categoryId": 2,
+    "name": "Cyberpunk 2077 (PC)",
+    "shortDescription": "RPG de mundo abierto futurista",
+    "longDescription": "Cyberpunk 2077 es un RPG de acción en primera persona ambientado en el futuro distópico de 2077. Crea tu personaje y sumérgete en la megaciudad de Night City, donde tus acciones y decisiones moldean tu historia única.",
+    "price": 29.99,
+    "image": "https://via.placeholder.com/300x300?text=Cyberpunk+2077",
+    "genre": "RPG, Acción, Ciencia Ficción",
+    "developer": "CD Projekt Red",
+    "releaseDate": "2020",
+    "inStock": true,
+    "rating": 4.5
+  },
+  {
+    "id": 4,
+    "categoryId": 2,
+    "name": "Baldur's Gate 3 (PC)",
+    "shortDescription": "RPG táctico profundo basado en D&D",
+    "longDescription": "Baldur's Gate 3 es un RPG de rol táctico que trae la magia de Dungeons & Dragons al mundo digital. Con miles de posibilidades narrativas y batallas estratégicas, cada decisión importa en esta épica aventura.",
+    "price": 49.99,
+    "image": "https://via.placeholder.com/300x300?text=Baldurs+Gate+3",
+    "genre": "RPG, Estrategia por turnos, Fantasía",
+    "developer": "Larian Studios",
+    "releaseDate": "2023",
+    "inStock": true,
+    "rating": 4.9
+  }
+]

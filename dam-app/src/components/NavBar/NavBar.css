@@ -1,0 +1,109 @@
+/**
+ * NavBar.css - Estilos personalizados para la barra de navegación
+ * 
+ * Customiza el navbar de Bootstrap con:
+ * - Sombra sutil
+ * - Colores azules para brand y enlaces
+ * - Efectos hover suave
+ * - Centrado de enlacesy responsividad
+ */
+
+/**
+ * Navbar personalizado
+ * - Sombra sutil (box-shadow) para separación visual
+ * - Fondo blanco (#ffffff)
+ */
+.custom-navbar {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  background-color: #ffffff;
+}
+
+/**
+ * Marca de la empresa (logo/nombre)
+ * - Peso de fuente: 600 (semi-bold)
+ * - Color azul (#0d6efd - color primario de Bootstrap)
+ * - !important asegura que se aplique el color azul
+ * - Tamaño: 1.25rem (ligeramente más grande que el texto normal)
+ * - z-index alto (1020) para que esté por encima de otros elementos
+ */
+.custom-navbar .navbar-brand {
+  font-weight: 600;
+  color: #0d6efd !important;
+  font-size: 1.25rem;
+  z-index: 1020;
+}
+
+/**
+ * Enlaces de navegación (.nav-link) dentro de .navbar-nav
+ * - Color gris (#495057 - color bootstrap secondary)
+ * - Peso de fuente: 500 (más fuerte que normal)
+ * - Transición suave (color cambia en 0.2s)
+ */
+.custom-navbar .navbar-nav .nav-link {
+  color: #495057;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+/**
+ * Enlaces de navegación en estado hover
+ * Cuando el usuario pasa el ratón, cambia el color a azul (#0d6efd)
+ * La transición hace que el cambio sea suave en lugar de instantáneo
+ */
+.custom-navbar .navbar-nav .nav-link:hover {
+  color: #0d6efd;
+}
+
+/**
+ * Enlaces de navegación activos (.active)
+ * Cuando el enlace corresponde a la página actual, se muestra en azul
+ */
+.custom-navbar .navbar-nav .nav-link.active {
+  color: #0d6efd;
+}
+
+/**
+ * Botón hamburguesa (toggler) para menú móvil
+ * z-index alto (1030) para que esté en primer plano y clickeable
+ */
+.custom-navbar .navbar-toggler {
+  z-index: 1030;
+}
+
+/**
+ * Menú colapsable del navbar
+ * 
+ * En pantallas grandes, el menú se centra horizontalmente:
+ * - left: 50% - posiciona el borde izquierdo en el centro
+ * - transform: translateX(-50%) - mueve el elemento 50% a la izquierda
+ *   para que el centro del menú esté en el centro de la pantalla
+ * - position: absolute - lo saca del flujo normal del documento
+ * - top: auto - no está pegado arriba
+ * - z-index: 1015 - por debajo del navbar-brand (1020)
+ */
+.custom-navbar .navbar-collapse.position-absolute {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  position: absolute !important;
+  top: auto;
+  z-index: 1015;
+}
+
+/**
+ * Media query para tablets e inferiores (max-width 991px)
+ * En pantallas pequeñas, el menú colapsable vuelve al flujo normal:
+ * - position: static ! important - vuelve al flujo normal del documento
+ * - transform: none - quita el centrado
+ * - left: auto - quita el posicionamiento a la izquierda
+ * - width: 100% - ocupa todo el ancho disponible
+ */
+@media (max-width: 991px) {
+  .custom-navbar .navbar-collapse.position-absolute {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    width: 100%;
+    z-index: 1015;
+  }
+}
+

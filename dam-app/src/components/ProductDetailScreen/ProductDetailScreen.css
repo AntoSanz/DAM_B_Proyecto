@@ -1,0 +1,154 @@
+/**
+ * ProductDetailScreen.css - Estilos para la pantalla de detalle de producto
+ * 
+ * Estiliza la vista completa de detalles de un producto incluyendo:
+ * - Animación de entrada (fade-in)
+ * - Imagen del producto con sombra
+ * - Información de producto (descripción, metadata)
+ * - Sección de precio
+ * - Responsividad para dispositivos móviles
+ */
+
+/**
+ * Contenedor principal de la pantalla de detalle
+ * 
+ * - animation: fadeIn - aplica animación al aparecer
+ * - margin: espaciado vertical (arriba/abajo)
+ */
+.product-detail-screen {
+  animation: fadeIn 0.3s ease-in-out;
+  margin: 2rem 0;
+}
+
+/**
+ * Animación fadeIn
+ * Hace que el contenido aparezca gradualmente:
+ * - Comienza con opacidad 0 (invisible) y trasladado 10px hacia abajo
+ * - Termina con opacidad 1 (visible) y posición normal
+ * Duración: 0.3s
+ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * Imagen del producto
+ * 
+ * - Altura máxima: 500px
+ * - Ancho: 100% del contenedor
+ * - object-fit: cover - mantiene proporción y cubre el espacio
+ * - Esquinas redondeadas (0.5rem)
+ * - Sombra sutil para profundidad
+ * - Margen inferior para separación
+ */
+.product-detail-image {
+  max-height: 500px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/**
+ * Contenedor de detalles del producto
+ * 
+ * - Fondo gris claro (#f8f9fa)
+ * - Padding: 2rem (espaciado interno)
+ * - Esquinas redondeadas
+ * - Altura de línea: 1.8 (para buena legibilidad)
+ */
+.product-details {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  line-height: 1.8;
+}
+
+/**
+ * Párrafos dentro de .product-details
+ * 
+ * - Margen inferior: 1rem (separación entre párrafos)
+ * - Color: gris más oscuro (#495057)
+ */
+.product-details p {
+  margin-bottom: 1rem;
+  color: #495057;
+}
+
+/**
+ * Texto con énfasis (<strong>) dentro de .product-details
+ * Etiquetas como "Género:", "Desarrollador:", etc.
+ * 
+ * - Color oscuro (#212529) para destacar
+ */
+.product-details strong {
+  color: #212529;
+}
+
+/**
+ * Sección del precio
+ * 
+ * - Borde superior para separación visual
+ * - Padding superior para espaciado
+ * - Margen superior para separación del contenido anterior
+ */
+.price-section {
+  border-top: 2px solid #dee2e6;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/**
+ * Precio del producto
+ * 
+ * - Tamaño muy grande (2.5rem) para destacar
+ * - Peso: 700 (bold)
+ * - Color verde (#28a745) para indicar "precio disponible"
+ * - Margen inferior para separación del botón
+ */
+.price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #28a745;
+  margin-bottom: 1rem;
+}
+
+/**
+ * Botón "Atrás" (btn-secondary) en la pantalla de detalle
+ * 
+ * - Margen inferior para separación
+ */
+.product-detail-screen .btn-secondary {
+  margin-bottom: 1.5rem;
+}
+
+/**
+ * Media query para dispositivos medianos (tablets, max-width 768px)
+ * 
+ * Ajusta tamaños para mejor visualización en pantallas más pequeñas:
+ * - Imagen más compacta (300px)
+ * - Precio más pequeño (2rem)
+ * - Padding de detalles reducido (1.5rem)
+ */
+@media (max-width: 768px) {
+  .product-detail-image {
+    max-height: 300px;
+  }
+
+  .price {
+    font-size: 2rem;
+  }
+
+  .product-details {
+    padding: 1.5rem;
+  }
+}
+
