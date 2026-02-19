@@ -164,7 +164,7 @@ fireEvent.submit(form)
 
 ### Matchers
 ```javascript
-// Jest matchers
+// Matchers compatibles con Vitest
 expect(element).toBeDefined()
 expect(element).toEqual(value)
 expect(element).toBe(value)
@@ -196,7 +196,7 @@ test('debe mostrar nombre de usuario', () => {
 ### Test de Evento
 ```javascript
 test('debe hacer click en botón', () => {
-  const handleClick = jest.fn()
+  const handleClick = vi.fn()
   render(<Button onClick={handleClick}>Clickear</Button>)
   
   fireEvent.click(screen.getByRole('button'))
@@ -229,7 +229,7 @@ test('debe mostrar botón solo si está habilitado', () => {
 ### Test de Mocks
 ```javascript
 test('debe llamar función con parámetros', () => {
-  const mockFn = jest.fn()
+  const mockFn = vi.fn()
   
   mockFn('arg1', 'arg2')
   
@@ -347,7 +347,7 @@ console.log(element.innerHTML)
 
 ## 📚 Recursos Externos
 
-- [Jest Documentation](https://jestjs.io/)
+- [Vitest Documentation](https://vitest.dev/guide/)
 - [Testing Library Docs](https://testing-library.com/docs/react-testing-library/intro/)
 - [React Testing Best Practices](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
 
@@ -359,11 +359,11 @@ R: Apunta a 70-80% cobertura. Calidad sobre cantidad.
 **P: ¿Debo testear componentes internos?**
 R: Testea comportamiento, no implementación.
 
-**P: ¿Jest es lento?**
-R: Usa `--watchAll=false` o `--bail` para acelerar.
+**P: ¿Vitest puede ser lento?**
+R: Usa ejecución por archivo (`npx vitest run src/__tests__/archivo.test.jsx`) y evita cobertura cuando no sea necesaria.
 
 **P: ¿Cómo testeo localStorage?**
-R: Mockea `window.localStorage` con `jest.spyOn`.
+R: Mockea `window.localStorage` con `vi.spyOn`.
 
 **P: ¿Necesito snapshots?**
 R: Solo para componentes que cambian raramente.

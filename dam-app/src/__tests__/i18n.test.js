@@ -9,7 +9,7 @@ import { t, setLocale } from '../locales/i18n'
 describe('i18n (Internacionalización)', () => {
   // Test 1: Obtener traducción simple
   test('t() debe retornar traducción para clave válida', () => {
-    const translation = t('brand.name')
+    const translation = t('brand')
     
     expect(typeof translation).toBe('string')
     expect(translation.length).toBeGreaterThan(0)
@@ -35,13 +35,13 @@ describe('i18n (Internacionalización)', () => {
   test('setLocale() debe cambiar el idioma actual', () => {
     setLocale('es-ES')
     
-    const translation = t('brand.name')
+    const translation = t('brand')
     expect(typeof translation).toBe('string')
   })
 
   // Test 5: Locale por defecto es español
   test('el locale por defecto debe ser es-ES', () => {
-    const translation = t('brand.name')
+    const translation = t('brand')
     
     expect(typeof translation).toBe('string')
   })
@@ -49,9 +49,9 @@ describe('i18n (Internacionalización)', () => {
   // Test 6: Múltiples claves
   test('debe obtener múltiples traducciones correctamente', () => {
     const keys = [
-      'brand.name',
+      'brand',
       'nav.home',
-      'button.add',
+      'button.primary',
       'welcome.title'
     ]
     
@@ -63,7 +63,7 @@ describe('i18n (Internacionalización)', () => {
 
   // Test 7: Consistencia de traducciones
   test('la misma clave debe retornar siempre la misma traducción', () => {
-    const key = 'brand.name'
+    const key = 'brand'
     const call1 = t(key)
     const call2 = t(key)
     
@@ -80,10 +80,10 @@ describe('i18n (Internacionalización)', () => {
   // Test 9: Locale inválido no cambia el actual
   test('setLocale() con idioma inválido no debe cambiar locale', () => {
     setLocale('es-ES')
-    const translationBefore = t('brand.name')
+    const translationBefore = t('brand')
     
     setLocale('xx-XX') // Idioma que no existe
-    const translationAfter = t('brand.name')
+    const translationAfter = t('brand')
     
     expect(translationBefore).toBe(translationAfter)
   })
@@ -91,9 +91,9 @@ describe('i18n (Internacionalización)', () => {
   // Test 10: Cadenas vacías
   test('no debe haber traducciones vacías', () => {
     const keys = [
-      'brand.name',
+      'brand',
       'nav.home',
-      'button.add',
+      'button.primary',
       'welcome.title',
       'products.viewButton'
     ]
@@ -107,7 +107,7 @@ describe('i18n (Internacionalización)', () => {
   // Test 11: CamelCase en claves
   test('los accesos a claves deben ser case-sensitive', () => {
     const result1 = t('Brand.Name')
-    const result2 = t('brand.name')
+    const result2 = t('brand')
     
     // Deben ser diferentes porque una no existe
     expect(result1).toBe('Brand.Name')
@@ -117,7 +117,7 @@ describe('i18n (Internacionalización)', () => {
   // Test 12: Tipos de datos
   test('todas las traducciones deben ser strings', () => {
     const keys = [
-      'brand.name',
+      'brand',
       'nav.home',
       'welcome.title'
     ]
