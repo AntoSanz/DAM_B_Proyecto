@@ -27,7 +27,7 @@ Servidor por defecto:
 ## Scripts útiles
 
 - `npm start`: inicia la API
-- `npm run db:reset`: elimina `database.sqlite`, recrea esquema y aplica seed automático de catálogo
+- `npm run db:reset`: limpia datos, recrea estado base y aplica seed automático de catálogo
 - `npm run db:seed:users`: aplica seed SQL de usuarios demo
 - `npm run db:bootstrap`: ejecuta reset + seed de usuarios en un único comando
 

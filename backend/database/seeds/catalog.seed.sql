@@ -6,7 +6,7 @@ INSERT OR IGNORE INTO categories (id, name, description) VALUES
   (2, 'Juegos PC', 'Juegos para ordenador (PC)'),
   (3, 'Juegos XBOX', 'Juegos para consolas Xbox'),
   (4, 'Juegos Nintendo', 'Juegos para consolas Nintendo'),
-  (5, 'Juegos PS5', 'Juegos para PlayStation 5');
+  (5, 'Juegos PlayStation 5', 'Juegos para PlayStation 5');
 
 INSERT OR IGNORE INTO products (
   id,
