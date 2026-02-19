@@ -1,7 +1,7 @@
 /**
  * Mock para archivos (imágenes, fuentes, etc.)
  * 
- * Durante testing, los archivos se reemplazan con une string vacío
+ * Durante testing, los archivos se reemplazan con un string vacío
  * porque el navegador simulado (jsdom) no procesa archivos
  */
 
