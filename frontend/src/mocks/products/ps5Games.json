@@ -1,0 +1,30 @@
+[
+  {
+    "id": 9,
+    "categoryId": 5,
+    "name": "Marvel's Spider-Man 2 (PS5)",
+    "shortDescription": "Aventura de superhéroes en Nueva York",
+    "longDescription": "Experiencia una historia épica de Spider-Man con gráficos de siguiente generación. Controla a Peter Parker y Miles Morales mientras proteges Nueva York de nuevas amenazas en este emocionante juego de acción y aventura.",
+    "price": 69.99,
+    "image": "https://via.placeholder.com/300x300?text=Spider-Man+2",
+    "genre": "Acción, Aventura, Superhéroes",
+    "developer": "Insomniac Games",
+    "releaseDate": "2023",
+    "inStock": true,
+    "rating": 4.8
+  },
+  {
+    "id": 10,
+    "categoryId": 5,
+    "name": "Demon's Souls (PS5)",
+    "shortDescription": "RPG de acción desafiante",
+    "longDescription": "Demon's Souls es un remake espectacular del clásico de PS3. Enfrenta enemigos desafiantes, mejora tus habilidades y derrota poderosos jefes en este juego que requiere habilidad, estrategia y perseverancia.",
+    "price": 49.99,
+    "image": "https://via.placeholder.com/300x300?text=Demons+Souls",
+    "genre": "RPG de acción, Souls-like",
+    "developer": "Bluepoint Games",
+    "releaseDate": "2020",
+    "inStock": true,
+    "rating": 4.7
+  }
+]

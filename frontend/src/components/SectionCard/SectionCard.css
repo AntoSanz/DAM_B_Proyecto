@@ -1,0 +1,68 @@
+/**
+ * SectionCard.css - Estilos para el componente SectionCard (tarjetas personalizadas)
+ * 
+ * Estiliza tarjetas Bootstrap con:
+ * - Efecto de elevación al pasar el ratón
+ * - Sombras sutiles
+ * - Colores personalizados para título y texto
+ * - Botón de acción que ocupa el ancho completo
+ */
+
+/**
+ * Elemento .card (contenedor de la tarjeta)
+ * 
+ * - Transiciones suaves para transform y box-shadow (0.2s)
+ * - Sin borde por defecto (border: none)
+ * - Sombra sutil (#rgba con opacidad 0.08)
+ * - Altura: 100% para ocupar todo el ancho del contenedor padre
+ */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  height: 100%;
+}
+
+/**
+ * Efecto hover en tarjetas
+ * Cuando el usuario pasa el ratón sobre la tarjeta:
+ * - Se eleva 4px hacia arriba (translateY(-4px))
+ * - La sombra se intensifica (rgba opacidad 0.12)
+ * Esto crea un efecto visual de "elevación" muy usado en Material Design
+ */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/**
+ * Título de la tarjeta
+ * - Peso de fuente: 600 (semi-bold)
+ * - Color oscuro (#212529)
+ */
+.card .card-title {
+  font-weight: 600;
+  color: #212529;
+}
+
+/**
+ * Texto descriptivo de la tarjeta
+ * - Color gris (#6c757d)
+ * - Tamaño: 0.95rem (ligeramente más pequeño que normal)
+ */
+.card .card-text {
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+/**
+ * Botón dentro de la tarjeta
+ * - Ancho: 100% (ocupa todo el ancho disponible)
+ * - margin-top: auto (empuja el botón al fondo de la tarjeta
+ *   cuando hay espacio disponible, usando flexbox)
+ */
+.card .btn {
+  width: 100%;
+  margin-top: auto;
+}
+

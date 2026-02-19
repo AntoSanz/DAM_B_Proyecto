@@ -1,140 +1,119 @@
-# Proyecto DAM
+# DAM_B_Proyecto
 
-Este proyecto es un sistema web con **frontend en React** y **backend en Node.js + Express**, preparado para manejo de autenticación y conexión a base de datos SQL.
+Proyecto fullstack con frontend en React/Vite (`frontend`) y backend en Node.js/Express + SQLite (`backend`).
 
-La estructura del proyecto está pensada para ser escalable, mantenible y clara para un contexto académico.
+## Estructura
 
----
-
-## Estructura general del proyecto
-
-```
-proyecto-dam/
-│
+```text
+DAM_B_Proyecto/
 ├── backend/
+│   ├── database/
+│   │   └── seeds/
 │   ├── src/
 │   │   ├── config/
-│   │   │   ├── db.js            # Configuración de conexión a la base de datos
-│   │   │   └── env.js           # Variables de entorno
-│   │   │
 │   │   ├── controllers/
-│   │   │   └── auth.controller.js  # Controlador de autenticación
-│   │   │
-│   │   ├── middlewares/
-│   │   │   └── auth.middleware.js  # Middlewares de autenticación
-│   │   │
 │   │   ├── models/
-│   │   │   └── user.model.js       # Modelo de usuario para base de datos
-│   │   │
 │   │   ├── routes/
-│   │   │   └── auth.routes.js      # Rutas de autenticación
-│   │   │
-│   │   ├── services/
-│   │   │   └── auth.service.js     # Lógica de negocio de autenticación
-│   │   │
-│   │   ├── app.js                  # Configuración de Express y middlewares globales
-│   │   └── server.js               # Arranque del servidor
-│   │
-│   ├── .env                        # Variables de entorno
-│   ├── package.json                 # Dependencias del backend
-│   └── README.md                    # Documentación específica del backend
-│
+│   │   ├── scripts/
+│   │   └── services/
 ├── frontend/
 │   ├── src/
-│   │   ├── api/
-│   │   │   └── auth.api.js          # Funciones para llamadas HTTP al backend
-│   │   │
 │   │   ├── components/
-│   │   │   └── Login.jsx            # Componente de formulario de login
-│   │   │
-│   │   ├── pages/
-│   │   │   └── LoginPage.jsx        # Página de login
-│   │   │
-│   │   ├── context/
-│   │   │   └── AuthContext.jsx      # Contexto global de autenticación
-│   │   │
-│   │   ├── services/
-│   │   │   └── auth.service.js      # Lógica de frontend para autenticación
-│   │   │
-│   │   ├── App.jsx                  # Componente raíz
-│   │   └── main.jsx                 # Entrada de la aplicación React
-│   │
-│   ├── package.json                 # Dependencias del frontend
-│   └── README.md                    # Documentación específica del frontend
-│
-└── README.md                        # Documentación general del proyecto
+│   │   ├── locales/
+│   │   ├── mocks/
+│   │   │   └── products/
+│   │   └── pages/
+├── tests/
+│   └── integration/
 ```
 
----
+## Requisitos
 
-## Tecnologías utilizadas
+- Node.js 20+ (recomendado)
+- npm
 
-- **Frontend:** React, React Router, Axios
-- **Backend:** Node.js, Express, JWT, bcrypt
-- **Base de datos:** SQL (MySQL/PostgreSQL)
-- **Otros:** dotenv, nodemon, CORS
+## Puesta en marcha rápida
 
----
-
-## Descripción de carpetas
-
-### Backend
-
-- `config/` → Configuración global y conexión a base de datos.
-- `routes/` → Define las URLs de la API y su mapeo a controladores.
-- `controllers/` → Manejo de requests y responses.
-- `services/` → Lógica de negocio del backend.
-- `models/` → Acceso a la base de datos.
-- `middlewares/` → Funciones intermedias como autenticación y validaciones.
-- `app.js` → Configura Express y middlewares.
-- `server.js` → Arranca el servidor.
-
-### Frontend
-
-- `api/` → Funciones que hacen llamadas HTTP al backend.
-- `components/` → Componentes reutilizables de React.
-- `pages/` → Vistas completas o pantallas de la aplicación.
-- `context/` → Contextos de React para estado global.
-- `services/` → Lógica y helpers del frontend.
-- `App.jsx` → Componente raíz de React.
-- `main.jsx` → Entrada de la aplicación.
-
----
-
-## Instalación y ejecución
-
-### Backend
+1. Instala dependencias del frontend y backend:
 
 ```bash
-cd backend
-npm install
-npm run dev  # Inicia el servidor con nodemon
+npm --prefix frontend install
+npm --prefix backend install
 ```
 
-### Frontend
+2. Levanta frontend + backend juntos (desde la raíz):
 
 ```bash
-cd frontend
-npm install
-npm run dev  # Inicia el frontend (Vite)
+npm run dev:full
 ```
 
----
+Servicios esperados:
 
-## Flujo de autenticación (resumido)
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:3000`
 
-1. El usuario envía email y contraseña desde el frontend.
-2. El backend valida credenciales en `auth.service.js` y `user.model.js`.
-3. Si es correcto, se genera un token JWT y se envía al frontend.
-4. El frontend almacena el token (context, localStorage o cookies) y controla el acceso a rutas privadas.
+## Scripts disponibles (raíz)
 
----
+- `npm run dev:full`: levanta frontend + backend
+- `npm run dev:front`: levanta solo frontend
+- `npm run dev:back`: levanta solo backend
+- `npm run db:reset`: resetea DB SQLite del backend y carga catálogo
+- `npm run db:seed:users`: aplica seed de usuarios demo en backend
+- `npm run db:bootstrap`: resetea y siembra la base SQLite del backend
+- `npm run test:integration:front-back`: prueba especial de conexión Front-Back (config frontend + API backend + contrato de datos)
 
-## Resumen
+## Integración Front-Back
 
-Esta estructura permite:
+El frontend usa `VITE_API_BASE_URL` para apuntar al backend.
 
-- Separación clara de responsabilidades.
-- Escalabilidad para agregar módulos y endpoints.
-- Fácil mantenimiento y lectura académica.
-- Integración sencilla de frontend y backend mediante API REST.
+Archivo:
+
+- `frontend/.env`
+
+Valor local por defecto:
+
+```env
+VITE_API_BASE_URL=http://localhost:3000/api
+```
+
+## Backend API
+
+Endpoints principales:
+
+- `GET /health`
+- `GET /api/categories`
+- `GET /api/categories/:id/products`
+
+## Base de datos SQLite
+
+- Motor: `better-sqlite3`
+- Archivo local: `backend/database.sqlite`
+- Inicialización automática al arrancar backend
+- Seed catálogo (auto): `backend/database/seeds/catalog.seed.sql`
+- Seed usuarios (manual): `backend/database/seeds/users.seed.sql`
+
+Comando recomendado para dejar DB lista en backend:
+
+```bash
+npm --prefix backend run db:bootstrap
+```
+
+Flujo recomendado desde la raíz:
+
+```bash
+# Opción rápida (recomendada)
+npm run db:bootstrap
+
+# Opción paso a paso
+npm run db:reset
+npm run db:seed:users
+```
+
+## Git y archivos ignorados
+
+En `.gitignore` ya está configurado:
+
+- `node_modules/`
+- `*.sqlite`
+- `*.sqlite3`
+- `*.db`

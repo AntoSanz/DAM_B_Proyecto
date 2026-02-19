@@ -1,141 +1,499 @@
-# 🎨 Estructura del Frontend
+# 🎮 Game Store - Tienda de Juegos
 
-Este proyecto utiliza **React** para el desarrollo del frontend,
-siguiendo una estructura modular que permite **separar
-responsabilidades**, facilitar el mantenimiento y escalar la aplicación
-de forma ordenada.
+Una aplicación web moderna de e-commerce para la venta de videojuegos, construida con **React**, **Vite** y **Bootstrap 5**.
 
-El frontend se comunica con el backend **exclusivamente mediante
-peticiones HTTP** (API REST).
+> 💡 **¿Quieres empezar rápido?** Consulta [QUICK_START.md](./QUICK_START.md) para comandos esenciales.
 
-------------------------------------------------------------------------
+## 📋 Características Principales
 
-## 📁 `frontend/`
+- ✅ **Sistema de categorías**: Navega entre diferentes tipos de juegos (Juegos de Mesa, PC, Xbox, Nintendo, PS5)
+- ✅ **Catálogo de productos**: Visualiza productos enriquecidos con información detallada
+- ✅ **Vista detallada de productos**: Información completa incluyendo género, desarrollador, jugadores, fecha de lanzamiento, calificación
+- ✅ **Navegación intuitiva**: Breadcrumb interactivo para facilitar la navegación
+- ✅ **Localización en español**: Toda la interfaz en español (i18n)
+- ✅ **Diseño responsivo**: Funciona perfectamente en dispositivos móviles, tablets y desktop
+- ✅ **Integración Front + Back**: Consume endpoints reales en Express
 
-Contiene **toda la aplicación cliente**, encargada de la interfaz de
-usuario y la interacción con el backend.
+## 🛠️ Tecnologías Utilizadas
 
-------------------------------------------------------------------------
+| Tecnología | Versión | Propósito |
+|-----------|---------|----------|
+| **React** | 18+ | Framework de UI |
+| **Vite** | 5+ | Herramienta de build y desarrollo |
+| **Bootstrap** | 5 | Framework CSS responsivo |
+| **JavaScript (ES6+)** | - | Lenguaje de programación |
 
-## 📁 `src/`
+## 📁 Estructura del Proyecto
 
-Es el **núcleo del frontend**.\
-Todo el código de React vive dentro de esta carpeta.
+```
+frontend/
+├── src/
+│   ├── pages/
+│   │   ├── Index.jsx              # Página principal
+│   │   └── MainContent.jsx        # Orquestador de navegación
+│   │
+│   ├── components/
+│   │   ├── NavBar/
+│   │   │   ├── NavBar.jsx         # Barra de navegación fija
+│   │   │   └── NavBar.css
+│   │   │
+│   │   ├── Breadcrumb/
+│   │   │   ├── Breadcrumb.jsx     # Migas de pan interactivas
+│   │   │   └── Breadcrumb.css
+│   │   │
+│   │   ├── SectionCard/
+│   │   │   ├── SectionCard.jsx    # Componente reutilizable de tarjeta
+│   │   │   └── SectionCard.css
+│   │   │
+│   │   ├── CategoriesList/
+│   │   │   ├── CategoriesList.jsx # Grid de categorías
+│   │   │   └── CategoriesList.css
+│   │   │
+│   │   ├── ProductsList/
+│   │   │   ├── ProductsList.jsx   # Grid de productos
+│   │   │   └── ProductsList.css
+│   │   │
+│   │   └── ProductDetailScreen/
+│   │       ├── ProductDetailScreen.jsx  # Vista detallada de producto
+│   │       └── ProductDetailScreen.css
+│   │
+│   ├── locales/
+│   │   ├── i18n.js               # Sistema de traducción
+│   │   └── es-ES.js              # Diccionario español
+│   │
+│   ├── mocks/
+│   │   ├── api.js                # Cliente HTTP hacia backend Express
+│   │   ├── categories.json       # Datos de categorías
+│   │   └── products/             # Datos de productos por categoría
+│   │       ├── boardGames.json
+│   │       ├── pcGames.json
+│   │       ├── xboxGames.json
+│   │       ├── nintendoGames.json
+│   │       └── ps5Games.json
+│   │
+│   ├── App.jsx                   # Componente raíz
+│   ├── App.css
+│   ├── main.jsx                  # Entry point
+│   ├── index.css                 # Estilos globales
+│   └── assets/                   # Imágenes y recursos
+│
+├── public/                       # Archivos públicos estáticos
+├── index.html                    # HTML principal
+├── .env                          # Configuración de URL API (local)
+├── .env.example                  # Plantilla de variables de entorno
+├── package.json                  # Dependencias y scripts
+├── vite.config.js               # Configuración de Vite
+├── eslint.config.js             # Configuración de ESLint
+└── README.md                     # Este archivo
+```
 
-------------------------------------------------------------------------
+## 🚀 Instalación y Configuración
 
-## 📁 `api/` -- Comunicación con el backend
+### Requisitos Previos
+- **Node.js** v16 o superior
+- **npm** o **yarn**
 
-Contiene funciones encargadas de realizar **peticiones HTTP** al
-backend.
+### Pasos de Instalación
 
-### Ejemplos:
+1. **Clonar el repositorio**
+```bash
+git clone <url-del-repositorio>
+cd frontend
+```
 
--   Login
--   Registro
--   Obtener datos protegidos
+2. **Instalar dependencias**
+```bash
+npm install
+```
 
-📌 *Centralizar las llamadas HTTP evita duplicación de código y facilita
-cambios en la API.*
+3. **Iniciar frontend (solo React)**
+```bash
+npm run dev
+```
 
-------------------------------------------------------------------------
+La aplicación estará disponible en: `http://localhost:5173`
 
-## 📁 `components/` -- Componentes reutilizables
+4. **Iniciar frontend + backend con un solo comando**
+```bash
+npm run dev:full
+```
 
-Contiene componentes de React **reutilizables y desacoplados**.
+Este comando levanta:
+- Frontend (Vite): `http://localhost:5173`
+- Backend (Express): `http://localhost:3000`
 
-### Ejemplos:
+5. **Build para producción**
+```bash
+npm run build
+```
 
--   Formularios
--   Botones
--   Inputs
--   Componentes de UI
+## 💡 Cómo Usar
 
-📌 *Los componentes no deberían manejar lógica compleja ni llamadas
-directas a la API.*
+### Vista General de la Aplicación
 
-------------------------------------------------------------------------
+1. **Página de Inicio**: Muestra todas las categorías de juegos disponibles como tarjetas interactivas
+2. **Lista de Productos**: Al seleccionar una categoría, se muestran los productos disponibles
+3. **Detalle de Producto**: Accede a información completa del juego seleccionado
 
-## 📁 `pages/` -- Vistas o pantallas
+### Navegación
 
-Contiene los componentes que representan **pantallas completas** de la
-aplicación.
+- **Navbar Fija**: Accede rápidamente a la página de inicio desde cualquier lugar
+- **Breadcrumb**: Visualiza tu ubicación en la jerarquía y navega hacia atrás
+- **Botones de Acción**: Cada elemento tiene botones para acceder a opciones relacionadas
 
-### Ejemplos:
+## 📊 Estructura de Datos
 
--   LoginPage
--   RegisterPage
--   Dashboard
+### Categorías
+```json
+{
+  "id": 1,
+  "name": "Juegos de Mesa",
+  "description": "Juegos tradicionales y estratégicos"
+}
+```
 
-📌 *Las páginas suelen combinar varios componentes.*
+### Productos
+```json
+{
+  "id": 1,
+  "categoryId": 1,
+  "name": "Carcassonne",
+  "shortDescription": "Juego de construcción de mapa medieval",
+  "longDescription": "Carcassonne es un fascinante juego de construcción...",
+  "price": 29.99,
+  "image": "url-de-imagen",
+  "genre": "Estrategia",
+  "developer": "Klaus Teuber",
+  "players": "2-5",
+  "releaseDate": "2000",
+  "rating": 4.5,
+  "inStock": true
+}
+```
 
-------------------------------------------------------------------------
+## 🌍 Sistema de Localización (i18n)
 
-## 📁 `context/` -- Estado global
+### Estructura de Traducciones
 
-Contiene los **Context Providers** de React.
+Las traducciones se encuentran en `src/locales/es-ES.js` organizadas por secciones:
 
-### Ejemplos:
+```javascript
+{
+  brand: { ... },
+  nav: { ... },
+  welcome: { ... },
+  button: { ... },
+  products: { ... },
+  breadcrumb: { ... }
+}
+```
 
--   Autenticación
--   Usuario logueado
--   Tokens
+### Uso en Componentes
 
-📌 *Permite compartir estado global sin necesidad de prop drilling.*
+```jsx
+import { t } from '../locales/i18n'
 
-------------------------------------------------------------------------
+// Uso simple
+<h1>{t('welcome.title')}</h1>
 
-## 📁 `services/` -- Lógica del frontend
+// Acceso anidado
+<p>{t('products.viewButton')}</p>
+```
 
-Contiene lógica que no pertenece directamente a la UI.
+### Cambiar Localización
 
-### Ejemplos:
+```javascript
+import { setLocale } from '../locales/i18n'
 
--   Manejo de tokens
--   Helpers
--   Lógica relacionada con autenticación
+setLocale('es-ES')  // Cambiar a español
+// En futuro: setLocale('en-US') para inglés
+```
 
-📌 *Esta capa separa la lógica de la presentación.*
+## 🔄 Integración con Backend
 
-------------------------------------------------------------------------
+El frontend usa funciones en `src/mocks/api.js` como capa de acceso a datos, pero actualmente esas funciones llaman a endpoints reales del backend.
 
-## 📄 `App.jsx`
+### Funciones Disponibles
 
-Componente raíz de la aplicación.
+#### `getCategories(options)`
+Consulta categorías desde backend
+```javascript
+const categories = await getCategories({ delayMs: 300 })
+```
 
-### Responsabilidades:
+#### `getProductsByCategory(categoryId, options)`
+Consulta productos filtrados por categoría desde backend
+```javascript
+const products = await getProductsByCategory(1, { delayMs: 300 })
+```
 
--   Definir rutas (React Router)
--   Envolver la app en providers
--   Estructurar la aplicación
+### Características
 
-------------------------------------------------------------------------
+- ✅ **Base URL configurable**: `VITE_API_BASE_URL` (archivo `.env`)
+- ✅ **Endpoints reales**: `GET /api/categories` y `GET /api/categories/:id/products`
+- ✅ **Misma interfaz de funciones**: no rompe componentes consumidores
 
-## 📄 `main.jsx`
+## 🎨 Componentes Principales
 
-Punto de entrada del frontend.
+### NavBar
+Barra de navegación fija en la parte superior con:
+- Logo/marca de la tienda
+- Enlaces de navegación centrados
+- Responsive menu hamburguesa en móviles
 
-### Funciones:
+### Breadcrumb
+Sistema interactivo de migas de pan que:
+- Muestra la ubicación actual
+- Permite navegar hacia atrás clickeando
+- Se actualiza dinámicamente
 
--   Renderizar React en el DOM
--   Inicializar la aplicación
+### SectionCard
+Componente reutilizable de tarjeta que puede:
+- Mostrar título, subtítulo y descripción
+- Incluir enlaces internos
+- Tener un botón de acción personalizado
 
-------------------------------------------------------------------------
+### CategoriesList
+Grid responsivo que:
+- Muestra todas las categorías
+- Usa Bootstrap grid layout
+- Tarjetas con efecto hover
 
-## 🧠 Resumen de la arquitectura
+### ProductsList
+Grid responsivo que:
+- Muestra productos de una categoría específica
+- Tarjetas con información resumida
+- Botón para ver detalles completos
 
-  Carpeta / Archivo   Función
-  ------------------- -----------------------------
-  `api`               Comunicación con el backend
-  `components`        Componentes reutilizables
-  `pages`             Pantallas de la app
-  `context`           Estado global
-  `services`          Lógica del frontend
-  `App.jsx`           Estructura principal
-  `main.jsx`          Punto de entrada
+### ProductDetailScreen
+Pantalla completa que:
+- Muestra imagen grande del producto
+- Información detallada (género, desarrollador, jugadores, etc.)
+- Precio prominente
+- Botón de acción (Añadir al carrito)
 
-------------------------------------------------------------------------
+## 🎯 Flujo de Navegación
 
-📌 Esta estructura permite: - Separación clara de responsabilidades -
-Escalabilidad - Fácil mantenimiento - Explicación clara en un contexto
-académico
+```
+Inicio (Index)
+  ↓
+Categorías (CategoriesList)
+  ↓ [Click en categoría]
+Productos (ProductsList)
+  ↓ [Click en producto]
+Detalle de Producto (ProductDetailScreen)
+  ↓ [Click atrás]
+Vuelve a Productos
+```
+
+## 🔧 Personalización
+
+### Añadir Nueva Categoría
+
+1. Editar `src/mocks/categories.json`
+2. Crear archivo de productos en `src/mocks/products/newCategory.json`
+3. Actualizar el mapeo en backend para exponer la nueva categoría
+
+> Nota: mientras los datos estén en archivos JSON del frontend, el backend los lee desde `frontend/src/mocks`. Si cambias estructura o nombres, actualiza también el backend.
+
+### Cambiar Colores de Bootstrap
+
+Editar los colores en los archivos CSS individuales o agregar variables CSS en `src/index.css`:
+
+```css
+:root {
+  --bs-primary: #new-color;
+  --bs-secondary: #new-color;
+  /* ... más variables ... */
+}
+```
+
+### Traducir a Otro Idioma
+
+1. Crear archivo `src/locales/en-US.js` (o el idioma deseado)
+2. Agregar las traducciones
+3. Registrar en `src/locales/i18n.js`:
+```javascript
+const translations = {
+  'es-ES': es,
+  'en-US': en  // Nuevo idioma
+}
+```
+
+## 📱 Responsividad
+
+La aplicación es completamente responsiva gracias a:
+- **Bootstrap Grid System**: Layout flexible
+- **Media Queries**: Ajustes CSS para diferentes tamaños
+- **Navbar Responsive**: Menú hamburguesa en móviles
+- **Componentes Adaptables**: Se redimensionan según pantalla
+
+### Puntos de Quiebre
+
+- **Extra pequeño**: < 576px (Móviles)
+- **Pequeño**: ≥ 576px (Móviles grandes)
+- **Mediano**: ≥ 768px (Tablets)
+- **Grande**: ≥ 992px (Desktops)
+- **Extra grande**: ≥ 1200px (Desktops grandes)
+
+## 🧪 Testing
+
+El proyecto incluye una suite de tests automatizados para componentes, API e i18n.
+
+### Cobertura de Tests
+
+- ✅ Cobertura de sentencias
+- ✅ Cobertura de funciones
+- ✅ Cobertura de ramas
+
+> Consulta los valores actualizados ejecutando `npm run test:coverage`.
+
+### Ejecutar Tests
+
+```bash
+# Ejecutar tests una vez
+npm test
+
+# Modo watch (re-ejecuta al cambiar archivos)
+npm run test:watch
+
+# Ver cobertura detallada
+npm run test:coverage
+
+# Ver interfaz gráfica interactiva
+npm run test:ui
+```
+
+### Framework de Testing
+
+- **Vitest** (compatible con ES Modules de Vite)
+- **React Testing Library** (testea como un usuario)
+- **@testing-library/jest-dom** (matchers útiles)
+
+### Test Suites
+
+1. **SectionCard.test.jsx**
+   - Renderizado de componentes
+   - Props y estado
+   - Callbacks y eventos
+
+2. **Breadcrumb.test.jsx**
+   - Navegación interactiva
+   - Estados de renderización
+   - Funciones callback
+
+3. **NavBar.test.jsx**
+   - Estructura Bootstrap
+   - Responsive design
+   - Eventos de click
+
+4. **ProductDetailScreen.test.jsx**
+   - Renderizado de datos
+   - Estados de producto
+   - Disponibilidad de stock
+
+5. **api.test.js**
+   - Latencia simulada
+   - Filtrado de productos
+   - Manejo de categorías
+
+6. **i18n.test.js**
+   - Traducción de textos
+   - Cambio de idioma
+   - Acceso a clave anidadas
+
+7. **MainContent.test.jsx**
+  - Orquestación de estado y navegación
+  - Handlers principales de flujo
+  - Renderizado condicional de vistas
+
+8. **CategoriesList.test.jsx**
+  - Renderizado de categorías y descripciones
+  - Callback `onCategorySelect`
+  - Grid Bootstrap e integración con SectionCard
+
+### Cobertura pendiente (sin test unitario dedicado)
+
+Actualmente no existe archivo de test específico para:
+- `ProductsList`
+- `ProductDetailModal`
+- `Index`
+- `App`
+
+Estos casos están parcialmente cubiertos de forma indirecta por pruebas de integración entre componentes.
+
+Para más detalles, consulta [TESTING_GUIDE.md](./TESTING_GUIDE.md).
+
+## 🚀 Mejoras Futuras
+
+- [ ] Carrito de compras con estado persistente
+- [ ] Búsqueda y filtros de productos
+- [ ] Sistema de calificaciones y comentarios
+- [ ] Favoritos/Wishlist
+- [ ] Integración con API real
+- [ ] Autenticación y registro de usuarios
+- [ ] Historial de pedidos
+- [ ] Múltiples idiomas (soporte en i18n)
+- [ ] Tema oscuro
+- [ ] Análisis y seguimiento
+
+## 📄 Documentación del Código
+
+Todo el código incluye comentarios en español explicando:
+- Propósito de cada componente
+- Parámetros y props esperados
+- Lógica de funciones
+- Decisiones de diseño
+
+Para entender mejor un componente específico, consulta el archivo correspondiente donde encontrarás documentación detallada.
+
+## 🐛 Solución de Problemas
+
+### El servidor no inicia
+```bash
+# Eliminar node_modules y reinstalar
+rm -r node_modules
+npm install
+npm run dev
+```
+
+### Los estilos no se aplican
+- Asegúrate de que Bootstrap está importado en `src/main.jsx`
+- Verifica que los archivos CSS están importados en los componentes
+- Limpia la caché del navegador (Ctrl+Shift+Delete)
+
+### No se muestran las imágenes
+- Verifica que las URLs en los archivos JSON de productos son correctas
+- Asegúrate de que las imágenes están en `src/assets/` o son URLs válidas
+
+## 📝 Notas de Desarrollo
+
+- **Estado**: La aplicación usa React Hooks (useState) para gestionar el estado
+- **No se usa Redux**: Para este proyecto, el estado es simple y se maneja localmente
+- **CSS**: Se prefiere Bootstrap utilities sobre CSS personalizado
+- **Componentes**: Cada componente está en su propia carpeta con JSX y CSS separados
+- **Convención de extensiones**: Archivos con JSX usan `.jsx`; utilidades, mocks, locales y tests sin JSX usan `.js`; imports internos JS/JSX se escriben sin extensión
+
+## 🤝 Contribuir
+
+Para contribuir al proyecto:
+
+1. Hacer un fork del repositorio
+2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir un Pull Request
+
+## 📞 Contacto
+
+Para preguntas o sugerencias sobre el proyecto, contacta al equipo de desarrollo.
+
+## 📜 Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+
+---
+
+**Última actualización**: Febrero 2026  
+**Versión**: 1.0.0  
+**Estado**: ✅ Producción lista

@@ -1,0 +1,118 @@
+/**
+ * App.css - Estilos globales para el componente App e Index
+ * 
+ * Incluye estilos para:
+ * - Contenedor general (#root)
+ * - Página de índice (.index-container)
+ * - Sección hero (.hero)
+ * - Ajustes de padding para navbar fija
+ */
+
+/**
+ * Contenedor raíz
+ * Asegura que ocupe al menos la altura completa del viewport
+ */
+#root {
+  min-height: 100vh;
+}
+
+/**
+ * Contenedor de la página Index
+ * Padding: espaciado arriba/abajo de 2rem, izquierda/derecha de 1rem
+ */
+.index-container {
+  padding: 2rem 1rem;
+}
+
+/**
+ * Encabezado de la página Index
+ * Margen inferior para separación del siguiente contenido
+ */
+.index-container header {
+  margin-bottom: 2rem;
+}
+
+/**
+ * Título principal (h1) en el encabezado
+ * - Tamaño grande (2.5rem)
+ * - Peso de fuente fuerte (700 = bold)
+ * - Margen inferior pequeño
+ */
+.index-container header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/**
+ * Párrafo de descripción en el encabezado
+ * - Tamaño ligeramente más grande (1.125rem)
+ * - Color gris (#6c757d) para distinguirse del título
+ */
+.index-container header p {
+  font-size: 1.125rem;
+  color: #6c757d;
+}
+
+/**
+ * Sección Hero - área destacada con gradiente
+ * - Margen: centrado con auto y 2rem arriba/abajo
+ * - Padding: 3rem interno para dar espacio
+ * - Máximo ancho: 720px
+ * - Gradiente: azul claro a azul más oscuro (135deg)
+ * - Borde izquierdo azul para llamar la atención
+ */
+.hero {
+  margin: 2rem auto;
+  padding: 3rem;
+  max-width: 720px;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f3ff 100%);
+  border-left: 4px solid #0d6efd;
+}
+
+/**
+ * Título dentro del Hero (h2)
+ * - Tamaño: 1.75rem
+ * - Margen inferior para separación del párrafo
+ */
+.hero h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+/**
+ * Párrafo dentro del Hero
+ * - Tamaño: 1rem (normal)
+ * - Color gris para contrastar menos que el título
+ */
+.hero p {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/**
+ * MainContent - contenedor principal de contenido
+ * 
+ * Usa padding-top para evitar que la navbar fija (position: fixed)
+ * oculte el contenido de la página. El navbar tiene altura ~72px
+ * 
+ * min-height calcula: 100vh (altura veintana) - 72px (altura navbar)
+ * para mantener una altura mínima adecuada
+ */
+.main-content {
+  padding-top: 72px;
+  min-height: calc(100vh - 72px);
+}
+
+/**
+ * Media query para dispositivos pequeños (móviles, max-width 575px)
+ * En pantallas pequeñas, el navbar se vuelve más alto (flex direction column)
+ * por lo que ajustamos el padding-top a 88px
+ */
+@media (max-width: 575px) {
+  .main-content {
+    padding-top: 88px;
+  }
+}
+

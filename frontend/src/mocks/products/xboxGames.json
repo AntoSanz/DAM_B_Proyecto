@@ -1,0 +1,30 @@
+[
+  {
+    "id": 5,
+    "categoryId": 3,
+    "name": "Halo Infinite (Xbox)",
+    "shortDescription": "Shooter épico de ciencia ficción",
+    "longDescription": "Halo Infinite es un shooter en primera persona que lleva la franquicia a nuevas alturas. Pilota el Grappling Hook, personaliza tu arsenal y domina los campos de batalla en este juego multijugador intenso con una campaña épica.",
+    "price": 39.99,
+    "image": "https://via.placeholder.com/300x300?text=Halo+Infinite",
+    "genre": "Shooter, Acción, Ciencia Ficción",
+    "developer": "343 Industries",
+    "releaseDate": "2021",
+    "inStock": true,
+    "rating": 4.6
+  },
+  {
+    "id": 6,
+    "categoryId": 3,
+    "name": "Forza Horizon 5 (Xbox)",
+    "shortDescription": "Juego de carreras en mundo abierto",
+    "longDescription": "Forza Horizon 5 te lleva a México con gráficos impresionantes y una colección de 500+ vehículos. Explora paisajes diversos, participa en carreras emocionantes y personaliza tu experiencia de conducción.",
+    "price": 59.99,
+    "image": "https://via.placeholder.com/300x300?text=Forza+Horizon+5",
+    "genre": "Carreras, Mundo abierto",
+    "developer": "Playground Games",
+    "releaseDate": "2021",
+    "inStock": true,
+    "rating": 4.8
+  }
+]

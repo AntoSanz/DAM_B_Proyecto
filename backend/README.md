@@ -1,98 +1,98 @@
-# 📦 Estructura del Backend
+# Backend (Node.js + Express + SQLite)
 
-Este proyecto utiliza **Node.js + Express** siguiendo una arquitectura
-modular, pensada para ser **escalable**, **mantenible** y **fácil de
-explicar en un contexto académico**.
+API del proyecto con base de datos SQLite y estructura por capas.
 
-A continuación se describe **la función de cada carpeta y archivo del
-backend**.
+## Requisitos
 
-------------------------------------------------------------------------
+- Node.js 20+
+- npm
 
-## 📁 `backend/`
+## Instalación
 
-Contiene **todo el código del servidor** (API, autenticación, conexión a
-base de datos).\
-El frontend no interactúa directamente con esta carpeta, solo a través
-de peticiones HTTP.
+```bash
+cd backend
+npm install
+```
 
-------------------------------------------------------------------------
+## Arranque
 
-## 📁 `src/`
+```bash
+npm start
+```
 
-Es el **núcleo del backend**.\
-Todo el código fuente vive aquí para evitar mezclarlo con archivos de
-configuración o dependencias.
+Servidor por defecto:
 
-------------------------------------------------------------------------
+- `http://localhost:3000`
 
-## 📁 `config/` -- Configuración del sistema
+## Scripts útiles
 
-Contiene archivos de configuración global.
+- `npm start`: inicia la API
+- `npm run db:reset`: limpia datos, recrea estado base y aplica seed automático de catálogo
+- `npm run db:seed:users`: aplica seed SQL de usuarios demo
+- `npm run db:bootstrap`: ejecuta reset + seed de usuarios en un único comando
 
-### Archivos:
+## Endpoints actuales
 
--   **`db.js`**\
-    Configura la conexión a la base de datos SQL (host, usuario,
-    contraseña, pool de conexiones).
--   **`env.js`** (opcional)\
-    Centraliza el acceso a variables de entorno (`process.env`).
+- `GET /health`
+- `GET /api/categories`
+- `GET /api/categories/:id/products`
 
-------------------------------------------------------------------------
+## Estructura recomendada (actual)
 
-## 📁 `routes/` -- Definición de rutas
+- `src/config/`: configuración e inicialización de DB
+- `src/models/`: acceso a datos (SQL/prepared statements)
+- `src/services/`: lógica de negocio
+- `src/controllers/`: manejo de request/response
+- `src/routes/`: definición de endpoints
+- `src/app.js`: composición de middlewares y rutas
+- `src/server.js`: bootstrap del servidor
 
-Define las **URLs disponibles de la API** y asigna cada ruta a su
-controlador correspondiente.
+- `database/seeds/catalog.seed.sql`: seed de categorías y productos
+- `database/seeds/users.seed.sql`: seed SQL de usuarios
 
-------------------------------------------------------------------------
+## Base de datos
 
-## 📁 `controllers/` -- Controladores
+- Driver: `better-sqlite3`
+- Archivo: `backend/database.sqlite`
+- Inicialización: automática al iniciar el servidor (`initializeDatabase()` en `src/config/db.js`)
+- Tablas `users`, `categories` y `products` creadas automáticamente si no existen
 
-Los controladores actúan como intermediarios entre las rutas HTTP y la
-lógica del sistema.
+## Seed
 
-------------------------------------------------------------------------
+Archivos seed:
 
-## 📁 `services/` -- Lógica de negocio
+- `backend/database/seeds/catalog.seed.sql` (carga automática si categorías/productos están vacíos)
+- `backend/database/seeds/users.seed.sql` (ejecución manual)
 
-Contiene la **lógica principal del sistema**.
+Flujo sugerido:
 
-------------------------------------------------------------------------
+1. Ejecuta `npm run db:bootstrap` para dejar la base lista (catálogo + usuarios demo).
 
-## 📁 `models/` -- Acceso a datos
+Desde la raíz del repo, puedes usar:
 
-Define cómo se interactúa con la base de datos.
+```bash
+npm run db:bootstrap
+```
 
-------------------------------------------------------------------------
+Alternativa paso a paso:
 
-## 📁 `middlewares/` -- Middlewares
+1. Ejecuta `npm run db:reset` para regenerar base limpia con catálogo.
+2. Ejecuta `npm run db:seed:users` para cargar usuarios demo.
 
-Funciones que se ejecutan **antes de llegar al controlador**.
+Desde la raíz del repo, equivalente:
 
-------------------------------------------------------------------------
+```bash
+npm run db:reset
+npm run db:seed:users
+```
 
-## 📄 `app.js`
+## Modelo de usuario
 
-Configura la aplicación Express.
+Implementado en `src/models/user.model.js` con prepared statements:
 
-------------------------------------------------------------------------
-
-## 📄 `server.js`
-
-Archivo de arranque del servidor.
-
-------------------------------------------------------------------------
-
-## 🧠 Resumen de la arquitectura
-
-  Carpeta / Archivo   Función
-  ------------------- ------------------------------
-  `config`            Configuración global
-  `routes`            Definición de endpoints
-  `controllers`       Manejo de requests/responses
-  `services`          Lógica de negocio
-  `models`            Acceso a la base de datos
-  `middlewares`       Seguridad y validaciones
-  `app.js`            Configuración de Express
-  `server.js`         Inicio del servidor
+- `create(email, hashedPassword, name)`
+- `findByEmail(email)`
+- `findById(id)`
+- `findAll()`
+- `update(id, data)`
+- `delete(id)`
