@@ -4,8 +4,28 @@ Proyecto fullstack con frontend en React/Vite (`dam-app`) y backend en Node.js/E
 
 ## Estructura
 
-- `dam-app/`: interfaz web
-- `backend/`: API REST y base de datos SQLite
+```text
+DAM_B_Proyecto/
+├── backend/
+│   ├── database/
+│   │   └── seeds/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── scripts/
+│   │   └── services/
+├── dam-app/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── locales/
+│   │   ├── mocks/
+│   │   │   └── products/
+│   │   └── pages/
+├── tests/
+│   └── integration/
+```
 
 ## Requisitos
 
