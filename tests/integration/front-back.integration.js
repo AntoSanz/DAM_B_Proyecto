@@ -6,6 +6,23 @@ const ROOT = path.resolve(__dirname, '../..');
 const BACKEND_DIR = path.join(ROOT, 'backend');
 const FRONTEND_DIR = path.join(ROOT, 'frontend');
 
+function createNpmChild(args, cwd) {
+  const npmExecPath = process.env.npm_execpath;
+
+  if (npmExecPath) {
+    return spawn(process.execPath, [npmExecPath, ...args], {
+      cwd,
+      stdio: 'inherit',
+    });
+  }
+
+  const command = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+  return spawn(command, args, {
+    cwd,
+    stdio: 'inherit',
+  });
+}
+
 function parseEnvFile(filePath) {
   if (!fs.existsSync(filePath)) return {};
 
@@ -29,9 +46,8 @@ function parseEnvFile(filePath) {
 
 function runCommand(command, args, cwd) {
   return new Promise((resolve, reject) => {
-    const child = spawn(command, args, {
+    const child = command === 'npm' ? createNpmChild(args, cwd) : spawn(command, args, {
       cwd,
-      shell: true,
       stdio: 'inherit',
     });
 
@@ -111,11 +127,7 @@ async function main() {
   await runCommand('npm', ['run', 'db:bootstrap'], ROOT);
 
   console.log('2) Levantando backend...');
-  const backendProcess = spawn('npm', ['start'], {
-    cwd: BACKEND_DIR,
-    shell: true,
-    stdio: 'inherit',
-  });
+  const backendProcess = createNpmChild(['start'], BACKEND_DIR);
 
   let backendClosed = false;
   backendProcess.on('exit', () => {
