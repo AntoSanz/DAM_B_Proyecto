@@ -3,7 +3,9 @@ const es = {
   nav: {
     home: 'Inicio',
     features: 'Características',
-    pricing: 'Precios'
+    pricing: 'Precios',
+    login: 'Iniciar sesión',
+    register: 'Registrarse'
   },
   welcome: {
     title: 'Bienvenido',

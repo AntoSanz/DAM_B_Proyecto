@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import './ComponenteModal.css'
 
 function ComponenteModal({
@@ -7,9 +8,15 @@ function ComponenteModal({
   triggerText = 'Abrir modal',
   closeText = 'Cerrar',
   triggerClassName = 'btn btn-primary',
-  size = ''
+  size = '',
+  showTrigger = true,
+  isOpenExternal,
+  onOpenChange,
+  footerContent
 }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [internalIsOpen, setInternalIsOpen] = useState(false)
+  const isControlled = typeof isOpenExternal === 'boolean'
+  const isOpen = isControlled ? isOpenExternal : internalIsOpen
 
   useEffect(() => {
     if (isOpen) {
@@ -24,16 +31,29 @@ function ComponenteModal({
     }
   }, [isOpen])
 
-  const openModal = () => setIsOpen(true)
-  const closeModal = () => setIsOpen(false)
+  const openModal = () => {
+    if (!isControlled) {
+      setInternalIsOpen(true)
+    }
+    onOpenChange?.(true)
+  }
+
+  const closeModal = () => {
+    if (!isControlled) {
+      setInternalIsOpen(false)
+    }
+    onOpenChange?.(false)
+  }
 
   return (
     <>
-      <button type="button" className={triggerClassName} onClick={openModal}>
-        {triggerText}
-      </button>
+      {showTrigger && (
+        <button type="button" className={triggerClassName} onClick={openModal}>
+          {triggerText}
+        </button>
+      )}
 
-      {isOpen && (
+      {isOpen && createPortal(
         <>
           <div
             className="modal fade show d-block"
@@ -43,7 +63,7 @@ function ComponenteModal({
             onClick={closeModal}
           >
             <div
-              className={`modal-dialog ${size}`.trim()}
+              className={`modal-dialog modal-dialog-centered ${size}`.trim()}
               role="document"
               onClick={(event) => event.stopPropagation()}
             >
@@ -61,15 +81,18 @@ function ComponenteModal({
                 <div className="modal-body">{children}</div>
 
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" onClick={closeModal}>
-                    {closeText}
-                  </button>
+                  {footerContent ?? (
+                    <button type="button" className="btn btn-secondary" onClick={closeModal}>
+                      {closeText}
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           </div>
           <div className="modal-backdrop fade show"></div>
-        </>
+        </>,
+        document.body
       )}
     </>
   )
