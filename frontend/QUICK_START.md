@@ -39,9 +39,22 @@ npm uninstall nombre-del-paquete
 ```bash
 npm run dev
 ```
-- Abre automáticamente en `http://localhost:5174`
+- Abre automáticamente en `http://localhost:5173`
 - Hot Reload activado (los cambios se ven instantáneamente)
 - Presiona `Ctrl+C` para detener
+
+### Iniciar Frontend + Backend con un solo comando
+```bash
+npm run dev:full
+```
+- Levanta backend en `http://localhost:3000`
+- Levanta frontend en `http://localhost:5173`
+
+### Iniciar Frontend + Backend desde la raíz del repo
+```bash
+npm run dev:full
+```
+- Ejecutar este comando desde `DAM_B_Proyecto/` una vez creado el `package.json` de raíz
 
 ### Compilar para producción
 ```bash

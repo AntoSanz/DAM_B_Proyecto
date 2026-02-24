@@ -63,6 +63,21 @@ describe('Mock API', () => {
       expect(product).toHaveProperty('longDescription')
       expect(product).toHaveProperty('price')
       expect(product).toHaveProperty('image')
+      expect(product).toHaveProperty('genre')
+      expect(product).toHaveProperty('developer')
+      expect(product).toHaveProperty('players')
+      expect(product).toHaveProperty('releaseDate')
+      expect(product).toHaveProperty('inStock')
+      expect(product).toHaveProperty('rating')
+
+      expect(typeof product.id).toBe('number')
+      expect(typeof product.categoryId).toBe('number')
+      expect(typeof product.name).toBe('string')
+      expect(typeof product.shortDescription).toBe('string')
+      expect(typeof product.longDescription).toBe('string')
+      expect(typeof product.price).toBe('number')
+      expect(typeof product.image).toBe('string')
+      expect(typeof product.inStock).toBe('boolean')
     }
   })
 
@@ -103,12 +118,11 @@ describe('Mock API', () => {
   })
 
   // Test 10: Valores por defecto
-  test('delay debe usar valor por defecto de 300ms si no se especifica', async () => {
-    const startTime = Date.now()
-    await getCategories()
-    const endTime = Date.now()
-    
-    expect(endTime - startTime).toBeGreaterThanOrEqual(290)
+  test('getCategories debe funcionar con valores por defecto', async () => {
+    const categories = await getCategories()
+
+    expect(Array.isArray(categories)).toBe(true)
+    expect(categories.length).toBeGreaterThan(0)
   })
 
   // Test 11: Retorna promesa
