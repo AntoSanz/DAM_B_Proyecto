@@ -5,14 +5,18 @@ import SectionCard from '../src/components/SectionCard/SectionCard'
 describe('SectionCard Component', () => {
   test('debe renderizar con título y texto por defecto', () => {
     render(<SectionCard />)
-    expect(screen.getByText('Card title')).toBeInTheDocument()
-    expect(screen.getByText(/Some quick example text/)).toBeInTheDocument()
+    expect({
+      hasTitle: !!screen.queryByText('Card title'),
+      hasText: !!screen.queryByText(/Some quick example text/),
+    }).toEqual({ hasTitle: true, hasText: true })
   })
 
   test('debe mostrar título y texto personalizados', () => {
     render(<SectionCard title="Juegos de Mesa" text="Descubre los mejores juegos de mesa" />)
-    expect(screen.getByText('Juegos de Mesa')).toBeInTheDocument()
-    expect(screen.getByText('Descubre los mejores juegos de mesa')).toBeInTheDocument()
+    expect({
+      hasTitle: !!screen.queryByText('Juegos de Mesa'),
+      hasText: !!screen.queryByText('Descubre los mejores juegos de mesa'),
+    }).toEqual({ hasTitle: true, hasText: true })
   })
 
   test('debe mostrar subtítulo cuando se proporciona', () => {
@@ -44,8 +48,10 @@ describe('SectionCard Component', () => {
       { href: '#categoria2', text: 'Categoría 2' },
     ]
     render(<SectionCard title="Título" text="Texto" links={links} />)
-    expect(screen.getByText('Categoría 1')).toBeInTheDocument()
-    expect(screen.getByText('Categoría 2')).toBeInTheDocument()
+    expect({
+      hasFirst: !!screen.queryByText('Categoría 1'),
+      hasSecond: !!screen.queryByText('Categoría 2'),
+    }).toEqual({ hasFirst: true, hasSecond: true })
   })
 
   test('debe aplicar clases personalizadas', () => {

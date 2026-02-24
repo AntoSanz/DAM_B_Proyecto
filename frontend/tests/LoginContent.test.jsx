@@ -1,42 +1,21 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, test, vi } from 'vitest'
+import { describe, expect, test } from 'vitest'
 import LoginContent from '../src/components/LoginContent/LoginContent'
-
-function buildProps(overrides = {}) {
-  return {
-    step: 'choose',
-    loginEmail: '',
-    loginPass: '',
-    regEmail: '',
-    regPass1: '',
-    regPass2: '',
-    regUser: '',
-    feedback: '',
-    onStepChange: vi.fn(),
-    onLoginEmailChange: vi.fn(),
-    onLoginPassChange: vi.fn(),
-    onRegEmailChange: vi.fn(),
-    onRegPass1Change: vi.fn(),
-    onRegPass2Change: vi.fn(),
-    onRegUserChange: vi.fn(),
-    ...overrides,
-  }
-}
+import { buildLoginContentProps } from './mocks/loginContent.mock'
 
 describe('LoginContent Component', () => {
   test('muestra pantalla choose y navega a login/register', () => {
-    const props = buildProps({ step: 'choose' })
+    const props = buildLoginContentProps({ step: 'choose' })
     render(<LoginContent {...props} />)
 
     fireEvent.click(screen.getByRole('button', { name: /identificarse/i }))
     fireEvent.click(screen.getByRole('button', { name: /registrarse/i }))
 
-    expect(props.onStepChange).toHaveBeenCalledWith('login')
-    expect(props.onStepChange).toHaveBeenCalledWith('register')
+    expect(props.onStepChange.mock.calls).toEqual([['login'], ['register']])
   })
 
   test('muestra campos de login y emite cambios', () => {
-    const props = buildProps({ step: 'login' })
+    const props = buildLoginContentProps({ step: 'login' })
     render(<LoginContent {...props} />)
 
     fireEvent.change(screen.getByLabelText(/correo/i), {
@@ -46,14 +25,16 @@ describe('LoginContent Component', () => {
       target: { value: 'admin123' },
     })
 
-    expect(props.onLoginEmailChange).toHaveBeenCalledWith('admin@test.com')
-    expect(props.onLoginPassChange).toHaveBeenCalledWith('admin123')
+    expect({
+      email: props.onLoginEmailChange.mock.calls,
+      pass: props.onLoginPassChange.mock.calls,
+    }).toEqual({ email: [['admin@test.com']], pass: [['admin123']] })
   })
 
   test('muestra validación de contraseñas en registro', () => {
     const { rerender } = render(
       <LoginContent
-        {...buildProps({
+        {...buildLoginContentProps({
           step: 'register',
           regPass1: 'secret123',
           regPass2: 'otro',
@@ -61,11 +42,11 @@ describe('LoginContent Component', () => {
       />
     )
 
-    expect(screen.getByText('Las contraseñas no coinciden.')).toBeInTheDocument()
+    const firstMessage = !!screen.queryByText('Las contraseñas no coinciden.')
 
     rerender(
       <LoginContent
-        {...buildProps({
+        {...buildLoginContentProps({
           step: 'register',
           regPass1: 'secret123',
           regPass2: 'secret123',
@@ -73,13 +54,16 @@ describe('LoginContent Component', () => {
       />
     )
 
-    expect(screen.getByText('Las contraseñas coinciden.')).toBeInTheDocument()
+    expect({ firstMessage, secondMessage: !!screen.queryByText('Las contraseñas coinciden.') }).toEqual({
+      firstMessage: true,
+      secondMessage: true,
+    })
   })
 
   test('muestra feedback cuando existe mensaje', () => {
     render(
       <LoginContent
-        {...buildProps({
+        {...buildLoginContentProps({
           step: 'login',
           feedback: 'Sesión iniciada como admin@test.com.',
         })}

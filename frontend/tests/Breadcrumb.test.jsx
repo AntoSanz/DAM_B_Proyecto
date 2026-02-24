@@ -6,22 +6,28 @@ describe('Breadcrumb Component', () => {
   test('debe mostrar solo "Inicio" cuando está en la página principal', () => {
     render(<Breadcrumb onHomeClick={vi.fn()} onCategoryClick={vi.fn()} onBackClick={vi.fn()} />)
     const breadcrumbItems = screen.getAllByRole('button')
-    expect(breadcrumbItems).toHaveLength(1)
-    expect(breadcrumbItems[0]).toHaveTextContent('Inicio')
+    expect({ total: breadcrumbItems.length, first: breadcrumbItems[0].textContent?.trim() }).toEqual({
+      total: 1,
+      first: 'Inicio',
+    })
   })
 
   test('debe mostrar "Inicio > Categoría" cuando está en vista de productos', () => {
     const categoryName = 'Juegos de Mesa'
     render(<Breadcrumb showProducts={true} categoryName={categoryName} onHomeClick={vi.fn()} onCategoryClick={vi.fn()} onBackClick={vi.fn()} />)
-    expect(screen.getByText('Inicio')).toBeInTheDocument()
-    expect(screen.getByText(categoryName)).toBeInTheDocument()
+    expect({ hasHome: !!screen.queryByText('Inicio'), hasCategory: !!screen.queryByText(categoryName) }).toEqual({
+      hasHome: true,
+      hasCategory: true,
+    })
   })
 
   test('debe mostrar la ruta completa en vista de detalle', () => {
     render(<Breadcrumb showProductDetail={true} categoryName="PC Games" productName="Minecraft" onHomeClick={vi.fn()} onCategoryClick={vi.fn()} onBackClick={vi.fn()} />)
-    expect(screen.getByText('Inicio')).toBeInTheDocument()
-    expect(screen.getByText('PC Games')).toBeInTheDocument()
-    expect(screen.getByText('Minecraft')).toBeInTheDocument()
+    expect({
+      hasHome: !!screen.queryByText('Inicio'),
+      hasCategory: !!screen.queryByText('PC Games'),
+      hasProduct: !!screen.queryByText('Minecraft'),
+    }).toEqual({ hasHome: true, hasCategory: true, hasProduct: true })
   })
 
   test('debe ejecutar onHomeClick cuando se hace click en Inicio', () => {

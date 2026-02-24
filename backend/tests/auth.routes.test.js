@@ -52,8 +52,22 @@ test('POST /api/auth/register crea usuario con password hasheada', async () => {
   assert.equal(body.user.email, 'nuevo@test.com');
 
   const stored = db.prepare('SELECT password FROM users WHERE email = ?').get('nuevo@test.com');
-  assert.ok(stored.password.startsWith('scrypt$'));
-  assert.notEqual(stored.password, 'secret123');
+  assert.deepEqual(
+    {
+      status: response.status,
+      ok: body.ok,
+      email: body.user.email,
+      usesHash: stored.password.startsWith('scrypt$'),
+      notPlain: stored.password !== 'secret123',
+    },
+    {
+      status: 201,
+      ok: true,
+      email: 'nuevo@test.com',
+      usesHash: true,
+      notPlain: true,
+    }
+  );
 });
 
 test('POST /api/auth/login autentica usuario válido', async () => {
@@ -76,9 +90,18 @@ test('POST /api/auth/login autentica usuario válido', async () => {
     }),
   });
 
-  assert.equal(response.status, 200);
-  assert.equal(body.ok, true);
-  assert.equal(body.user.email, 'admin@test.com');
+  assert.deepEqual(
+    {
+      status: response.status,
+      ok: body.ok,
+      email: body.user.email,
+    },
+    {
+      status: 200,
+      ok: true,
+      email: 'admin@test.com',
+    }
+  );
 });
 
 test('POST /api/auth/login rechaza credenciales inválidas y patrón SQL injection', async () => {
@@ -101,9 +124,6 @@ test('POST /api/auth/login rechaza credenciales inválidas y patrón SQL injecti
     }),
   });
 
-  assert.equal(badPassword.response.status, 401);
-  assert.equal(badPassword.body.ok, false);
-
   const sqlInjectionAttempt = await request('/api/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -113,8 +133,20 @@ test('POST /api/auth/login rechaza credenciales inválidas y patrón SQL injecti
     }),
   });
 
-  assert.equal(sqlInjectionAttempt.response.status, 401);
-  assert.equal(sqlInjectionAttempt.body.ok, false);
+  assert.deepEqual(
+    {
+      badPasswordStatus: badPassword.response.status,
+      badPasswordOk: badPassword.body.ok,
+      sqlInjectionStatus: sqlInjectionAttempt.response.status,
+      sqlInjectionOk: sqlInjectionAttempt.body.ok,
+    },
+    {
+      badPasswordStatus: 401,
+      badPasswordOk: false,
+      sqlInjectionStatus: 401,
+      sqlInjectionOk: false,
+    }
+  );
 });
 
 test('POST /api/auth/register devuelve 409 si el email ya existe', async () => {
@@ -138,6 +170,14 @@ test('POST /api/auth/register devuelve 409 si el email ya existe', async () => {
     }),
   });
 
-  assert.equal(response.status, 409);
-  assert.equal(body.ok, false);
+  assert.deepEqual(
+    {
+      status: response.status,
+      ok: body.ok,
+    },
+    {
+      status: 409,
+      ok: false,
+    }
+  );
 });

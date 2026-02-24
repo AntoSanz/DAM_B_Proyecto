@@ -1,24 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { vi } from 'vitest'
 import ProductDetailScreen from '../src/components/ProductDetailScreen/ProductDetailScreen'
+import { mockProduct } from './mocks/products.mock'
 
 describe('ProductDetailScreen Component', () => {
-  const mockProduct = {
-    id: 1,
-    categoryId: 1,
-    name: 'Test Game',
-    shortDescription: 'A short description',
-    longDescription: 'A much longer and detailed description of the game',
-    price: 29.99,
-    image: 'https://example.com/image.jpg',
-    genre: 'Action',
-    developer: 'Test Developer',
-    players: '1-4',
-    releaseDate: '2024',
-    rating: 4.5,
-    inStock: true,
-  }
-
   test('debe renderizar el componente', () => {
     render(<ProductDetailScreen product={mockProduct} onBack={vi.fn()} />)
     expect(screen.getByText(mockProduct.name)).toBeInTheDocument()
@@ -89,8 +74,10 @@ describe('ProductDetailScreen Component', () => {
   test('debe mostrar la imagen del producto', () => {
     const { container } = render(<ProductDetailScreen product={mockProduct} onBack={vi.fn()} />)
     const image = container.querySelector('img')
-    expect(image).toBeInTheDocument()
-    expect(image.src).toContain('example.com')
+    expect({ exists: !!image, isExpected: image?.src.includes('example.com') }).toEqual({
+      exists: true,
+      isExpected: true,
+    })
   })
 
   test('debe tener un botón para añadir al carrito', () => {

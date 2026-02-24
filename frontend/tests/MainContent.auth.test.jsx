@@ -1,48 +1,27 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 import MainContent from '../src/pages/MainContent'
-
-const {
+import {
   mockGetCategories,
   mockGetProductsByCategory,
   mockLogin,
   mockRegister,
-} = vi.hoisted(() => ({
-  mockGetCategories: vi.fn(),
-  mockGetProductsByCategory: vi.fn(),
-  mockLogin: vi.fn(),
-  mockRegister: vi.fn(),
-}))
+  resetApiMocks,
+} from './mocks/api.mock'
 
-vi.mock('../src/mocks/api', () => ({
-  getCategories: (...args) => mockGetCategories(...args),
-  getProductsByCategory: (...args) => mockGetProductsByCategory(...args),
-  login: (...args) => mockLogin(...args),
-  register: (...args) => mockRegister(...args),
-}))
-
-vi.mock('../src/components/CategoriesList/CategoriesList', () => ({
-  default: () => <div data-testid="categories-list">categories</div>,
-}))
-
-vi.mock('../src/components/ProductsList/ProductsList', () => ({
-  default: () => <div data-testid="products-list">products</div>,
-}))
-
-vi.mock('../src/components/ProductDetailScreen/ProductDetailScreen', () => ({
-  default: () => <div data-testid="product-detail-screen">detail</div>,
-}))
-
-vi.mock('../src/components/Breadcrumb/Breadcrumb', () => ({
-  default: () => <div data-testid="breadcrumb">breadcrumb</div>,
-}))
+vi.mock('../src/mocks/api', async () => {
+  const api = await import('./mocks/api.mock')
+  return {
+    getCategories: (...args) => api.mockGetCategories(...args),
+    getProductsByCategory: (...args) => api.mockGetProductsByCategory(...args),
+    login: (...args) => api.mockLogin(...args),
+    register: (...args) => api.mockRegister(...args),
+  }
+})
 
 describe('MainContent auth flow', () => {
   beforeEach(() => {
-    mockGetCategories.mockReset()
-    mockGetProductsByCategory.mockReset()
-    mockLogin.mockReset()
-    mockRegister.mockReset()
+    resetApiMocks()
     mockGetCategories.mockResolvedValue([])
     mockGetProductsByCategory.mockResolvedValue([])
   })
@@ -57,10 +36,14 @@ describe('MainContent auth flow', () => {
     fireEvent.click(screen.getByRole('button', { name: /loguear/i }))
 
     await waitFor(() => {
-      expect(mockLogin).toHaveBeenCalledWith({ email: 'admin@test.com', password: 'admin123' })
+      expect({
+        call: mockLogin.mock.calls[0],
+        feedbackVisible: !!screen.queryByText(/sesión iniciada como admin@test.com/i),
+      }).toEqual({
+        call: [{ email: 'admin@test.com', password: 'admin123' }],
+        feedbackVisible: true,
+      })
     })
-
-    expect(screen.getByText(/sesión iniciada como admin@test.com/i)).toBeInTheDocument()
   })
 
   test('en registro no envía cuando contraseñas no coinciden', async () => {
@@ -90,13 +73,17 @@ describe('MainContent auth flow', () => {
     fireEvent.click(screen.getByRole('button', { name: /^registrarse$/i }))
 
     await waitFor(() => {
-      expect(mockRegister).toHaveBeenCalledWith({
-        email: 'nuevo@test.com',
-        password: 'secret123',
-        name: 'nuevoUser',
+      expect({
+        call: mockRegister.mock.calls[0],
+        feedbackVisible: !!screen.queryByText(/registro completado para nuevo@test.com/i),
+      }).toEqual({
+        call: [{
+          email: 'nuevo@test.com',
+          password: 'secret123',
+          name: 'nuevoUser',
+        }],
+        feedbackVisible: true,
       })
     })
-
-    expect(screen.getByText(/registro completado para nuevo@test.com/i)).toBeInTheDocument()
   })
 })

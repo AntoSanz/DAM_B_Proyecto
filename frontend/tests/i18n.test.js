@@ -3,8 +3,10 @@ import { t, setLocale } from '../src/locales/i18n'
 describe('i18n (Internacionalización)', () => {
   test('t() debe retornar traducción para clave válida', () => {
     const translation = t('brand')
-    expect(typeof translation).toBe('string')
-    expect(translation.length).toBeGreaterThan(0)
+    expect({ type: typeof translation, hasContent: translation.length > 0 }).toEqual({
+      type: 'string',
+      hasContent: true,
+    })
   })
 
   test('t() debe retornar la clave si no existe la traducción', () => {
@@ -14,8 +16,10 @@ describe('i18n (Internacionalización)', () => {
 
   test('debe acceder a traducciones anidadas con notación de puntos', () => {
     const translation = t('welcome.title')
-    expect(typeof translation).toBe('string')
-    expect(translation).not.toBe('welcome.title')
+    expect({ type: typeof translation, isResolved: translation !== 'welcome.title' }).toEqual({
+      type: 'string',
+      isResolved: true,
+    })
   })
 
   test('setLocale() debe cambiar el idioma actual', () => {
@@ -28,9 +32,8 @@ describe('i18n (Internacionalización)', () => {
   })
 
   test('debe obtener múltiples traducciones correctamente', () => {
-    ;['brand', 'nav.home', 'button.primary', 'welcome.title'].forEach(key => {
-      expect(typeof t(key)).toBe('string')
-    })
+    const allAreStrings = ['brand', 'nav.home', 'button.primary', 'welcome.title'].every((key) => typeof t(key) === 'string')
+    expect(allAreStrings).toBe(true)
   })
 
   test('la misma clave debe retornar siempre la misma traducción', () => {
@@ -49,19 +52,19 @@ describe('i18n (Internacionalización)', () => {
   })
 
   test('no debe haber traducciones vacías', () => {
-    ;['brand', 'nav.home', 'button.primary', 'welcome.title', 'products.viewButton'].forEach(key => {
-      expect(t(key).length).toBeGreaterThan(0)
-    })
+    const allNonEmpty = ['brand', 'nav.home', 'button.primary', 'welcome.title', 'products.viewButton'].every((key) => t(key).length > 0)
+    expect(allNonEmpty).toBe(true)
   })
 
   test('los accesos a claves deben ser case-sensitive', () => {
-    expect(t('Brand.Name')).toBe('Brand.Name')
-    expect(t('brand')).not.toBe('Brand.Name')
+    expect({ wrongCase: t('Brand.Name'), rightCaseDiffers: t('brand') !== 'Brand.Name' }).toEqual({
+      wrongCase: 'Brand.Name',
+      rightCaseDiffers: true,
+    })
   })
 
   test('todas las traducciones deben ser strings', () => {
-    ;['brand', 'nav.home', 'welcome.title'].forEach(key => {
-      expect(typeof t(key)).toBe('string')
-    })
+    const allAreStrings = ['brand', 'nav.home', 'welcome.title'].every((key) => typeof t(key) === 'string')
+    expect(allAreStrings).toBe(true)
   })
 })

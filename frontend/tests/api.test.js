@@ -4,6 +4,7 @@
 
 import { getCategories, getProductsByCategory, delay, login, register } from '../src/mocks/api'
 import { afterEach, vi } from 'vitest'
+import { mockFetchError, mockFetchSuccess } from './mocks/fetch.mock'
 
 afterEach(() => {
   vi.restoreAllMocks()
@@ -19,20 +20,23 @@ describe('Mock API', () => {
 
   test('getCategories debe retornar un array de categorías', async () => {
     const categories = await getCategories({ delayMs: 0 })
-    expect(Array.isArray(categories)).toBe(true)
-    expect(categories.length).toBeGreaterThan(0)
+    expect({ isArray: Array.isArray(categories), hasData: categories.length > 0 }).toEqual({
+      isArray: true,
+      hasData: true,
+    })
   })
 
   test('cada categoría debe tener id, name y description', async () => {
     const categories = await getCategories({ delayMs: 0 })
-    categories.forEach(category => {
-      expect(category).toHaveProperty('id')
-      expect(category).toHaveProperty('name')
-      expect(category).toHaveProperty('description')
-      expect(typeof category.id).toBe('number')
-      expect(typeof category.name).toBe('string')
-      expect(typeof category.description).toBe('string')
-    })
+    const isValidShape = categories.every((category) => (
+      Object.prototype.hasOwnProperty.call(category, 'id')
+      && Object.prototype.hasOwnProperty.call(category, 'name')
+      && Object.prototype.hasOwnProperty.call(category, 'description')
+      && typeof category.id === 'number'
+      && typeof category.name === 'string'
+      && typeof category.description === 'string'
+    ))
+    expect(isValidShape).toBe(true)
   })
 
   test('getProductsByCategory debe retornar un array', async () => {
@@ -42,45 +46,44 @@ describe('Mock API', () => {
 
   test('cada producto debe tener propiedades requeridas', async () => {
     const products = await getProductsByCategory(1, { delayMs: 0 })
-
-    if (products.length > 0) {
-      const product = products[0]
-      expect(product).toHaveProperty('id')
-      expect(product).toHaveProperty('categoryId')
-      expect(product).toHaveProperty('name')
-      expect(product).toHaveProperty('shortDescription')
-      expect(product).toHaveProperty('longDescription')
-      expect(product).toHaveProperty('price')
-      expect(product).toHaveProperty('image')
-      expect(product).toHaveProperty('genre')
-      expect(product).toHaveProperty('developer')
-      expect(product).toHaveProperty('players')
-      expect(product).toHaveProperty('releaseDate')
-      expect(product).toHaveProperty('inStock')
-      expect(product).toHaveProperty('rating')
-      expect(typeof product.id).toBe('number')
-      expect(typeof product.categoryId).toBe('number')
-      expect(typeof product.name).toBe('string')
-      expect(typeof product.shortDescription).toBe('string')
-      expect(typeof product.longDescription).toBe('string')
-      expect(typeof product.price).toBe('number')
-      expect(typeof product.image).toBe('string')
-      expect(typeof product.inStock).toBe('boolean')
-    }
+    const isValidShape = products.length === 0 || products.every((product) => (
+      Object.prototype.hasOwnProperty.call(product, 'id')
+      && Object.prototype.hasOwnProperty.call(product, 'categoryId')
+      && Object.prototype.hasOwnProperty.call(product, 'name')
+      && Object.prototype.hasOwnProperty.call(product, 'shortDescription')
+      && Object.prototype.hasOwnProperty.call(product, 'longDescription')
+      && Object.prototype.hasOwnProperty.call(product, 'price')
+      && Object.prototype.hasOwnProperty.call(product, 'image')
+      && Object.prototype.hasOwnProperty.call(product, 'genre')
+      && Object.prototype.hasOwnProperty.call(product, 'developer')
+      && Object.prototype.hasOwnProperty.call(product, 'players')
+      && Object.prototype.hasOwnProperty.call(product, 'releaseDate')
+      && Object.prototype.hasOwnProperty.call(product, 'inStock')
+      && Object.prototype.hasOwnProperty.call(product, 'rating')
+      && typeof product.id === 'number'
+      && typeof product.categoryId === 'number'
+      && typeof product.name === 'string'
+      && typeof product.shortDescription === 'string'
+      && typeof product.longDescription === 'string'
+      && typeof product.price === 'number'
+      && typeof product.image === 'string'
+      && typeof product.inStock === 'boolean'
+    ))
+    expect(isValidShape).toBe(true)
   })
 
   test('getProductsByCategory debe filtrar productos por categoryId', async () => {
     const categoryId = 1
     const products = await getProductsByCategory(categoryId, { delayMs: 0 })
-    products.forEach(product => {
-      expect(product.categoryId).toBe(categoryId)
-    })
+    expect(products.every((product) => product.categoryId === categoryId)).toBe(true)
   })
 
   test('debe retornar array vacío para categoría que no existe', async () => {
     const products = await getProductsByCategory(999, { delayMs: 0 })
-    expect(Array.isArray(products)).toBe(true)
-    expect(products.length).toBe(0)
+    expect({ isArray: Array.isArray(products), isEmpty: products.length === 0 }).toEqual({
+      isArray: true,
+      isEmpty: true,
+    })
   })
 
   test('getCategories debe respetar la latencia especificada', async () => {
@@ -99,8 +102,10 @@ describe('Mock API', () => {
 
   test('getCategories debe funcionar con valores por defecto', async () => {
     const categories = await getCategories()
-    expect(Array.isArray(categories)).toBe(true)
-    expect(categories.length).toBeGreaterThan(0)
+    expect({ isArray: Array.isArray(categories), hasData: categories.length > 0 }).toEqual({
+      isArray: true,
+      hasData: true,
+    })
   })
 
   test('getCategories debe retornar una promesa', () => {
@@ -121,33 +126,28 @@ describe('Mock API', () => {
 
   test('los IDs de categoría deben ser números positivos', async () => {
     const categories = await getCategories({ delayMs: 0 })
-    categories.forEach(category => {
-      expect(typeof category.id).toBe('number')
-      expect(category.id).toBeGreaterThan(0)
-    })
+    expect(categories.every((category) => typeof category.id === 'number' && category.id > 0)).toBe(true)
   })
 
   test('login debe enviar credenciales y retornar usuario', async () => {
-    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue({
-      ok: true,
-      json: async () => ({ ok: true, user: { email: 'admin@test.com', role: 'admin' } }),
-    })
+    const fetchMock = mockFetchSuccess({ ok: true, user: { email: 'admin@test.com', role: 'admin' } })
 
     const user = await login({ email: 'admin@test.com', password: 'admin' })
 
-    expect(user).toEqual({ email: 'admin@test.com', role: 'admin' })
-    expect(fetchMock).toHaveBeenCalledWith(
-      expect.stringMatching(/\/auth\/login$/),
-      expect.objectContaining({ method: 'POST', headers: { 'Content-Type': 'application/json' } })
-    )
+    expect({
+      user,
+      call: fetchMock.mock.calls[0],
+    }).toEqual({
+      user: { email: 'admin@test.com', role: 'admin' },
+      call: [
+        expect.stringMatching(/\/auth\/login$/),
+        expect.objectContaining({ method: 'POST', headers: { 'Content-Type': 'application/json' } }),
+      ],
+    })
   })
 
   test('register debe lanzar error con mensaje del backend cuando falla', async () => {
-    vi.spyOn(globalThis, 'fetch').mockResolvedValue({
-      ok: false,
-      status: 409,
-      json: async () => ({ message: 'El email ya está registrado.' }),
-    })
+    mockFetchError({ status: 409, message: 'El email ya está registrado.' })
 
     await expect(
       register({ email: 'dup@test.com', password: 'secret123', name: 'Dup' })

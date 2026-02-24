@@ -11,12 +11,29 @@ test('hashPassword devuelve formato scrypt y verifyPassword valida correctamente
   const plainPassword = 'secret123';
   const hashed = hashPassword(plainPassword);
 
-  assert.equal(isHashedPassword(hashed), true);
-  assert.equal(verifyPassword(plainPassword, hashed), true);
-  assert.equal(verifyPassword('otra-pass', hashed), false);
+  assert.deepEqual(
+    {
+      hashed: isHashedPassword(hashed),
+      valid: verifyPassword(plainPassword, hashed),
+      invalid: verifyPassword('otra-pass', hashed),
+    },
+    {
+      hashed: true,
+      valid: true,
+      invalid: false,
+    }
+  );
 });
 
 test('verifyPassword soporta fallback legacy en texto plano', () => {
-  assert.equal(verifyPassword('admin', 'admin'), true);
-  assert.equal(verifyPassword('admin', 'admin123'), false);
+  assert.deepEqual(
+    {
+      samePlain: verifyPassword('admin', 'admin'),
+      wrongPlain: verifyPassword('admin', 'admin123'),
+    },
+    {
+      samePlain: true,
+      wrongPlain: false,
+    }
+  );
 });
