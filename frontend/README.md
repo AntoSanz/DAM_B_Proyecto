@@ -4,6 +4,16 @@ Una aplicación web moderna de e-commerce para la venta de videojuegos, construi
 
 > 💡 **¿Quieres empezar rápido?** Consulta [QUICK_START.md](./QUICK_START.md) para comandos esenciales.
 
+<a id="indice-rapido"></a>
+
+## Índice rápido
+
+- [Demos de Componentes (Playground)](#demos-playground)
+- [Instalación y Configuración](#instalacion-configuracion)
+- [Estructura del Proyecto](#estructura-proyecto)
+- [Integración con Backend](#integracion-backend)
+- [Componentes Principales](#componentes-principales)
+
 ## 📋 Características Principales
 
 - ✅ **Sistema de categorías**: Navega entre diferentes tipos de juegos (Juegos de Mesa, PC, Xbox, Nintendo, PS5)
@@ -14,6 +24,8 @@ Una aplicación web moderna de e-commerce para la venta de videojuegos, construi
 - ✅ **Diseño responsivo**: Funciona perfectamente en dispositivos móviles, tablets y desktop
 - ✅ **Integración Front + Back**: Consume endpoints reales en Express
 
+[↑ Volver al índice rápido](#indice-rapido)
+
 ## 🛠️ Tecnologías Utilizadas
 
 | Tecnología | Versión | Propósito |
@@ -22,6 +34,10 @@ Una aplicación web moderna de e-commerce para la venta de videojuegos, construi
 | **Vite** | 5+ | Herramienta de build y desarrollo |
 | **Bootstrap** | 5 | Framework CSS responsivo |
 | **JavaScript (ES6+)** | - | Lenguaje de programación |
+
+[↑ Volver al índice rápido](#indice-rapido)
+
+<a id="estructura-proyecto"></a>
 
 ## 📁 Estructura del Proyecto
 
@@ -87,6 +103,10 @@ frontend/
 └── README.md                     # Este archivo
 ```
 
+[↑ Volver al índice rápido](#indice-rapido)
+
+<a id="instalacion-configuracion"></a>
+
 ## 🚀 Instalación y Configuración
 
 ### Requisitos Previos
@@ -127,7 +147,56 @@ Este comando levanta:
 npm run build
 ```
 
+[↑ Volver al índice rápido](#indice-rapido)
+
 ## 💡 Cómo Usar
+
+<a id="demos-playground"></a>
+
+### Demos de Componentes (Playground)
+
+Para visualizar y probar componentes de forma aislada, ejecuta el frontend y abre:
+
+`http://localhost:5173/?demo=components`
+
+#### Qué ofrece este modo
+
+- Menú lateral izquierdo con lista de componentes
+- Buscador en el menú para filtrar por nombre
+- Vista única: al pulsar una entrada se muestra solo esa demo
+- Estado compartible por URL (filtro + componente activo)
+
+#### Componentes disponibles
+
+- Breadcrumb
+- SectionCard
+- ComponenteModal
+- CategoriesList
+- ProductsList
+- ProductDetailScreen
+
+#### Parámetros de URL
+
+- `demo=components` → activa el modo playground
+- `component=<id>` → abre directamente una demo concreta
+- `q=<texto>` → filtra el menú lateral por texto
+
+IDs válidos para `component`:
+
+- `breadcrumb`
+- `sectioncard`
+- `modal`
+- `categories`
+- `products`
+- `product-detail`
+
+#### Ejemplos de enlaces compartibles
+
+- `http://localhost:5173/?demo=components&component=products`
+- `http://localhost:5173/?demo=components&component=product-detail`
+- `http://localhost:5173/?demo=components&component=products&q=prod`
+
+Para volver al flujo normal de la app, usa `http://localhost:5173/`.
 
 ### Vista General de la Aplicación
 
@@ -140,6 +209,8 @@ npm run build
 - **Navbar Fija**: Accede rápidamente a la página de inicio desde cualquier lugar
 - **Breadcrumb**: Visualiza tu ubicación en la jerarquía y navega hacia atrás
 - **Botones de Acción**: Cada elemento tiene botones para acceder a opciones relacionadas
+
+[↑ Volver al índice rápido](#indice-rapido)
 
 ## 📊 Estructura de Datos
 
@@ -170,6 +241,8 @@ npm run build
   "inStock": true
 }
 ```
+
+[↑ Volver al índice rápido](#indice-rapido)
 
 ## 🌍 Sistema de Localización (i18n)
 
@@ -209,6 +282,10 @@ setLocale('es-ES')  // Cambiar a español
 // En futuro: setLocale('en-US') para inglés
 ```
 
+[↑ Volver al índice rápido](#indice-rapido)
+
+<a id="integracion-backend"></a>
+
 ## 🔄 Integración con Backend
 
 El frontend usa funciones en `src/mocks/api.js` como capa de acceso a datos, pero actualmente esas funciones llaman a endpoints reales del backend.
@@ -232,6 +309,10 @@ const products = await getProductsByCategory(1, { delayMs: 300 })
 - ✅ **Base URL configurable**: `VITE_API_BASE_URL` (archivo `.env`)
 - ✅ **Endpoints reales**: `GET /api/categories` y `GET /api/categories/:id/products`
 - ✅ **Misma interfaz de funciones**: no rompe componentes consumidores
+
+[↑ Volver al índice rápido](#indice-rapido)
+
+<a id="componentes-principales"></a>
 
 ## 🎨 Componentes Principales
 
@@ -272,6 +353,8 @@ Pantalla completa que:
 - Precio prominente
 - Botón de acción (Añadir al carrito)
 
+[↑ Volver al índice rápido](#indice-rapido)
+
 ## 🎯 Flujo de Navegación
 
 ```
@@ -285,6 +368,8 @@ Detalle de Producto (ProductDetailScreen)
   ↓ [Click atrás]
 Vuelve a Productos
 ```
+
+[↑ Volver al índice rápido](#indice-rapido)
 
 ## 🔧 Personalización
 
@@ -320,6 +405,8 @@ const translations = {
 }
 ```
 
+[↑ Volver al índice rápido](#indice-rapido)
+
 ## 📱 Responsividad
 
 La aplicación es completamente responsiva gracias a:
@@ -335,6 +422,8 @@ La aplicación es completamente responsiva gracias a:
 - **Mediano**: ≥ 768px (Tablets)
 - **Grande**: ≥ 992px (Desktops)
 - **Extra grande**: ≥ 1200px (Desktops grandes)
+
+[↑ Volver al índice rápido](#indice-rapido)
 
 ## 🧪 Testing
 
@@ -424,6 +513,8 @@ Estos casos están parcialmente cubiertos de forma indirecta por pruebas de inte
 
 Para más detalles, consulta [TESTING_GUIDE.md](./TESTING_GUIDE.md).
 
+[↑ Volver al índice rápido](#indice-rapido)
+
 ## 🚀 Mejoras Futuras
 
 - [ ] Carrito de compras con estado persistente
@@ -437,6 +528,8 @@ Para más detalles, consulta [TESTING_GUIDE.md](./TESTING_GUIDE.md).
 - [ ] Tema oscuro
 - [ ] Análisis y seguimiento
 
+[↑ Volver al índice rápido](#indice-rapido)
+
 ## 📄 Documentación del Código
 
 Todo el código incluye comentarios en español explicando:
@@ -446,6 +539,8 @@ Todo el código incluye comentarios en español explicando:
 - Decisiones de diseño
 
 Para entender mejor un componente específico, consulta el archivo correspondiente donde encontrarás documentación detallada.
+
+[↑ Volver al índice rápido](#indice-rapido)
 
 ## 🐛 Solución de Problemas
 
@@ -466,6 +561,8 @@ npm run dev
 - Verifica que las URLs en los archivos JSON de productos son correctas
 - Asegúrate de que las imágenes están en `src/assets/` o son URLs válidas
 
+[↑ Volver al índice rápido](#indice-rapido)
+
 ## 📝 Notas de Desarrollo
 
 - **Estado**: La aplicación usa React Hooks (useState) para gestionar el estado
@@ -473,6 +570,8 @@ npm run dev
 - **CSS**: Se prefiere Bootstrap utilities sobre CSS personalizado
 - **Componentes**: Cada componente está en su propia carpeta con JSX y CSS separados
 - **Convención de extensiones**: Archivos con JSX usan `.jsx`; utilidades, mocks, locales y tests sin JSX usan `.js`; imports internos JS/JSX se escriben sin extensión
+
+[↑ Volver al índice rápido](#indice-rapido)
 
 ## 🤝 Contribuir
 
@@ -484,13 +583,19 @@ Para contribuir al proyecto:
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abrir un Pull Request
 
+[↑ Volver al índice rápido](#indice-rapido)
+
 ## 📞 Contacto
 
 Para preguntas o sugerencias sobre el proyecto, contacta al equipo de desarrollo.
 
+[↑ Volver al índice rápido](#indice-rapido)
+
 ## 📜 Licencia
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+
+[↑ Volver al índice rápido](#indice-rapido)
 
 ---
 

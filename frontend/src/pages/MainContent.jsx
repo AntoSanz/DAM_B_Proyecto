@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../App.css'
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb'
 import CategoriesList from '../components/CategoriesList/CategoriesList'
+import ComponenteModal from '../components/ComponenteModal/ComponenteModal'
 import ProductsList from '../components/ProductsList/ProductsList'
 import ProductDetailScreen from '../components/ProductDetailScreen/ProductDetailScreen'
 import { getCategories, getProductsByCategory } from '../mocks/api'
@@ -133,10 +134,27 @@ function MainContent({ children }) {
               onProductSelect={handleProductSelect}
             />
           ) : (
-            <CategoriesList
-              categories={categories}
-              onCategorySelect={handleCategorySelect}
-            />
+            <>
+              <div className="d-flex justify-content-center mb-4">
+                <ComponenteModal
+                  title="Demo Modal"
+                  triggerText="Abrir demo modal"
+                  closeText="Cerrar"
+                  triggerClassName="btn btn-outline-primary"
+                >
+                  <div>
+                    <h6>Contenido inyectado desde fuera</h6>
+                    <p className="mb-0">
+                      Este bloque es un ejemplo de contenido pasado como children al componente modal.
+                    </p>
+                  </div>
+                </ComponenteModal>
+              </div>
+              <CategoriesList
+                categories={categories}
+                onCategorySelect={handleCategorySelect}
+              />
+            </>
           )}
         </div>
       )}
