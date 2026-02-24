@@ -37,8 +37,7 @@ DAM_B_Proyecto/
 1. Instala dependencias del frontend y backend:
 
 ```bash
-npm --prefix frontend install
-npm --prefix backend install
+npm run install:all
 ```
 
 2. Levanta frontend + backend juntos (desde la raíz):
@@ -54,6 +53,7 @@ Servicios esperados:
 
 ## Scripts disponibles (raíz)
 
+- `npm run install:all`: instala dependencias de backend y frontend
 - `npm run dev:full`: levanta frontend + backend
 - `npm run dev:front`: levanta solo frontend
 - `npm run dev:back`: levanta solo backend
