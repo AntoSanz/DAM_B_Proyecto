@@ -7,7 +7,7 @@ import LoginContent from '../components/LoginContent/LoginContent'
 import ProductsList from '../components/ProductsList/ProductsList'
 import ProductDetailScreen from '../components/ProductDetailScreen/ProductDetailScreen'
 import { t } from '../locales/i18n'
-import { getCategories, getProductsByCategory } from '../mocks/api'
+import { getCategories, getProductsByCategory, login, register } from '../mocks/api'
 
 function LoginModal({ isOpen, onClose }) {
   const [step, setStep] = useState('choose')
@@ -17,6 +17,8 @@ function LoginModal({ isOpen, onClose }) {
   const [regPass1, setRegPass1] = useState('')
   const [regPass2, setRegPass2] = useState('')
   const [regUser, setRegUser] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [feedback, setFeedback] = useState('')
 
   const resetAll = () => {
     setStep('choose')
@@ -26,6 +28,8 @@ function LoginModal({ isOpen, onClose }) {
     setRegPass1('')
     setRegPass2('')
     setRegUser('')
+    setIsSubmitting(false)
+    setFeedback('')
   }
 
   useEffect(() => {
@@ -52,6 +56,51 @@ function LoginModal({ isOpen, onClose }) {
 
   const passwordsMatch = regPass1.length > 0 && regPass1 === regPass2
 
+  const handleLoginSubmit = async () => {
+    if (!loginEmail || !loginPass) {
+      return
+    }
+
+    setIsSubmitting(true)
+    setFeedback('')
+
+    try {
+      const user = await login({
+        email: loginEmail,
+        password: loginPass,
+      })
+
+      setFeedback(`Sesión iniciada como ${user.email}.`)
+    } catch (error) {
+      setFeedback(error.message)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleRegisterSubmit = async () => {
+    if (!regEmail || !regUser || !passwordsMatch) {
+      return
+    }
+
+    setIsSubmitting(true)
+    setFeedback('')
+
+    try {
+      const user = await register({
+        email: regEmail,
+        password: regPass1,
+        name: regUser,
+      })
+
+      setFeedback(`Registro completado para ${user.email}.`)
+    } catch (error) {
+      setFeedback(error.message)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   const footerByStep = {
     choose: (
       <button type="button" className="btn btn-secondary" onClick={handleClose}>
@@ -69,12 +118,8 @@ function LoginModal({ isOpen, onClose }) {
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => {
-            if (!loginEmail || !loginPass) {
-              return
-            }
-            window.alert(`Ejemplo: login con ${loginEmail}`)
-          }}
+          onClick={handleLoginSubmit}
+          disabled={isSubmitting}
         >
           <i className="bi bi-box-arrow-in-right me-2"></i>
           Loguear
@@ -92,12 +137,8 @@ function LoginModal({ isOpen, onClose }) {
         <button
           type="button"
           className="btn btn-success"
-          onClick={() => {
-            if (!regEmail || !regUser || !passwordsMatch) {
-              return
-            }
-            window.alert(`Ejemplo: registro de ${regUser} (${regEmail})`)
-          }}
+          onClick={handleRegisterSubmit}
+          disabled={isSubmitting}
         >
           <i className="bi bi-person-plus me-2"></i>
           Registrarse
@@ -134,6 +175,7 @@ function LoginModal({ isOpen, onClose }) {
         onRegPass1Change={setRegPass1}
         onRegPass2Change={setRegPass2}
         onRegUserChange={setRegUser}
+        feedback={feedback}
       />
     </ComponenteModal>
   )

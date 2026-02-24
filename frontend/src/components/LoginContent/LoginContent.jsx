@@ -15,7 +15,8 @@ function LoginContent({
   onRegEmailChange,
   onRegPass1Change,
   onRegPass2Change,
-  onRegUserChange
+  onRegUserChange,
+  feedback
 }) {
   const hasRegPass2 = regPass2.length > 0
   const passwordsMatch = regPass1.length > 0 && regPass1 === regPass2
@@ -52,8 +53,9 @@ function LoginContent({
         <form>
           <h6 className="mb-3">Identificarse</h6>
           <div className="mb-3">
-            <label className="form-label">Correo</label>
+            <label className="form-label" htmlFor="login-email">Correo</label>
             <input
+              id="login-email"
               type="email"
               className="form-control"
               placeholder="usuario@correo.com"
@@ -63,8 +65,9 @@ function LoginContent({
             />
           </div>
           <div className="mb-0">
-            <label className="form-label">Contraseña</label>
+            <label className="form-label" htmlFor="login-password">Contraseña</label>
             <input
+              id="login-password"
               type="password"
               className="form-control"
               placeholder="••••••••"
@@ -81,8 +84,9 @@ function LoginContent({
           <h6 className="mb-3">Registrarse</h6>
 
           <div className="mb-3">
-            <label className="form-label">Correo electrónico</label>
+            <label className="form-label" htmlFor="register-email">Correo electrónico</label>
             <input
+              id="register-email"
               type="email"
               className="form-control"
               placeholder="usuario@correo.com"
@@ -94,8 +98,9 @@ function LoginContent({
 
           <div className="row g-2">
             <div className="col-md-6 mb-3">
-              <label className="form-label">Contraseña</label>
+              <label className="form-label" htmlFor="register-password">Contraseña</label>
               <input
+                id="register-password"
                 type="password"
                 className="form-control"
                 placeholder="••••••••"
@@ -106,8 +111,9 @@ function LoginContent({
             </div>
 
             <div className="col-md-6 mb-3">
-              <label className="form-label">Repetir contraseña</label>
+              <label className="form-label" htmlFor="register-password-repeat">Repetir contraseña</label>
               <input
+                id="register-password-repeat"
                 type="password"
                 className={`form-control ${hasRegPass2 ? (passwordsMatch ? 'is-valid' : 'is-invalid') : ''}`}
                 placeholder="••••••••"
@@ -122,8 +128,9 @@ function LoginContent({
           </div>
 
           <div className="mb-0">
-            <label className="form-label">Nombre de usuario</label>
+            <label className="form-label" htmlFor="register-username">Nombre de usuario</label>
             <input
+              id="register-username"
               type="text"
               className="form-control"
               placeholder="miUsuario"
@@ -134,6 +141,8 @@ function LoginContent({
           </div>
         </form>
       )}
+
+      {feedback && <div className="alert alert-info mt-3 mb-0">{feedback}</div>}
     </div>
   )
 }
