@@ -12,7 +12,7 @@ Una aplicación web moderna de e-commerce para la venta de videojuegos, construi
 - ✅ **Navegación intuitiva**: Breadcrumb interactivo para facilitar la navegación
 - ✅ **Localización en español**: Toda la interfaz en español (i18n)
 - ✅ **Diseño responsivo**: Funciona perfectamente en dispositivos móviles, tablets y desktop
-- ✅ **Mock API**: Simula un backend real con latencia de red
+- ✅ **Integración Front + Back**: Consume endpoints reales en Express
 
 ## 🛠️ Tecnologías Utilizadas
 
@@ -26,7 +26,7 @@ Una aplicación web moderna de e-commerce para la venta de videojuegos, construi
 ## 📁 Estructura del Proyecto
 
 ```
-dam-app/
+frontend/
 ├── src/
 │   ├── pages/
 │   │   ├── Index.jsx              # Página principal
@@ -62,7 +62,7 @@ dam-app/
 │   │   └── es-ES.js              # Diccionario español
 │   │
 │   ├── mocks/
-│   │   ├── api.js                # Mock API con funciones async
+│   │   ├── api.js                # Cliente HTTP hacia backend Express
 │   │   ├── categories.json       # Datos de categorías
 │   │   └── products/             # Datos de productos por categoría
 │   │       ├── boardGames.json
@@ -79,6 +79,8 @@ dam-app/
 │
 ├── public/                       # Archivos públicos estáticos
 ├── index.html                    # HTML principal
+├── .env                          # Configuración de URL API (local)
+├── .env.example                  # Plantilla de variables de entorno
 ├── package.json                  # Dependencias y scripts
 ├── vite.config.js               # Configuración de Vite
 ├── eslint.config.js             # Configuración de ESLint
@@ -96,7 +98,7 @@ dam-app/
 1. **Clonar el repositorio**
 ```bash
 git clone <url-del-repositorio>
-cd dam-app
+cd frontend
 ```
 
 2. **Instalar dependencias**
@@ -104,14 +106,23 @@ cd dam-app
 npm install
 ```
 
-3. **Iniciar el servidor de desarrollo**
+3. **Iniciar frontend (solo React)**
 ```bash
 npm run dev
 ```
 
-La aplicación estará disponible en: `http://localhost:5174`
+La aplicación estará disponible en: `http://localhost:5173`
 
-4. **Build para producción**
+4. **Iniciar frontend + backend con un solo comando**
+```bash
+npm run dev:full
+```
+
+Este comando levanta:
+- Frontend (Vite): `http://localhost:5173`
+- Backend (Express): `http://localhost:3000`
+
+5. **Build para producción**
 ```bash
 npm run build
 ```
@@ -198,29 +209,29 @@ setLocale('es-ES')  // Cambiar a español
 // En futuro: setLocale('en-US') para inglés
 ```
 
-## 🔄 Mock API
+## 🔄 Integración con Backend
 
-El proyecto incluye una mock API en `src/mocks/api.js` que simula un backend real con:
+El frontend usa funciones en `src/mocks/api.js` como capa de acceso a datos, pero actualmente esas funciones llaman a endpoints reales del backend.
 
 ### Funciones Disponibles
 
 #### `getCategories(options)`
-Retorna todas las categorías de juegos
+Consulta categorías desde backend
 ```javascript
 const categories = await getCategories({ delayMs: 300 })
 ```
 
 #### `getProductsByCategory(categoryId, options)`
-Retorna productos filtrados por categoría (simula búsqueda del servidor)
+Consulta productos filtrados por categoría desde backend
 ```javascript
 const products = await getProductsByCategory(1, { delayMs: 300 })
 ```
 
 ### Características
 
-- ✅ **Latencia simulada**: Espera 300ms por defecto para simular red
-- ✅ **Filtrado del servidor**: Los productos se filtran simulando un backend
-- ✅ **Estructura realista**: Retorna promesas como una API real
+- ✅ **Base URL configurable**: `VITE_API_BASE_URL` (archivo `.env`)
+- ✅ **Endpoints reales**: `GET /api/categories` y `GET /api/categories/:id/products`
+- ✅ **Misma interfaz de funciones**: no rompe componentes consumidores
 
 ## 🎨 Componentes Principales
 
@@ -281,7 +292,9 @@ Vuelve a Productos
 
 1. Editar `src/mocks/categories.json`
 2. Crear archivo de productos en `src/mocks/products/newCategory.json`
-3. Actualizar el `categoryProductsMap` en `src/mocks/api.js`
+3. Actualizar el mapeo en backend para exponer la nueva categoría
+
+> Nota: mientras los datos estén en archivos JSON del frontend, el backend los lee desde `frontend/src/mocks`. Si cambias estructura o nombres, actualiza también el backend.
 
 ### Cambiar Colores de Bootstrap
 

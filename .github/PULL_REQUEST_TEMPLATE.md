@@ -6,50 +6,58 @@
 ## ✅ Checklist de Verificación
 
 ### 🔧 Instalación y Dependencias
-- [ ] Los componentes se descargan correctamente con `npm i`
-- [ ] No hay errores de dependencias ni conflictos de versiones
-- [ ] Se han actualizado las dependencias necesarias en `package.json`
+- Los componentes se descargan correctamente con `npm i`
+- No hay errores de dependencias ni conflictos de versiones
+- Se han actualizado las dependencias necesarias en `package.json`
+- [ ] Revisado
 
 ### 🚀 Ejecución de la Aplicación
-- [ ] La aplicación se lanza correctamente con `npm run dev`
-- [ ] No hay errores en la consola al iniciar
-- [ ] La aplicación es accesible en el navegador
+- La aplicación se lanza correctamente con `npm run dev`
+- No hay errores en la consola al iniciar
+- La aplicación es accesible en el navegador
+- [ ] Revisado
 
 ### 🧪 Testing y Cobertura
-- [ ] Los tests se ejecutan correctamente con `npm run test:coverage`
-- [ ] La cobertura de código es **mayor al 80%**
-- [ ] Todos los tests existentes pasan correctamente
-- [ ] Se han añadido tests para las nuevas funcionalidades
-- [ ] Se han actualizado los tests afectados por los cambios
+- Los tests se ejecutan correctamente con `npm run test:coverage`
+- La cobertura de código es **mayor al 80%**
+- Todos los tests existentes pasan correctamente
+- Se han añadido tests para las nuevas funcionalidades
+- Se han actualizado los tests afectados por los cambios
+- [ ] Revisado
 
 ### 📝 Código y Estándares
-- [ ] El código sigue las convenciones del proyecto
-- [ ] No hay errores de linting
-- [ ] Se han eliminado console.logs y código comentado innecesario
-- [ ] Las funciones y variables tienen nombres descriptivos
-- [ ] El código está debidamente documentado (comentarios donde sea necesario)
+- El código sigue las convenciones del proyecto
+- No hay errores de linting
+- Se han eliminado console.logs y código comentado innecesario
+- Las funciones y variables tienen nombres descriptivos
+- El código está debidamente documentado (comentarios donde sea necesario)
+- [ ] Revisado
 
 ### 🎨 Funcionalidad
-- [ ] La funcionalidad implementada cumple con los requisitos
-- [ ] Se ha probado manualmente en diferentes escenarios
-- [ ] Se han contemplado casos de error y estados de carga
-- [ ] La interfaz es responsive (si aplica)
+- La funcionalidad implementada cumple con los requisitos
+- Se ha probado manualmente en diferentes escenarios
+- Se han contemplado casos de error y estados de carga
+- La interfaz es responsive (si aplica)
+- [ ] Revisado
 
 ### 📚 Documentación
-- [ ] Se ha actualizado el README si es necesario
-- [ ] Se ha documentado cualquier cambio en la API o configuración
-- [ ] Se han añadido comentarios JSDoc si es necesario
+- Se ha actualizado el README si es necesario
+- Se ha documentado cualquier cambio en la API o configuración
+- Se han añadido comentarios JSDoc si es necesario
+- [ ] Revisado
 
 ### 🔍 Revisión de Código
-- [ ] El código ha sido auto-revisado antes de solicitar review
-- [ ] No hay conflictos con la rama base
-- [ ] Los commits tienen mensajes descriptivos
-- [ ] Se ha mantenido el código DRY (Don't Repeat Yourself)
+- El código ha sido auto-revisado antes de solicitar review
+- No hay conflictos con la rama base
+- Los commits tienen mensajes descriptivos
+- Se ha mantenido el código DRY (Don't Repeat Yourself)
+- [ ] Revisado
 
 ### 🔒 Seguridad (si aplica)
-- [ ] No se han expuesto credenciales o información sensible
-- [ ] Se han validado los inputs del usuario
-- [ ] Se han contemplado posibles vulnerabilidades
+- No se han expuesto credenciales o información sensible
+- Se han validado los inputs del usuario
+- Se han contemplado posibles vulnerabilidades
+- [ ] Revisado
 
 ## 📸 Capturas de Pantalla (si aplica)
 <!-- Añade capturas de pantalla si hay cambios visuales -->
