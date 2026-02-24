@@ -1,0 +1,11 @@
+body.modal-open-custom {
+  overflow: hidden;
+}
+
+.modal.show {
+  z-index: 1055;
+}
+
+.modal-backdrop.show {
+  z-index: 1050;
+}
