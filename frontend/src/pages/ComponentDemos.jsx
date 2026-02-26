@@ -5,6 +5,7 @@ import ComponenteModal from '../components/ComponenteModal/ComponenteModal'
 import ProductDetailScreen from '../components/ProductDetailScreen/ProductDetailScreen'
 import ProductsList from '../components/ProductsList/ProductsList'
 import SectionCard from '../components/SectionCard/SectionCard'
+import { t } from '../locales/i18n'
 import categoriesData from '../mocks/categories.json'
 import boardGames from '../mocks/products/boardGames.json'
 import nintendoGames from '../mocks/products/nintendoGames.json'
@@ -21,12 +22,12 @@ const productsByCategory = {
 }
 
 const demoItems = [
-  { id: 'breadcrumb', label: 'Breadcrumb' },
-  { id: 'sectioncard', label: 'SectionCard' },
-  { id: 'modal', label: 'ComponenteModal' },
-  { id: 'categories', label: 'CategoriesList' },
-  { id: 'products', label: 'ProductsList' },
-  { id: 'product-detail', label: 'ProductDetailScreen' }
+  { id: 'breadcrumb', labelKey: 'demos.breadcrumb' },
+  { id: 'sectioncard', labelKey: 'demos.sectionCard' },
+  { id: 'modal', labelKey: 'demos.componentModal' },
+  { id: 'categories', labelKey: 'demos.categoriesList' },
+  { id: 'products', labelKey: 'demos.productsList' },
+  { id: 'product-detail', labelKey: 'demos.productDetailScreen' }
 ]
 
 const isValidDemoId = (id) => demoItems.some((item) => item.id === id)
@@ -63,7 +64,7 @@ function ComponentDemos() {
       return demoItems
     }
 
-    return demoItems.filter((item) => item.label.toLowerCase().includes(normalizedQuery))
+    return demoItems.filter((item) => t(item.labelKey).toLowerCase().includes(normalizedQuery))
   }, [menuQuery])
 
   useEffect(() => {
@@ -113,7 +114,7 @@ function ComponentDemos() {
     if (activeDemo === 'breadcrumb') {
       return (
         <section>
-          <h2 className="mb-3">Breadcrumb</h2>
+          <h2 className="mb-3">{t('demos.breadcrumb')}</h2>
           <Breadcrumb
             categoryName={selectedCategory?.name}
             showProducts={selectedProducts.length > 0}
@@ -132,14 +133,14 @@ function ComponentDemos() {
     if (activeDemo === 'sectioncard') {
       return (
         <section>
-          <h2 className="mb-3">SectionCard</h2>
+          <h2 className="mb-3">{t('demos.sectionCard')}</h2>
           <div className="d-flex justify-content-center">
             <SectionCard
-              title="Demo SectionCard"
-              subtitle="Configuración base"
-              text="Tarjeta de ejemplo para visualizar estilos y comportamiento del CTA."
-              ctaText="Acción demo"
-              onCta={() => window.alert('CTA de demo pulsado')}
+              title={t('demos.sectionCardTitle')}
+              subtitle={t('demos.sectionCardSubtitle')}
+              text={t('demos.sectionCardText')}
+              ctaText={t('demos.sectionCardCta')}
+              onCta={() => window.alert(t('demos.sectionCardAlert'))}
             />
           </div>
         </section>
@@ -149,14 +150,14 @@ function ComponentDemos() {
     if (activeDemo === 'modal') {
       return (
         <section>
-          <h2 className="mb-3">ComponenteModal</h2>
+          <h2 className="mb-3">{t('demos.componentModal')}</h2>
           <ComponenteModal
-            title="Demo Modal"
-            triggerText="Abrir modal demo"
-            closeText="Cerrar"
+            title={t('demos.modalTitle')}
+            triggerText={t('demos.modalTrigger')}
+            closeText={t('products.closeButton')}
             triggerClassName="btn btn-outline-primary"
           >
-            <p className="mb-0">Este contenido se inyecta como children para probar el componente.</p>
+            <p className="mb-0">{t('demos.modalBody')}</p>
           </ComponenteModal>
         </section>
       )
@@ -165,7 +166,7 @@ function ComponentDemos() {
     if (activeDemo === 'categories') {
       return (
         <section>
-          <h2 className="mb-3">CategoriesList</h2>
+          <h2 className="mb-3">{t('demos.categoriesList')}</h2>
           <CategoriesList
             categories={categoriesData}
             onCategorySelect={handleCategorySelect}
@@ -177,10 +178,10 @@ function ComponentDemos() {
     if (activeDemo === 'products') {
       return (
         <section>
-          <h2 className="mb-3">ProductsList</h2>
+          <h2 className="mb-3">{t('demos.productsList')}</h2>
           <ProductsList
             products={selectedProducts}
-            categoryName={selectedCategory?.name || 'Sin categoría'}
+            categoryName={selectedCategory?.name || t('demos.noCategory')}
             onProductSelect={setSelectedProduct}
           />
         </section>
@@ -189,7 +190,7 @@ function ComponentDemos() {
 
     return (
       <section>
-        <h2 className="mb-3">ProductDetailScreen</h2>
+        <h2 className="mb-3">{t('demos.productDetailScreen')}</h2>
         <ProductDetailScreen
           product={detailProduct}
           onBack={() => setSelectedProduct(null)}
@@ -202,7 +203,7 @@ function ComponentDemos() {
     <main className="main-content">
       <div className="index-container">
         <div className="alert alert-info mt-3" role="alert">
-          <strong>Modo Demo de Componentes</strong> · Abre la app normal en <a href="/">/</a>
+          <strong>{t('demos.bannerTitle')}</strong> · {t('demos.bannerText')} <a href="/">/</a>
         </div>
 
         <div className="row g-4 align-items-start">
@@ -211,10 +212,10 @@ function ComponentDemos() {
               <input
                 type="search"
                 className="form-control"
-                placeholder="Buscar componente..."
+                placeholder={t('demos.searchPlaceholder')}
                 value={menuQuery}
                 onChange={(event) => setMenuQuery(event.target.value)}
-                aria-label="Buscar componente"
+                aria-label={t('demos.searchAriaLabel')}
               />
             </div>
             <div className="list-group">
@@ -226,11 +227,11 @@ function ComponentDemos() {
                     className={`list-group-item list-group-item-action ${activeDemo === item.id ? 'active' : ''}`}
                     onClick={() => setActiveDemo(item.id)}
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </button>
                 ))
               ) : (
-                <div className="list-group-item text-muted">No hay componentes que coincidan.</div>
+                <div className="list-group-item text-muted">{t('demos.noMatches')}</div>
               )}
             </div>
           </aside>

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { t } from '../../locales/i18n'
 import './ComponenteModal.css'
 
 function ComponenteModal({
   children,
-  title = 'Modal',
-  triggerText = 'Abrir modal',
-  closeText = 'Cerrar',
+  title = t('modal.title'),
+  triggerText = t('modal.open'),
+  closeText = t('modal.close'),
   triggerClassName = 'btn btn-primary',
   size = '',
   showTrigger = true,

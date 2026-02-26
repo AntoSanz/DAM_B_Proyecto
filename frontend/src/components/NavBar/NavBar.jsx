@@ -16,7 +16,7 @@ function NavBar({ onHomeClick, onLoginClick }) {
         <a className="navbar-brand d-flex align-items-center" href="/" onClick={handleHomeClick}>
           {t('brand')}
         </a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label={t('nav.toggleNavigation')}>
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse position-absolute start-50 translate-middle-x" id="navbarNav">
