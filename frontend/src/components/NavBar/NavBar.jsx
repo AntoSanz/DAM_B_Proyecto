@@ -2,7 +2,7 @@ import React from 'react'
 import './NavBar.css'
 import { t } from '../../locales/i18n'
 
-function NavBar({ onHomeClick, onLoginClick }) {
+function NavBar({ onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, userName = '' }) {
   const handleHomeClick = (event) => {
     if (onHomeClick) {
       event.preventDefault()
@@ -34,10 +34,21 @@ function NavBar({ onHomeClick, onLoginClick }) {
             </li>
           </ul>
         </div>
-        <div className="d-flex ms-auto">
-          <button type="button" className="btn btn-outline-primary" onClick={onLoginClick}>
-            <i className="bi bi-box-arrow-in-right me-1"></i> {t('nav.login')}
-          </button>
+        <div className="d-flex ms-auto align-items-center gap-2">
+          {isLoggedIn ? (
+            <>
+              <span className="text-muted small">
+                {t('nav.welcome').replace('{name}', userName)}
+              </span>
+              <button type="button" className="btn btn-outline-danger" onClick={onLogoutClick}>
+                <i className="bi bi-box-arrow-right me-1"></i> {t('nav.logout')}
+              </button>
+            </>
+          ) : (
+            <button type="button" className="btn btn-outline-primary" onClick={onLoginClick}>
+              <i className="bi bi-box-arrow-in-right me-1"></i> {t('nav.login')}
+            </button>
+          )}
         </div>
       </div>
     </nav>

@@ -13,7 +13,7 @@ import { getCategories, getProductsByCategory } from '../mocks/api'
  * - La renderización condicional de componentes según el contexto
  * - La comunicación entre componentes hermanos
  */
-function MainContent({ children, isLoginModalOpen = false, onLoginModalClose }) {
+function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, onLoginSuccess }) {
   const [selectedProducts, setSelectedProducts] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [selectedProductDetail, setSelectedProductDetail] = useState(null)
@@ -67,7 +67,7 @@ function MainContent({ children, isLoginModalOpen = false, onLoginModalClose }) 
 
   return (
     <main className="main-content">
-      <LoginModal isOpen={isLoginModalOpen} onClose={onLoginModalClose} />
+      <LoginModal isOpen={isLoginModalOpen} onClose={onLoginModalClose} onLoginSuccess={onLoginSuccess} />
 
       {children || (
         <MainFlowContent

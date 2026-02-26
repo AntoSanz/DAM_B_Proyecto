@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { login, register } from '../mocks/api'
 import { t } from '../locales/i18n'
 
-function useAuthModalState({ isOpen, onClose }) {
+function useAuthModalState({ isOpen, onClose, onLoginSuccess }) {
   const [step, setStep] = useState('choose')
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPass, setLoginPass] = useState('')
@@ -76,6 +76,8 @@ function useAuthModalState({ isOpen, onClose }) {
       })
 
       setFeedback(t('login.loginSuccess').replace('{email}', user.email))
+      onLoginSuccess?.(user)
+      closeAuthModal()
     } catch (error) {
       setFeedback(error.message)
     } finally {
@@ -92,13 +94,14 @@ function useAuthModalState({ isOpen, onClose }) {
     setFeedback('')
 
     try {
-      await register({
+      const user = await register({
         email: regEmail,
         password: regPass1,
         name: regUser,
       })
 
       setIsRegisterSuccessOpen(true)
+      onLoginSuccess?.(user)
       closeAuthModal()
     } catch (error) {
       setFeedback(error.message)

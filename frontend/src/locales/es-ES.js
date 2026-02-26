@@ -5,6 +5,13 @@ const es = {
     features: 'Características',
     pricing: 'Precios',
     login: 'Iniciar sesión',
+    logout: 'Desconectar',
+    welcome: 'Bienvenido, {name}',
+    welcomeFallback: 'usuario',
+    logoutConfirmTitle: 'Confirmar desconexion',
+    logoutConfirmBody: 'Seguro que quieres desconectar?',
+    logoutConfirmAction: 'Desconectar',
+    logoutCancelAction: 'Cancelar',
     toggleNavigation: 'Alternar navegación',
     register: 'Registrarse'
   },

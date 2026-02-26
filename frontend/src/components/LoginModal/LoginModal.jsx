@@ -4,7 +4,7 @@ import LoginContent from '../LoginContent/LoginContent'
 import { t } from '../../locales/i18n'
 import useAuthModalState from '../../hooks/useAuthModalState'
 
-function LoginModal({ isOpen, onClose }) {
+function LoginModal({ isOpen, onClose, onLoginSuccess }) {
   const {
     step,
     loginEmail,
@@ -27,7 +27,7 @@ function LoginModal({ isOpen, onClose }) {
     closeRegisterSuccessModal,
     submitLogin,
     submitRegister,
-  } = useAuthModalState({ isOpen, onClose })
+  } = useAuthModalState({ isOpen, onClose, onLoginSuccess })
 
   const getModalTitle = () => {
     if (step === 'login') {
