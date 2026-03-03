@@ -13,24 +13,38 @@ function NavBar({ onHomeClick }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top custom-navbar">
       <div className="container-fluid position-relative d-flex align-items-center">
-        <a className="navbar-brand d-flex align-items-center" href="/" onClick={handleHomeClick}>
-  {t('brand')}
-</a>
+        <a
+          className="navbar-brand d-flex align-items-center"
+          href="/"
+          onClick={handleHomeClick}
+          style={{ color: 'inherit', textDecoration: 'none' }}
+        >
+          {t('brand')}
+        </a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse position-absolute start-50 translate-middle-x" id="navbarNav">
           <ul className="navbar-nav justify-content-center">
             <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/" onClick={handleHomeClick}>
-  <i className="bi bi-house-door-fill me-1"></i> {t('nav.home')}
-</a>
+              <a className="nav-link active" aria-current="page" href="/" onClick={handleHomeClick}>
+                <i className="bi bi-house-door-fill me-1"></i> {t('nav.home')}
+              </a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#">{t('nav.features')}</a>
+              <a className="nav-link" href="#">
+                <i className="bi bi-gear-fill me-1"></i> {t('nav.settings')}
+              </a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#">{t('nav.pricing')}</a>
+              <a className="nav-link" href="#">
+                <i className="bi bi-star-fill me-1"></i> {t('nav.favorites')}
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                <i className="bi bi-envelope-at-fill me-1"></i> {t('nav.contact')}
+              </a>
             </li>
           </ul>
         </div>
