@@ -8,20 +8,17 @@
  * y gestión de estado está en MainContent
  */
 
-import './App.css'
-import Index from './pages/Index'
-import ComponentDemos from './pages/ComponentDemos'
+import React, { useState } from "react";
+import Index from "./pages/Index";
+import ComponenteModal from "./components/ComponenteModal/ComponenteModal"; // El de Antonio
 
-/**
- * Componente App
- * Simplemente renderiza el componente Index que contiene toda la aplicación
- */
 function App() {
-  const params = new URLSearchParams(window.location.search)
-  const isDemoMode = params.get('demo') === 'components'
-
-  return isDemoMode ? <ComponentDemos /> : <Index />
+  return (
+    <>
+      <Index />
+    </>
+  );
 }
 
-export default App
+export default App;
 
