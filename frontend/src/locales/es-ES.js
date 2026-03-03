@@ -2,9 +2,8 @@ const es = {
   brand: 'Proyecto DAM',
   nav: {
     home: 'Inicio',
-    settings: 'Ajustes',
-    favorites: 'Favoritos',
-    contact: 'Contacto'
+    features: 'Características',
+    pricing: 'Precios'
   },
   welcome: {
     title: 'Bienvenido',
