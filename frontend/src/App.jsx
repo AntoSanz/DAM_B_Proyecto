@@ -10,7 +10,7 @@
 
 import React, { useState } from "react";
 import Index from "./pages/Index";
-import ComponenteModal from "./components/ComponenteModal/ComponenteModal"; // El de Antonio
+import ComponenteModal from "./components/ComponenteModal/ComponenteModal";
 
 function App() {
   return (
