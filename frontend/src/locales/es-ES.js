@@ -4,7 +4,7 @@ const es = {
     home: 'Inicio',
     settings: 'Ajustes',
     favorites: 'Favoritos',
-    contact: 'Contactanos'
+    contact: 'Contacto'
   },
   welcome: {
     title: 'Bienvenido',
