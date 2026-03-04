@@ -13,7 +13,10 @@ const es = {
     logoutConfirmAction: 'Desconectar',
     logoutCancelAction: 'Cancelar',
     toggleNavigation: 'Alternar navegación',
-    register: 'Registrarse'
+    register: 'Registrarse',
+    settings: 'Ajustes',
+    favorites: 'Favoritos',
+    contact: 'Contacto'
   },
   welcome: {
     title: 'Bienvenido',

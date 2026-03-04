@@ -13,10 +13,15 @@ function NavBar({ onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top custom-navbar">
       <div className="container-fluid position-relative d-flex align-items-center">
-        <a className="navbar-brand d-flex align-items-center" href="/" onClick={handleHomeClick}>
+        <a
+          className="navbar-brand d-flex align-items-center"
+          href="/"
+          onClick={handleHomeClick}
+          style={{ color: 'inherit', textDecoration: 'none' }}
+        >
           {t('brand')}
         </a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label={t('nav.toggleNavigation')}>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse position-absolute start-50 translate-middle-x" id="navbarNav">
@@ -27,10 +32,19 @@ function NavBar({ onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, 
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">{t('nav.features')}</a>
+              <a className="nav-link" href="#">
+                <i className="bi bi-gear-fill me-1"></i> {t('nav.settings')}
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">{t('nav.pricing')}</a>
+              <a className="nav-link" href="#">
+                <i className="bi bi-star-fill me-1"></i> {t('nav.favorites')}
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                <i className="bi bi-envelope-at-fill me-1"></i> {t('nav.contact')}
+              </a>
             </li>
           </ul>
         </div>
