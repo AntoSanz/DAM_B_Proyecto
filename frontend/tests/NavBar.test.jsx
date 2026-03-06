@@ -1,86 +1,52 @@
-/**
- * Tests para NavBar Component
- * 
- * Prueba la renderización y comportamiento de la barra de navegación
- */
-
 import { fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
-import NavBar from '../components/NavBar/NavBar'
+import NavBar from '../src/components/NavBar/NavBar'
 
 describe('NavBar Component', () => {
-  // Test 1: Renderizado básico
   test('debe renderizar el navbar', () => {
     render(<NavBar onHomeClick={vi.fn()} />)
-    
-    const navbar = screen.getByRole('navigation')
-    expect(navbar).toBeInTheDocument()
+    expect(screen.getByRole('navigation')).toBeInTheDocument()
   })
 
-  // Test 2: Logo/Brand
   test('debe mostrar el nombre de la marca', () => {
     render(<NavBar onHomeClick={vi.fn()} />)
-    
-    // El brand debería contener el nombre del proyecto
-    const brandElement = document.querySelector('.navbar-brand')
-    expect(brandElement).toBeInTheDocument()
+    expect(document.querySelector('.navbar-brand')).toBeInTheDocument()
   })
 
-  // Test 3: Navbar debe estar fija
   test('navbar debe tener class sticky o fixed', () => {
     const { container } = render(<NavBar onHomeClick={vi.fn()} />)
-    
-    const navbar = container.querySelector('nav')
-    expect(navbar).toHaveClass('custom-navbar')
+    expect(container.querySelector('nav')).toHaveClass('custom-navbar')
   })
 
-  // Test 4: Enlaces de navegación
   test('debe contener navbar-nav para los enlaces', () => {
     const { container } = render(<NavBar onHomeClick={vi.fn()} />)
-    
-    const navLinks = container.querySelector('.navbar-nav')
-    expect(navLinks).toBeInTheDocument()
+    expect(container.querySelector('.navbar-nav')).toBeInTheDocument()
   })
 
-  // Test 5: Botón toggler en mobile
   test('debe tener botón toggler para mobile', () => {
     const { container } = render(<NavBar onHomeClick={vi.fn()} />)
-    
-    const toggler = container.querySelector('.navbar-toggler')
-    expect(toggler).toBeInTheDocument()
+    expect(container.querySelector('.navbar-toggler')).toBeInTheDocument()
   })
 
-  // Test 6: Usar Bootstrap
   test('debe usar clases de Bootstrap', () => {
     const { container } = render(<NavBar onHomeClick={vi.fn()} />)
-    
-    const navbar = container.querySelector('.navbar')
-    expect(navbar).toBeInTheDocument()
+    expect(container.querySelector('.navbar')).toBeInTheDocument()
   })
 
-  // Test 7: Estructura correcta
   test('debe tener estructura de navbar expandible para responsive', () => {
     const { container } = render(<NavBar onHomeClick={vi.fn()} />)
-    
-    const navbarCollapse = container.querySelector('.navbar-collapse')
-    expect(navbarCollapse).toBeInTheDocument()
+    expect(container.querySelector('.navbar-collapse')).toBeInTheDocument()
   })
 
-  // Test 8: Callback onHomeClick
   test('debe ejecutar onHomeClick al hacer click en la marca', () => {
     const mockClick = vi.fn()
     render(<NavBar onHomeClick={mockClick} />)
-
-    const brand = document.querySelector('.navbar-brand')
-    fireEvent.click(brand)
-
+    fireEvent.click(document.querySelector('.navbar-brand'))
     expect(mockClick).toHaveBeenCalledTimes(1)
   })
 
-  // Test 9: Clases CSS personalizadas
   test('debe aplicar las clases CSS del componente', () => {
     const { container } = render(<NavBar onHomeClick={vi.fn()} />)
-    
     expect(container.querySelector('.custom-navbar')).toBeInTheDocument()
   })
 })

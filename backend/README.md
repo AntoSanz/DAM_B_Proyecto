@@ -36,6 +36,32 @@ Servidor por defecto:
 - `GET /health`
 - `GET /api/categories`
 - `GET /api/categories/:id/products`
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+
+### Auth (request body)
+
+`POST /api/auth/register`
+
+```json
+{
+	"email": "user@test.com",
+	"password": "secret123",
+	"name": "Usuario Demo"
+}
+```
+
+`POST /api/auth/login`
+
+```json
+{
+	"email": "user@test.com",
+	"password": "secret123"
+}
+```
+
+Las contraseñas se almacenan con hash `scrypt` + `salt`.
+No se desencriptan: se validan comparando hash de forma segura.
 
 ## Estructura recomendada (actual)
 

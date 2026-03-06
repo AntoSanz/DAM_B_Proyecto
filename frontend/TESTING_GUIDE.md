@@ -74,8 +74,10 @@ npm test -- --reporter=verbose
 ```
 src/
 ├── __tests__/                       # Carpeta principal de tests
-│   ├── __mocks__/
-│   │   └── fileMock.js             # Mock para archivos
+│   ├── mocks/
+│   │   ├── fileMock.js             # Mock para archivos
+│   │   ├── api.mock.js             # Mocks compartidos de API
+│   │   └── fetch.mock.js           # Helpers de fetch para tests
 │   ├── SectionCard.test.jsx        # Tests de SectionCard
 │   ├── Breadcrumb.test.jsx         # Tests de Breadcrumb
 │   ├── NavBar.test.jsx             # Tests de NavBar

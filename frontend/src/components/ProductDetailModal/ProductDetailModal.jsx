@@ -32,28 +32,28 @@ function ProductDetailModal({ product, isOpen, onClose }) {
             <h6>{product.name}</h6>
             <p>{product.longDescription}</p>
             <p>
-              <strong>Género:</strong> {product.genre}
+              <strong>{t('products.genreLabel')}</strong> {product.genre}
             </p>
             {product.developer && (
               <p>
-                <strong>Desarrollador:</strong> {product.developer}
+                <strong>{t('products.developerLabel')}</strong> {product.developer}
               </p>
             )}
             {product.players && (
               <p>
-                <strong>Jugadores:</strong> {product.players}
+                <strong>{t('products.playersLabel')}</strong> {product.players}
               </p>
             )}
             <p>
-              <strong>Año de lanzamiento:</strong> {product.releaseDate}
+              <strong>{t('products.releaseDateLabel')}</strong> {product.releaseDate}
             </p>
             {product.rating && (
               <p>
-                <strong>Puntuación:</strong> ⭐ {product.rating}/5
+                <strong>{t('products.ratingLabel')}</strong> ⭐ {product.rating}/5
               </p>
             )}
             <p>
-              <strong>Precio:</strong> €{product.price.toFixed(2)}
+              <strong>{t('products.priceLabel')}</strong> €{product.price.toFixed(2)}
             </p>
           </div>
           <div className="modal-footer">
