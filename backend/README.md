@@ -2,10 +2,15 @@
 
 API del proyecto con base de datos SQLite y estructura por capas.
 
+
 ## Requisitos
 
 - Node.js 20+
 - npm
+
+## Dependencias
+
+Solo se mantienen las dependencias necesarias para el backend: `express`, `cors` y `better-sqlite3`. Si añades nuevas, revisa que realmente se usen en el código.
 
 ## Instalación
 
