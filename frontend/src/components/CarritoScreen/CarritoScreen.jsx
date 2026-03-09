@@ -1,9 +1,9 @@
 import React from 'react';
-import { useCarritoDm } from '../../data-managers/CarritoDm';
+import { useCarrito } from '../../data-managers/CarritoDm';
 import './CarritoScreen.css';
 
 function CarritoScreen({ onBack }) {
-  const { cart, totalItems, totalPrice, removeFromCart, clearCart } = useCarritoDm();
+  const { cart, totalItems, totalPrice, removeFromCart, clearCart } = useCarrito();
 
   return (
     <section className="carrito-screen container mt-4">

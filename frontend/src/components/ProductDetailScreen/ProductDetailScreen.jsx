@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCarritoDm } from '../../data-managers/CarritoDm'
+import { useCarrito } from '../../data-managers/CarritoDm'
 import { t } from '../../locales/i18n'
 import './ProductDetailScreen.css'
 
@@ -17,7 +17,7 @@ import './ProductDetailScreen.css'
  * - onBack: Función callback para volver a la lista de productos
  */
 function ProductDetailScreen({ product, onBack }) {
-  const { addToCart } = useCarritoDm();
+  const { addToCart } = useCarrito();
   const [quantity, setQuantity] = React.useState(1);
   const handleAddToCart = () => {
     if (quantity > 0) {
@@ -110,7 +110,7 @@ function ProductDetailScreen({ product, onBack }) {
                 <input
                   type="number"
                   min="1"
-                  max={product.inStock || 99}
+                  max={typeof product.inStock === 'number' ? product.inStock : 99}
                   className="form-control"
                   value={quantity}
                   onChange={e => setQuantity(Math.max(1, Number(e.target.value)))}

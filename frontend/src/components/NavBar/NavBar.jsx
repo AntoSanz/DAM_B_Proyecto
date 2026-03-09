@@ -1,32 +1,34 @@
 import React from 'react'
 import './NavBar.css'
 import CarritoTooltip from '../CarritoTooltip/CarritoTooltip'
+import { useCarrito } from '../../data-managers/CarritoDm';
 import CarritoTooltipList from '../CarritoTooltipList/CarritoTooltipList'
 import { t } from '../../locales/i18n'
 
 function NavBar({ onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, userName = '', onShowCartScreen }) {
-    const [showTooltip, setShowTooltip] = React.useState(false);
-    const tooltipRef = React.useRef(null);
+  const { totalItems } = useCarrito();
+  const [showTooltip, setShowTooltip] = React.useState(false);
+  const tooltipRef = React.useRef(null);
 
-    // Cerrar tooltip al hacer click fuera
-    React.useEffect(() => {
-      if (!showTooltip) return;
-      function handleClickOutside(event) {
-        if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
-          setShowTooltip(false);
-        }
+  // Cerrar tooltip al hacer click fuera
+  React.useEffect(() => {
+    if (!showTooltip) return;
+    function handleClickOutside(event) {
+      if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
+        setShowTooltip(false);
       }
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, [showTooltip]);
-    // Al hacer click en el botón, mostrar/ocultar el tooltip
-    const handleCartClick = () => setShowTooltip((v) => !v);
-    const handleShowCartScreen = () => {
-      setShowTooltip(false);
-      if (onShowCartScreen) onShowCartScreen();
-    };
-    // Cerrar el tooltip desde el propio tooltip
-    const handleTooltipClose = () => setShowTooltip(false);
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showTooltip]);
+  // Al hacer click en el botón, mostrar/ocultar el tooltip
+  const handleCartClick = () => setShowTooltip((v) => !v);
+  const handleShowCartScreen = () => {
+    setShowTooltip(false);
+    if (onShowCartScreen) onShowCartScreen();
+  };
+  // Cerrar el tooltip desde el propio tooltip
+  const handleTooltipClose = () => setShowTooltip(false);
   const handleHomeClick = (event) => {
     if (onHomeClick) {
       event.preventDefault()
@@ -83,7 +85,7 @@ function NavBar({ onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, 
               aria-label={t('nav.cart')}
             >
               <i className="bi bi-cart-fill me-1"></i> {t('nav.cart')}
-              <CarritoTooltip />
+              <CarritoTooltip totalItems={totalItems} />
             </button>
             {showTooltip && (
               <div

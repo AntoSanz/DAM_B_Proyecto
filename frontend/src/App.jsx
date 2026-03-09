@@ -13,6 +13,7 @@ import './App.css';
 
 import Index from './pages/Index';
 import ComponentDemos from './pages/ComponentDemos';
+import { CarritoProvider } from './data-managers/CarritoDm';
 
 /**
  * Componente App
@@ -25,7 +26,11 @@ function App() {
 
   if (isDemoMode) return <ComponentDemos />;
 
-  return <Index />;
+  return (
+    <CarritoProvider>
+      <Index />
+    </CarritoProvider>
+  );
 }
 
 export default App

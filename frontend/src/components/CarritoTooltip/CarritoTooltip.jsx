@@ -1,10 +1,8 @@
-import React from 'react';
-import { useCarritoDm } from '../../data-managers/CarritoDm';
-import './CarritoTooltip.css';
+
+import { useCarrito } from '../../data-managers/CarritoDm';
 
 function CarritoTooltip() {
-  const { totalItems } = useCarritoDm();
-
+  const { totalItems } = useCarrito();
   return (
     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-tooltip-badge" style={{ fontSize: '0.8rem' }}>
       {totalItems}

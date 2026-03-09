@@ -1,9 +1,8 @@
 import React from 'react';
-import { useCarritoDm } from '../../data-managers/CarritoDm';
-import './CarritoTooltipList.css';
+import { useCarrito } from '../../data-managers/CarritoDm';
 
 function CarritoTooltipList() {
-  const { cart } = useCarritoDm();
+  const { cart } = useCarrito();
 
   if (cart.length === 0) {
     return <div className="p-2 text-muted small">El carrito está vacío.</div>;
