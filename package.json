@@ -11,5 +11,8 @@
     "db:seed:users": "npm --prefix backend run db:seed:users",
     "db:bootstrap": "npm --prefix backend run db:bootstrap",
     "test:integration:front-back": "node tests/integration/front-back.integration.js"
+  },
+  "dependencies": {
+    "react-router-dom": "^7.13.1"
   }
 }
