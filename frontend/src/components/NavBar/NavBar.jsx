@@ -49,6 +49,12 @@ function NavBar({ onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, 
           </ul>
         </div>
         <div className="d-flex ms-auto align-items-center gap-2">
+          {/* Botón de carrito de compras */}
+          <button type="button" className="btn btn-outline-secondary position-relative">
+            <i className="bi bi-cart-fill me-1"></i> {t('nav.cart')}
+            {/* Badge de cantidad de productos, opcional */}
+            {/* <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span> */}
+          </button>
           {isLoggedIn ? (
             <>
               <span className="text-muted small">

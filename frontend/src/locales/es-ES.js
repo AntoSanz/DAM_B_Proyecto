@@ -16,7 +16,8 @@ const es = {
     register: 'Registrarse',
     settings: 'Ajustes',
     favorites: 'Favoritos',
-    contact: 'Contacto'
+    contact: 'Contacto',
+    cart: 'Carrito'
   },
   welcome: {
     title: 'Bienvenido',
