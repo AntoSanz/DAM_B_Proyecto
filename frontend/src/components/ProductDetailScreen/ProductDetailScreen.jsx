@@ -17,7 +17,7 @@ import './ProductDetailScreen.css'
  */
 function ProductDetailScreen({ product, onBack }) {
   return (
-    <section className="product-detail-screen">
+    <section className="product-detail-screen" id={`product-detail-${product.id}`} data-product-id={product.id}>
       {/* Botón de volver atrás */}
       <button className="btn btn-secondary mb-3" onClick={onBack}>
         ← {t('products.backButton')}
@@ -97,7 +97,9 @@ function ProductDetailScreen({ product, onBack }) {
               <p className="price">€{product.price.toFixed(2)}</p>
 
               {/* Botón para añadir al carrito */}
-              <button className="btn btn-success btn-lg">
+              <button 
+                className="btn btn-success btn-lg"
+              >
                 {t('products.addToCart')}
               </button>
             </div>
