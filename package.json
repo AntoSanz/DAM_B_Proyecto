@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "install:all": "npm i --prefix backend; npm i --prefix frontend",
+    "install:all": "npm i --prefix backend && npm i --prefix frontend",
     "dev:full": "npm --prefix frontend run dev:full",
     "dev:front": "npm --prefix frontend run dev",
     "dev:back": "npm --prefix backend start",

@@ -22,7 +22,7 @@ import './Breadcrumb.css'
 function Breadcrumb({ categoryName, showProducts, showProductDetail, productName, onHomeClick, onBackToCategory }) {
   return (
     // Elemento nav semántico con atributo aria-label para accesibilidad
-    <nav aria-label="breadcrumb" className="breadcrumb-nav">
+    <nav aria-label={t('breadcrumb.ariaLabel')} className="breadcrumb-nav">
       {/* Lista ordenada de elementos del breadcrumb */}
       <ol className="breadcrumb">
         

@@ -90,7 +90,7 @@ Documentación completa en:
 
 ## Scripts disponibles (raíz)
 
-- `npm run install:all`: instala dependencias de backend y frontend
+- `npm run install:all`: instala dependencias de backend y frontend (solo las necesarias, dependencias revisadas y optimizadas)
 - `npm run dev:full`: levanta frontend + backend
 - `npm run dev:front`: levanta solo frontend
 - `npm run dev:back`: levanta solo backend
@@ -98,6 +98,9 @@ Documentación completa en:
 - `npm run db:seed:users`: aplica seed de usuarios demo en backend
 - `npm run db:bootstrap`: resetea y siembra la base SQLite del backend
 - `npm run test:integration:front-back`: prueba especial de conexión Front-Back (config frontend + API backend + contrato de datos)
+# Notas sobre dependencias
+
+Todas las dependencias de frontend y backend han sido revisadas y solo se mantienen las necesarias para el funcionamiento, desarrollo y testing del proyecto. Si añades nuevas dependencias, revisa que realmente sean usadas en el código.
 
 [↑ Volver al índice rápido](#indice-rapido)
 

@@ -6,6 +6,7 @@
 	"type": "commonjs",
 	"scripts": {
 		"start": "node src/server.js",
+		"test": "node --test tests/**/*.test.js",
 		"db:reset": "node src/scripts/db-reset.js",
 		"db:seed:users": "node src/scripts/db-seed-users.js",
 		"db:bootstrap": "node src/scripts/db-bootstrap.js"

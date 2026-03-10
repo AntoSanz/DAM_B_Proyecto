@@ -49,45 +49,45 @@ function ProductDetailScreen({ product, onBack }) {
           <div className="product-details">
             {/* Descripción larga del producto */}
             <p>
-              <strong>Descripción:</strong>
+              <strong>{t('products.descriptionLabel')}</strong>
             </p>
             <p>{product.longDescription}</p>
             
             {/* Género/Tipo del producto */}
             <p>
-              <strong>Género:</strong> {product.genre}
+              <strong>{t('products.genreLabel')}</strong> {product.genre}
             </p>
             
             {/* Desarrollador (solo si existe) - Ej: para videojuegos */}
             {product.developer && (
               <p>
-                <strong>Desarrollador:</strong> {product.developer}
+                <strong>{t('products.developerLabel')}</strong> {product.developer}
               </p>
             )}
             
             {/* Número de jugadores (solo si existe) - Ej: para juegos de mesa */}
             {product.players && (
               <p>
-                <strong>Jugadores:</strong> {product.players}
+                <strong>{t('products.playersLabel')}</strong> {product.players}
               </p>
             )}
             
             {/* Año de lanzamiento del producto */}
             <p>
-              <strong>Año de lanzamiento:</strong> {product.releaseDate}
+              <strong>{t('products.releaseDateLabel')}</strong> {product.releaseDate}
             </p>
             
             {/* Puntuación de usuarios (solo si existe) */}
             {product.rating && (
               <p>
-                <strong>Puntuación:</strong> ⭐ {product.rating}/5
+                <strong>{t('products.ratingLabel')}</strong> ⭐ {product.rating}/5
               </p>
             )}
             
             {/* Disponibilidad en stock (solo si existe) */}
             {product.inStock !== undefined && (
               <p>
-                <strong>Stock:</strong> {product.inStock ? '✓ Disponible' : '✗ Agotado'}
+                <strong>{t('products.stockLabel')}</strong> {product.inStock ? t('products.available') : t('products.soldOut')}
               </p>
             )}
             

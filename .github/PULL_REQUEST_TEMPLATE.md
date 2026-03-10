@@ -3,7 +3,12 @@
 ## 📋 Descripción
 <!-- Describe brevemente los cambios realizados en esta PR -->
 
+
 ## ✅ Checklist de Verificación
+
+### 🛠️ Preparación
+- Cambia a la rama de la Pull Request (`git checkout <nombre-de-la-rama>`)
+- [ ] Revisado
 
 ### 🔧 Instalación y Dependencias
 - Los componentes se descargan correctamente con `npm i`

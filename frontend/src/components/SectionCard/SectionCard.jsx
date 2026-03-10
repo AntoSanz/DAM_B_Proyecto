@@ -14,6 +14,7 @@
  */
 
 import React from 'react'
+import { t } from '../../locales/i18n'
 import './SectionCard.css'
 
 /**
@@ -34,9 +35,9 @@ import './SectionCard.css'
  *                           (por defecto: null)
  */
 function SectionCard({
-  title = 'Card title',
+  title = t('sectionCard.defaultTitle'),
   subtitle = '',
-  text = 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
+  text = t('sectionCard.defaultText'),
   links = [],
   width = '18rem',
   className = '',

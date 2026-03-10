@@ -1,0 +1,15 @@
+export const mockProduct = {
+  id: 1,
+  categoryId: 1,
+  name: 'Test Game',
+  shortDescription: 'A short description',
+  longDescription: 'A much longer and detailed description of the game',
+  price: 29.99,
+  image: 'https://example.com/image.jpg',
+  genre: 'Action',
+  developer: 'Test Developer',
+  players: '1-4',
+  releaseDate: '2024',
+  rating: 4.5,
+  inStock: true,
+}

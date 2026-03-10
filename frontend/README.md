@@ -26,14 +26,19 @@ Una aplicación web moderna de e-commerce para la venta de videojuegos, construi
 
 [↑ Volver al índice rápido](#indice-rapido)
 
+
 ## 🛠️ Tecnologías Utilizadas
 
-| Tecnología | Versión | Propósito |
-|-----------|---------|----------|
-| **React** | 18+ | Framework de UI |
-| **Vite** | 5+ | Herramienta de build y desarrollo |
-| **Bootstrap** | 5 | Framework CSS responsivo |
-| **JavaScript (ES6+)** | - | Lenguaje de programación |
+| Tecnología | Propósito |
+|-----------|----------|
+| **React** | Framework de UI |
+| **Vite** | Herramienta de build y desarrollo |
+| **Bootstrap** | Framework CSS responsivo |
+| **Vitest** | Testing |
+| **Testing Library** | Testing de componentes |
+| **ESLint** | Linting |
+
+**Nota:** Todas las dependencias han sido revisadas y solo se mantienen las necesarias. Si añades nuevas, asegúrate de que realmente se usen en el código.
 
 [↑ Volver al índice rápido](#indice-rapido)
 

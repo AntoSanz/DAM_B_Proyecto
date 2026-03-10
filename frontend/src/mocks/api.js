@@ -64,6 +64,24 @@ async function fetchJson(url) {
   return response.json()
 }
 
+async function postJson(url, payload) {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+
+  const body = await response.json().catch(() => ({}))
+
+  if (!response.ok) {
+    throw new Error(body.message || `Error HTTP ${response.status} al consultar ${url}`)
+  }
+
+  return body
+}
+
 /**
  * Función auxiliar que crea una demora
  * Retorna una Promise que se resuelve después de ms milisegundos
@@ -113,10 +131,31 @@ export async function getProductsByCategory(categoryId, { delayMs = DEFAULT_DELA
   return response.map(normalizeProduct)
 }
 
+export async function login({ email, password }) {
+  const response = await postJson(`${API_BASE_URL}/auth/login`, {
+    email,
+    password,
+  })
+
+  return response.user
+}
+
+export async function register({ email, password, name }) {
+  const response = await postJson(`${API_BASE_URL}/auth/register`, {
+    email,
+    password,
+    name,
+  })
+
+  return response.user
+}
+
 // Exporta las funciones como default para facilitar importaciones
 export default {
   delay,
   getCategories,
-  getProductsByCategory
+  getProductsByCategory,
+  login,
+  register,
 }
 
