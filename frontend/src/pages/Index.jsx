@@ -54,6 +54,8 @@ function Index() {
         userName={userName}
         onLoginClick={() => setIsLoginModalOpen(true)}
         onLogoutClick={() => setIsLogoutModalOpen(true)}
+        
+
       />
       <MainContent
         isLoginModalOpen={isLoginModalOpen}
