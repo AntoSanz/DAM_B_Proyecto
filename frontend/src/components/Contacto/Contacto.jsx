@@ -1,8 +1,7 @@
 import React from 'react';
-import ComponenteModal from '../ComponenteModal/ComponenteModal'; // Asegúrate de que esta ruta sea correcta
+import ComponenteModal from '../ComponenteModal/ComponenteModal';
 import { t } from '../../locales/i18n';
 
-// 1. Ahora recibe isOpen y onClose (las props que enviamos desde Index/MainContent)
 function Contacto({ isOpen, onClose }) {
   return (
     <ComponenteModal 
