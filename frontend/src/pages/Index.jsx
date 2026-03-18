@@ -7,6 +7,7 @@ import MainContent from './MainContent'
 function Index() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
+  const [isContactoOpen, setIsContactoOpen] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
   const isLoggedIn = Boolean(currentUser)
   const userName = currentUser?.name || currentUser?.email || t('nav.welcomeFallback')
@@ -54,13 +55,15 @@ function Index() {
         userName={userName}
         onLoginClick={() => setIsLoginModalOpen(true)}
         onLogoutClick={() => setIsLogoutModalOpen(true)}
-        
+        onContactoClick={() => setIsContactoOpen(true)}
 
       />
       <MainContent
         isLoginModalOpen={isLoginModalOpen}
         onLoginModalClose={() => setIsLoginModalOpen(false)}
         onLoginSuccess={handleLoginSuccess}
+        isContactoOpen={isContactoOpen}
+        onContactoClose={() => setIsContactoOpen(false)}
       />
       <LogoutConfirmModal
         isOpen={isLogoutModalOpen}
