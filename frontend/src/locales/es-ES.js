@@ -18,6 +18,29 @@ const es = {
     favorites: 'Favoritos',
     contact: 'Contacto'
   },
+  contact: {
+    developmentTeam: "Equipo de desarrollo",
+    people: {
+      antonio: {
+        name: "Antonio",
+        lastname1: "Sanz",
+        lastname2: "Pans",
+        mail: "antonio@email.com"
+      },
+      daniel: {
+        name: "Daniel",
+        lastname1: "Jordá",
+        lastname2: "Conde",
+        mail: "daniel@email.com"
+      },
+      lucas: {
+        name: "Lucas",
+        lastname1: "Ezequiel",
+        lastname2: "Juncos",
+        mail: "lucas@email.com"
+      }
+    }
+  },
   welcome: {
     title: 'Bienvenido',
     subtitle: 'Esta es la página índice.'
