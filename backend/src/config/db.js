@@ -46,6 +46,25 @@ function initializeDatabase() {
 			updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE CASCADE
 		);
+
+		-- Tabla de pedidos (orders)
+		CREATE TABLE IF NOT EXISTS orders (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			user_id INTEGER NOT NULL,
+			detalles TEXT,
+			fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+			FOREIGN KEY (user_id) REFERENCES users(id)
+		);
+
+		-- Tabla de historial de pedidos (history_orders)
+		CREATE TABLE IF NOT EXISTS history_orders (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			user_id INTEGER NOT NULL,
+			order_id INTEGER NOT NULL,
+			fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+			FOREIGN KEY (user_id) REFERENCES users(id),
+			FOREIGN KEY (order_id) REFERENCES orders(id)
+		);
 	`);
 
 	seedCatalogDataIfEmpty();
