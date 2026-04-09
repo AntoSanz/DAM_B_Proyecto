@@ -37,7 +37,7 @@ function CarritoScreen({ onBack, onHome, onCloseCartScreen, isLoggedIn, onRequir
 
   return (
     <>
-      <CustomSpinner visible={showSpinner} duration={2} />
+      <CustomSpinner visible={showSpinner} duration={2} showText={true} text="Procesando pago..." />
       <ComponenteModal
         isOpenExternal={showModal}
         onOpenChange={(open) => { if (!open) handleModalClose(); }}

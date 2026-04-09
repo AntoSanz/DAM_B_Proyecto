@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import './CustomSpinner.css';
 
-function CustomSpinner({ visible = true, duration = 0 }) {
+function CustomSpinner({ visible = true, duration = 0, showText = false, showSpinnerIcon = true, text = 'Cargando...' }) {
   const [internalVisible, setInternalVisible] = useState(visible);
 
   useEffect(() => {
@@ -23,9 +23,14 @@ function CustomSpinner({ visible = true, duration = 0 }) {
     <div className="custom-spinner-overlay">
       <div className="custom-spinner-backdrop" />
       <div className="custom-spinner-center">
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Cargando...</span>
-        </div>
+        {showSpinnerIcon && (
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">{text}</span>
+          </div>
+        )}
+        {showText && (
+          <div className="custom-spinner-text">{text}</div>
+        )}
       </div>
     </div>
   );
