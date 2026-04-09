@@ -9,6 +9,7 @@ function Index() {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
   const [isContactoOpen, setIsContactoOpen] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
+  const [showCartScreen, setShowCartScreen] = useState(false);
   const isLoggedIn = Boolean(currentUser)
   const userName = currentUser?.name || currentUser?.email || t('nav.welcomeFallback')
   const sessionKey = 'dam.currentUser'
@@ -48,6 +49,12 @@ function Index() {
     setCurrentUser(nextUser)
   }
 
+  // Handler para volver al home desde el carrito
+  const handleBackToHome = () => {
+    setShowCartScreen(false);
+    // Opcional: podrías resetear más estados aquí si quieres limpiar selección
+  };
+
   return (
     <>
       <NavBar
@@ -55,6 +62,7 @@ function Index() {
         userName={userName}
         onLoginClick={() => setIsLoginModalOpen(true)}
         onLogoutClick={() => setIsLogoutModalOpen(true)}
+        onShowCartScreen={() => setShowCartScreen(true)}
         onContactoClick={() => setIsContactoOpen(true)}
 
       />
@@ -62,6 +70,9 @@ function Index() {
         isLoginModalOpen={isLoginModalOpen}
         onLoginModalClose={() => setIsLoginModalOpen(false)}
         onLoginSuccess={handleLoginSuccess}
+        showCartScreen={showCartScreen}
+        onShowCartScreen={() => setShowCartScreen(true)}
+        onBackToHome={handleBackToHome}
         isContactoOpen={isContactoOpen}
         onContactoClose={() => setIsContactoOpen(false)}
       />

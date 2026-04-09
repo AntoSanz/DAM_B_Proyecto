@@ -1,8 +1,34 @@
 import React from 'react'
 import './NavBar.css'
+import CarritoTooltip from '../CarritoTooltip/CarritoTooltip'
+import { useCarrito } from '../../data-managers/CarritoDm';
+import CarritoTooltipList from '../CarritoTooltipList/CarritoTooltipList'
 import { t } from '../../locales/i18n'
 
-function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, userName = '' }) {
+function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, userName = '', onShowCartScreen }) {
+  const { totalItems } = useCarrito();
+  const [showTooltip, setShowTooltip] = React.useState(false);
+  const tooltipRef = React.useRef(null);
+
+  // Cerrar tooltip al hacer click fuera
+  React.useEffect(() => {
+    if (!showTooltip) return;
+    function handleClickOutside(event) {
+      if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
+        setShowTooltip(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showTooltip]);
+  // Al hacer click en el botón, mostrar/ocultar el tooltip
+  const handleCartClick = () => setShowTooltip((v) => !v);
+  const handleShowCartScreen = () => {
+    setShowTooltip(false);
+    if (onShowCartScreen) onShowCartScreen();
+  };
+  // Cerrar el tooltip desde el propio tooltip
+  const handleTooltipClose = () => setShowTooltip(false);
   const handleHomeClick = (event) => {
     if (onHomeClick) {
       event.preventDefault()
@@ -49,6 +75,48 @@ function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isL
           </ul>
         </div>
         <div className="d-flex ms-auto align-items-center gap-2">
+          {/* Botón de carrito de compras con tooltip */}
+          <div style={{ position: 'relative', display: 'inline-block' }}>
+            <button
+              type="button"
+              className="btn btn-outline-secondary position-relative"
+              onClick={handleCartClick}
+              aria-expanded={showTooltip}
+              aria-label={t('nav.cart')}
+            >
+              <i className="bi bi-cart-fill me-1"></i> {t('nav.cart')}
+              <CarritoTooltip totalItems={totalItems} />
+            </button>
+            {showTooltip && (
+              <div
+                ref={tooltipRef}
+                tabIndex={-1}
+                style={{
+                  position: 'absolute',
+                  top: '110%',
+                  right: 0,
+                  zIndex: 1000,
+                  background: '#fff',
+                  border: '1px solid #ddd',
+                  borderRadius: 6,
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+                  minWidth: 220,
+                  maxWidth: 320,
+                  padding: 0
+                }}
+              >
+                <div className="d-flex justify-content-end p-2 border-bottom bg-light">
+                  <button className="btn-close" aria-label="Cerrar" onClick={handleTooltipClose}></button>
+                </div>
+                <CarritoTooltipList />
+                <div className="d-flex justify-content-end p-2 border-top bg-light">
+                  <button className="btn btn-primary btn-sm" onClick={handleShowCartScreen}>
+                    Ver detalle del carrito
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
           {isLoggedIn ? (
             <>
               <span className="text-muted small">

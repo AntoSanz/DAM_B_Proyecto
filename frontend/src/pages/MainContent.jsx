@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../App.css'
 import LoginModal from '../components/LoginModal/LoginModal'
 import MainFlowContent from '../components/MainFlowContent/MainFlowContent'
+import CarritoScreen from '../components/CarritoScreen/CarritoScreen'
 import { getCategories, getProductsByCategory } from '../mocks/api'
 import Contacto from '../components/Contacto/Contacto'
 
@@ -14,11 +15,22 @@ import Contacto from '../components/Contacto/Contacto'
  * - La renderización condicional de componentes según el contexto
  * - La comunicación entre componentes hermanos
  */
-function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, onLoginSuccess, isContactoOpen, onContactoClose }) {
+function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, onLoginSuccess, isContactoOpen, onContactoClose, showCartScreen = false, onShowCartScreen, onBackToHome }) {
   const [selectedProducts, setSelectedProducts] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [selectedProductDetail, setSelectedProductDetail] = useState(null)
   const [categories, setCategories] = useState([])
+  const [showCart, setShowCart] = useState(false);
+  // Permitir control externo (Index) o interno
+  const isCartScreen = typeof showCartScreen === 'boolean' ? showCartScreen : showCart;
+  const handleShowCartScreen = () => {
+    if (onShowCartScreen) onShowCartScreen();
+    else setShowCart(true);
+  };
+  const handleHideCartScreen = () => {
+    if (onBackToHome) onBackToHome();
+    else setShowCart(false);
+  };
 
   useEffect(() => {
     let isMounted = true
@@ -71,18 +83,23 @@ function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, on
       <LoginModal isOpen={isLoginModalOpen} onClose={onLoginModalClose} onLoginSuccess={onLoginSuccess} />
       <Contacto isOpen={isContactoOpen} onClose={onContactoClose} />
 
-      {children || (
-        <MainFlowContent
-          selectedCategory={selectedCategory}
-          selectedProducts={selectedProducts}
-          selectedProductDetail={selectedProductDetail}
-          categories={categories}
-          onHomeClick={handleHomeClick}
-          onBackToCategory={handleBackToCategory}
-          onBackToProducts={handleBackToProducts}
-          onProductSelect={handleProductSelect}
-          onCategorySelect={handleCategorySelect}
-        />
+      {isCartScreen ? (
+        <CarritoScreen onBack={handleHideCartScreen} />
+      ) : (
+        children || (
+          <MainFlowContent
+            selectedCategory={selectedCategory}
+            selectedProducts={selectedProducts}
+            selectedProductDetail={selectedProductDetail}
+            categories={categories}
+            onHomeClick={handleHomeClick}
+            onBackToCategory={handleBackToCategory}
+            onBackToProducts={handleBackToProducts}
+            onProductSelect={handleProductSelect}
+            onCategorySelect={handleCategorySelect}
+            onShowCartScreen={handleShowCartScreen}
+          />
+        )
       )}
     </main>
   )

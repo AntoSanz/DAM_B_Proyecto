@@ -1,4 +1,5 @@
 import React from 'react'
+import { useCarrito } from '../../data-managers/CarritoDm'
 import { t } from '../../locales/i18n'
 import './ProductDetailScreen.css'
 
@@ -16,8 +17,16 @@ import './ProductDetailScreen.css'
  * - onBack: Función callback para volver a la lista de productos
  */
 function ProductDetailScreen({ product, onBack }) {
+  const { addToCart } = useCarrito();
+  const [quantity, setQuantity] = React.useState(1);
+  const handleAddToCart = () => {
+    if (quantity > 0) {
+      addToCart({ ...product, quantity });
+      setQuantity(1);
+    }
+  };
   return (
-    <section className="product-detail-screen">
+    <section className="product-detail-screen" id={`product-detail-${product.id}`} data-product-id={product.id}>
       {/* Botón de volver atrás */}
       <button className="btn btn-secondary mb-3" onClick={onBack}>
         ← {t('products.backButton')}
@@ -96,10 +105,27 @@ function ProductDetailScreen({ product, onBack }) {
               {/* Precio del producto formateado con 2 decimales */}
               <p className="price">€{product.price.toFixed(2)}</p>
 
-              {/* Botón para añadir al carrito */}
-              <button className="btn btn-success btn-lg">
-                {t('products.addToCart')}
-              </button>
+              {/* Selector de cantidad y botón para añadir al carrito */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                <input
+                  type="number"
+                  min="1"
+                  max={typeof product.inStock === 'number' ? product.inStock : 99}
+                  className="form-control"
+                  value={quantity}
+                  onChange={e => setQuantity(Math.max(1, Number(e.target.value)))}
+                  style={{ width: 70, textAlign: 'center' }}
+                  aria-label="Cantidad"
+                />
+                <button
+                  className="btn btn-success btn-lg"
+                  type="button"
+                  style={{ whiteSpace: 'nowrap' }}
+                  onClick={handleAddToCart}
+                >
+                  {t('products.addToCart')}
+                </button>
+              </div>
             </div>
           </div>
         </div>

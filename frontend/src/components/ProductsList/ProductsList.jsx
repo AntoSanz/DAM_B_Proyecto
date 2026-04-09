@@ -33,7 +33,12 @@ function ProductsList({ products, categoryName, onProductSelect }) {
       {products.map((p) => (
         <div key={p.id} className="col-12 col-md-4 d-flex justify-content-center mb-3">
           {/* Tarjeta de Bootstrap */}
-          <div className="card" style={{ width: '18rem' }}>
+          <div 
+            className="card" 
+            style={{ width: '18rem' }}
+            id={`product-card-${p.id}`}
+            data-product-id={p.id}
+          >
             <div className="card-body">
               {/* Nombre del producto */}
               <h5 className="card-title">{p.name}</h5>
