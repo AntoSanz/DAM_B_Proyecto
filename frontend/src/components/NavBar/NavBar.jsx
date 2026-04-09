@@ -4,11 +4,27 @@ import CarritoTooltip from '../CarritoTooltip/CarritoTooltip'
 import { useCarrito } from '../../data-managers/CarritoDm';
 import CarritoTooltipList from '../CarritoTooltipList/CarritoTooltipList'
 import { t } from '../../locales/i18n'
+import CustomDropdown from '../CustomDropdown/CustomDropdown'
 
-function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, userName = '', onShowCartScreen }) {
+function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, userName = '', onShowCartScreen, onPerfil, onFavoritos, onHistorial }) {
   const { totalItems } = useCarrito();
   const [showTooltip, setShowTooltip] = React.useState(false);
   const tooltipRef = React.useRef(null);
+
+  const [showUserMenu, setShowUserMenu] = React.useState(false);
+  const userMenuRef = React.useRef(null);
+
+  // Cerrar menú usuario al hacer click fuera
+  React.useEffect(() => {
+    if (!showUserMenu) return;
+    function handleClickOutside(event) {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setShowUserMenu(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showUserMenu]);
 
   // Cerrar tooltip al hacer click fuera
   React.useEffect(() => {
@@ -74,12 +90,66 @@ function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isL
             </li>
           </ul>
         </div>
-        <div className="d-flex ms-auto align-items-center gap-2">
+        <div className="d-flex ms-auto align-items-center gap-2" style={{marginRight: '1.5rem'}}>
+          {/* Botón de usuario (Bienvenido, admin) */}
+          {isLoggedIn ? (
+            <div style={{ position: 'relative', display: 'inline-block' }} ref={userMenuRef}>
+              <CustomDropdown
+                isOpen={showUserMenu}
+                onClose={() => setShowUserMenu(false)}
+                trigger={
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary position-relative me-2"
+                    style={{ textDecoration: 'none' }}
+                    onClick={() => setShowUserMenu((v) => !v)}
+                    aria-expanded={showUserMenu}
+                  >
+                    {t('nav.welcome').replace('{name}', userName)}
+                  </button>
+                }
+                items={[
+                  {
+                    id: 'perfil',
+                    nombre: 'Perfil',
+                    type: 'info',
+                    icon: 'person-fill',
+                    onClick: () => { setShowUserMenu(false); if (onPerfil) onPerfil(); }
+                  },
+                  {
+                    id: 'favoritos',
+                    nombre: 'Favoritos',
+                    type: 'info',
+                    icon: 'star-fill',
+                    onClick: () => { setShowUserMenu(false); if (onFavoritos) onFavoritos(); }
+                  },
+                  {
+                    id: 'historial',
+                    nombre: 'Historial',
+                    type: 'info',
+                    icon: 'clock-history',
+                    onClick: () => { setShowUserMenu(false); if (onHistorial) onHistorial(); }
+                  },
+                  {
+                    id: 'logout',
+                    nombre: 'Desconectar',
+                    type: 'danger',
+                    icon: 'box-arrow-right',
+                    onClick: () => { setShowUserMenu(false); onLogoutClick(); }
+                  }
+                ]}
+              />
+            </div>
+          ) : (
+            <button type="button" className="btn btn-outline-primary" onClick={onLoginClick}>
+              <i className="bi bi-box-arrow-in-right me-1"></i> {t('nav.login')}
+            </button>
+          )}
           {/* Botón de carrito de compras con tooltip */}
           <div style={{ position: 'relative', display: 'inline-block' }}>
             <button
               type="button"
-              className="btn btn-outline-secondary position-relative"
+              className="btn btn-outline-secondary position-relative me-2"
               onClick={handleCartClick}
               aria-expanded={showTooltip}
               aria-label={t('nav.cart')}
@@ -117,20 +187,6 @@ function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isL
               </div>
             )}
           </div>
-          {isLoggedIn ? (
-            <>
-              <span className="text-muted small">
-                {t('nav.welcome').replace('{name}', userName)}
-              </span>
-              <button type="button" className="btn btn-outline-danger" onClick={onLogoutClick}>
-                <i className="bi bi-box-arrow-right me-1"></i> {t('nav.logout')}
-              </button>
-            </>
-          ) : (
-            <button type="button" className="btn btn-outline-primary" onClick={onLoginClick}>
-              <i className="bi bi-box-arrow-in-right me-1"></i> {t('nav.login')}
-            </button>
-          )}
         </div>
       </div>
     </nav>
