@@ -5,7 +5,7 @@ import { useCarrito } from '../../data-managers/CarritoDm';
 import CarritoTooltipList from '../CarritoTooltipList/CarritoTooltipList'
 import { t } from '../../locales/i18n'
 
-function NavBar({ onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, userName = '', onShowCartScreen }) {
+function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, userName = '', onShowCartScreen }) {
   const { totalItems } = useCarrito();
   const [showTooltip, setShowTooltip] = React.useState(false);
   const tooltipRef = React.useRef(null);
@@ -68,7 +68,7 @@ function NavBar({ onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, 
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="#" onClick={(e) => { e.preventDefault(); onContactoClick(); }}>
                 <i className="bi bi-envelope-at-fill me-1"></i> {t('nav.contact')}
               </a>
             </li>

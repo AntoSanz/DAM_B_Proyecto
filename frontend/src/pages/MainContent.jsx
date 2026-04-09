@@ -4,6 +4,7 @@ import LoginModal from '../components/LoginModal/LoginModal'
 import MainFlowContent from '../components/MainFlowContent/MainFlowContent'
 import CarritoScreen from '../components/CarritoScreen/CarritoScreen'
 import { getCategories, getProductsByCategory } from '../mocks/api'
+import Contacto from '../components/Contacto/Contacto'
 
 /**
  * MainContent - Componente principal que gestiona toda la navegación y estado de la aplicación
@@ -14,7 +15,7 @@ import { getCategories, getProductsByCategory } from '../mocks/api'
  * - La renderización condicional de componentes según el contexto
  * - La comunicación entre componentes hermanos
  */
-function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, onLoginSuccess, showCartScreen = false, onShowCartScreen, onBackToHome }) {
+function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, onLoginSuccess, isContactoOpen, onContactoClose, showCartScreen = false, onShowCartScreen, onBackToHome }) {
   const [selectedProducts, setSelectedProducts] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [selectedProductDetail, setSelectedProductDetail] = useState(null)
@@ -80,6 +81,7 @@ function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, on
   return (
     <main className="main-content">
       <LoginModal isOpen={isLoginModalOpen} onClose={onLoginModalClose} onLoginSuccess={onLoginSuccess} />
+      <Contacto isOpen={isContactoOpen} onClose={onContactoClose} />
 
       {isCartScreen ? (
         <CarritoScreen onBack={handleHideCartScreen} />

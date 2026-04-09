@@ -7,6 +7,7 @@ import MainContent from './MainContent'
 function Index() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
+  const [isContactoOpen, setIsContactoOpen] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
   const [showCartScreen, setShowCartScreen] = useState(false);
   const isLoggedIn = Boolean(currentUser)
@@ -62,6 +63,8 @@ function Index() {
         onLoginClick={() => setIsLoginModalOpen(true)}
         onLogoutClick={() => setIsLogoutModalOpen(true)}
         onShowCartScreen={() => setShowCartScreen(true)}
+        onContactoClick={() => setIsContactoOpen(true)}
+
       />
       <MainContent
         isLoginModalOpen={isLoginModalOpen}
@@ -70,6 +73,8 @@ function Index() {
         showCartScreen={showCartScreen}
         onShowCartScreen={() => setShowCartScreen(true)}
         onBackToHome={handleBackToHome}
+        isContactoOpen={isContactoOpen}
+        onContactoClose={() => setIsContactoOpen(false)}
       />
       <LogoutConfirmModal
         isOpen={isLogoutModalOpen}
@@ -77,7 +82,7 @@ function Index() {
         onConfirm={handleLogout}
       />
     </>
-  )
+  );
 }
 
-export default Index
+export default Index;
