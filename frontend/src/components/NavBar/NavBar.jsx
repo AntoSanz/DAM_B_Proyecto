@@ -113,24 +113,28 @@ function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isL
                     id: 'perfil',
                     nombre: 'Perfil',
                     type: 'info',
+                    icon: 'person-fill',
                     onClick: () => { setShowUserMenu(false); if (onPerfil) onPerfil(); }
                   },
                   {
                     id: 'favoritos',
                     nombre: 'Favoritos',
                     type: 'info',
+                    icon: 'star-fill',
                     onClick: () => { setShowUserMenu(false); if (onFavoritos) onFavoritos(); }
                   },
                   {
                     id: 'historial',
                     nombre: 'Historial',
                     type: 'info',
+                    icon: 'clock-history',
                     onClick: () => { setShowUserMenu(false); if (onHistorial) onHistorial(); }
                   },
                   {
                     id: 'logout',
                     nombre: 'Desconectar',
                     type: 'danger',
+                    icon: 'box-arrow-right',
                     onClick: () => { setShowUserMenu(false); onLogoutClick(); }
                   }
                 ]}

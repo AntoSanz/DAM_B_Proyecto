@@ -33,6 +33,9 @@ const CustomDropdown = ({ isOpen, onClose, items = [], children, trigger, dropdo
                   onClick={item.onClick}
                   tabIndex={0}
                 >
+                  {item.icon && (
+                    <i className={`bi bi-${item.icon} me-2`}></i>
+                  )}
                   {item.nombre}
                 </li>
               ))}
