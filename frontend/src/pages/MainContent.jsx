@@ -15,7 +15,7 @@ import Contacto from '../components/Contacto/Contacto'
  * - La renderización condicional de componentes según el contexto
  * - La comunicación entre componentes hermanos
  */
-function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, onLoginSuccess, isContactoOpen, onContactoClose, showCartScreen = false, onShowCartScreen, onBackToHome }) {
+function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, onLoginSuccess, isContactoOpen, onContactoClose, showCartScreen = false, onShowCartScreen, onBackToHome, isLoggedIn = false, onRequireLogin }) {
   const [selectedProducts, setSelectedProducts] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [selectedProductDetail, setSelectedProductDetail] = useState(null)
@@ -84,7 +84,13 @@ function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, on
       <Contacto isOpen={isContactoOpen} onClose={onContactoClose} />
 
       {isCartScreen ? (
-        <CarritoScreen onBack={handleHideCartScreen} />
+        <CarritoScreen 
+          onBack={handleHideCartScreen} 
+          onHome={handleHomeClick}
+          onCloseCartScreen={handleHideCartScreen}
+          isLoggedIn={isLoggedIn}
+          onRequireLogin={onRequireLogin}
+        />
       ) : (
         children || (
           <MainFlowContent
