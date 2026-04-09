@@ -86,6 +86,8 @@ function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, on
       {isCartScreen ? (
         <CarritoScreen 
           onBack={handleHideCartScreen} 
+          onHome={handleHomeClick}
+          onCloseCartScreen={handleHideCartScreen}
           isLoggedIn={isLoggedIn}
           onRequireLogin={onRequireLogin}
         />
