@@ -3,7 +3,7 @@
 -- En producción deben almacenarse siempre hasheadas.
 
 INSERT INTO users (email, password, name, role)
-VALUES ('admin@test.com', 'admin', 'admin', 'admin')
+VALUES ('admin@test.com', 'admin123456', 'admin', 'admin')
 ON CONFLICT(email) DO UPDATE SET
   password = excluded.password,
   name = excluded.name,

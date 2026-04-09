@@ -55,6 +55,11 @@ function Index() {
     // Opcional: podrías resetear más estados aquí si quieres limpiar selección
   };
 
+  // Handler para requerir login desde el carrito
+  const handleRequireLogin = () => {
+    setIsLoginModalOpen(true);
+  };
+
   return (
     <>
       <NavBar
@@ -64,7 +69,6 @@ function Index() {
         onLogoutClick={() => setIsLogoutModalOpen(true)}
         onShowCartScreen={() => setShowCartScreen(true)}
         onContactoClick={() => setIsContactoOpen(true)}
-
       />
       <MainContent
         isLoginModalOpen={isLoginModalOpen}
@@ -75,6 +79,8 @@ function Index() {
         onBackToHome={handleBackToHome}
         isContactoOpen={isContactoOpen}
         onContactoClose={() => setIsContactoOpen(false)}
+        isLoggedIn={isLoggedIn}
+        onRequireLogin={handleRequireLogin}
       />
       <LogoutConfirmModal
         isOpen={isLogoutModalOpen}

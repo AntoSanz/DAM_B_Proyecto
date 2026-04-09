@@ -2,8 +2,18 @@ import React from 'react';
 import { useCarrito } from '../../data-managers/CarritoDm';
 import './CarritoScreen.css';
 
-function CarritoScreen({ onBack }) {
+
+function CarritoScreen({ onBack, isLoggedIn, onRequireLogin }) {
   const { cart, totalItems, totalPrice, removeFromCart, clearCart } = useCarrito();
+
+  const handleCheckout = () => {
+    if (!isLoggedIn && typeof onRequireLogin === 'function') {
+      onRequireLogin();
+      return;
+    }
+    // Aquí iría la lógica de pago real si el usuario está logueado
+    alert('Procediendo al pago...');
+  };
 
   return (
     <section className="carrito-screen container mt-4">
@@ -41,7 +51,7 @@ function CarritoScreen({ onBack }) {
                 <h5 className="card-title">Resumen</h5>
                 <p className="card-text mb-2">Artículos: <strong>{totalItems}</strong></p>
                 <p className="card-text mb-3">Total: <strong>€{totalPrice.toFixed(2)}</strong></p>
-                <button className="btn btn-success w-100">Finalizar compra</button>
+                <button className="btn btn-success w-100" onClick={handleCheckout}>Finalizar compra</button>
               </div>
             </div>
           </div>
