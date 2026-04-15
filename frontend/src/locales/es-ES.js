@@ -25,19 +25,19 @@ const es = {
         name: "Antonio",
         lastname1: "Sanz",
         lastname2: "Pans",
-        mail: "antonio@email.com"
+        mail: "antonio.sanzpans@alu.ceacfp.es"
       },
       daniel: {
         name: "Daniel",
         lastname1: "Jordá",
         lastname2: "Conde",
-        mail: "daniel@email.com"
+        mail: "daniel.jorda@alu.ceacfp.es"
       },
       lucas: {
         name: "Lucas",
         lastname1: "Ezequiel",
         lastname2: "Juncos",
-        mail: "lucas@email.com"
+        mail: "lucas.juncos@alu.ceacfp.es"
       }
     }
   },
