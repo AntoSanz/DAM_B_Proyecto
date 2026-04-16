@@ -72,7 +72,7 @@ function CarritoScreen({ onBack, onHome, onCloseCartScreen, isLoggedIn, onRequir
                       <strong>{item.name}</strong> <span className="text-muted">x{item.quantity}</span>
                     </div>
                     <div>
-                      €{(item.price * item.quantity).toFixed(2)}
+                    {(item.price * item.quantity).toFixed(2)} €
                       <button className="btn btn-sm btn-danger ms-3" onClick={() => removeFromCart(item.id)}>
                         Quitar
                       </button>
@@ -88,7 +88,7 @@ function CarritoScreen({ onBack, onHome, onCloseCartScreen, isLoggedIn, onRequir
                 <div className="card-body">
                   <h5 className="card-title">Resumen</h5>
                   <p className="card-text mb-2">Artículos: <strong>{totalItems}</strong></p>
-                  <p className="card-text mb-3">Total: <strong>€{totalPrice.toFixed(2)}</strong></p>
+                  <p className="card-text mb-3">Total: <strong>{totalPrice.toFixed(2)} €</strong></p>
                   <button className="btn btn-success w-100" onClick={handleCheckout}>Finalizar compra</button>
                 </div>
               </div>
