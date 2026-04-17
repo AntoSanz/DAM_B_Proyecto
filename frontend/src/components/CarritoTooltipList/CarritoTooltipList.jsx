@@ -9,12 +9,19 @@ function CarritoTooltipList() {
   }
 
   return (
-    <ul className="list-group list-group-flush pb-2 carrito-tooltip-list">
+    /* He añadido un minWidth aquí para que el panel sea más ancho y quepa todo */
+    <ul className="list-group list-group-flush pb-2 carrito-tooltip-list" style={{ minWidth: '240px' }}>
       {cart.map(item => (
         <li key={item.id} className="list-group-item py-1 px-2 d-flex justify-content-between align-items-center">
-          <span style={{ fontSize: '0.95em' }}>{item.name}</span>
-          <span className="ms-2 badge bg-secondary">x{item.quantity}</span>
-          <span className="ms-2 text-success">{(item.price * item.quantity).toFixed(2)} €</span>
+          <span style={{ fontSize: '0.95em', marginRight: '8px' }}>{item.name}</span>
+          
+          {/* Usamos flex y nowrap para que el badge y el precio no se rompan nunca */}
+          <div className="d-flex align-items-center" style={{ whiteSpace: 'nowrap' }}>
+            <span className="badge bg-secondary me-2">x{item.quantity}</span>
+            <span className="text-success" style={{ fontWeight: 'bold' }}>
+              {(item.price * item.quantity).toFixed(2)}&nbsp;€
+            </span>
+          </div>
         </li>
       ))}
     </ul>
