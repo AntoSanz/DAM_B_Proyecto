@@ -15,3 +15,27 @@
 /* ProductsList usa grid y componentes de Bootstrap - no se necesitan estilos adicionales */
 
 
+/**
+ * Estilos personalizados para ProductsList
+ * Separamos el diseño del HTML para cumplir con las buenas prácticas.
+ */
+
+ .product-card-custom {
+    /* Hacemos que la tarjeta ocupe el 100% del hueco de la columna */
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+  }
+  
+  .product-card-custom .card-body {
+    /* El cuerpo se estira para empujar al botón */
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+  }
+  
+  .product-card-custom .btn {
+    /* El botón se queda siempre pegado abajo */
+    margin-top: auto !important;
+  }

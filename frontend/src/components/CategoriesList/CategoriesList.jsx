@@ -23,7 +23,7 @@ function CategoriesList({ categories, onCategorySelect }) {
         - En móvil: 1 categoría por fila (col-12)
       */}
       {categories.map((cat) => (
-        <div key={cat.id} className="col-12 col-md-4 d-flex justify-content-center mb-3">
+        <div key={cat.id} className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex justify-content-center mb-3">
           {/* 
             Componente SectionCard: Tarjeta personalizada con estilo Bootstrap
             - title: Nombre de la categoría
