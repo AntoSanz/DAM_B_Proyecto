@@ -103,7 +103,7 @@ function ProductDetailScreen({ product, onBack }) {
             {/* Sección de precio y compra */}
             <div className="price-section mt-4">
               {/* Precio del producto formateado con 2 decimales */}
-              <p className="price">€{product.price.toFixed(2)}</p>
+              <p className="price">{product.price.toFixed(2)} €</p>
 
               {/* Selector de cantidad y botón para añadir al carrito */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
