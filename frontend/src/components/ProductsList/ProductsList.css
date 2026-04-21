@@ -23,19 +23,19 @@
  .product-card-custom {
     /* Hacemos que la tarjeta ocupe el 100% del hueco de la columna */
     width: 100%;
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
   
   .product-card-custom .card-body {
     /* El cuerpo se estira para empujar al botón */
-    display: flex !important;
-    flex-direction: column !important;
-    flex: 1 1 auto !important;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
   }
   
   .product-card-custom .btn {
     /* El botón se queda siempre pegado abajo */
-    margin-top: auto !important;
+    margin-top: auto;
   }
