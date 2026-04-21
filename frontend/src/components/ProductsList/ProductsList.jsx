@@ -49,7 +49,7 @@ function ProductsList({ products, categoryName, onProductSelect }) {
               </h6>
 
               {/* Precio formateado a 2 decimales */}
-              <p className="card-text">{t('products.priceLabel')} €{p.price.toFixed(2)}</p>
+              <p className="card-text">{t('products.priceLabel')} {p.price.toFixed(2)} €</p>
 
               {/* Botón que llama a onProductSelect con el producto seleccionado */}
               <button
