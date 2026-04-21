@@ -20,20 +20,20 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  height: 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .card .card-body {
-  display: flex !important;
-  flex-direction: column !important;
-  flex: 1 1 auto !important; /* Esto hace que el cuerpo se estire y ocupe el espacio sobrante */
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto; /* Esto hace que el cuerpo se estire y ocupe el espacio sobrante */
 }
 
 .card .btn {
-  width: 100% !important;
-  margin-top: auto !important; /* esto empujará el botón al fondo */
+  width: 100%;
+  margin-top: auto; /* esto empujará el botón al fondo */
 }
 
 /**
