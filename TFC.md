@@ -683,3 +683,1027 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
+# FASE DE DISEÑO
+
+La fase de diseño recoge todas las decisiones arquitectónicas y estructurales tomadas antes de iniciar la implementación del proyecto. El objetivo es disponer de un modelo completo y coherente del sistema que sirva de guía durante el desarrollo.
+
+---
+
+## 1. DIAGRAMA DE CLASES
+
+> 📌 **Nota:** Una vez generado el diagrama con Lucidchart o Draw.io, sustituir la siguiente sección por la imagen exportada:
+> `![Diagrama UML de Clases - Game Store](./docs/diseño/diagramas/diagrama-uml-clases.png)`
+
+### Estructura Principal
+
+```
+┌─────────────────────┐
+│        User         │
+├─────────────────────┤
+│ - id: number        │
+│ - email: string     │
+│ - password: string  │
+│ - name: string      │
+├─────────────────────┤
+│ + create()          │
+│ + findByEmail()     │
+│ + findById()        │
+│ + update()          │
+│ + delete()          │
+└─────────────────────┘
+          △
+          │ hereda
+          │
+┌─────────────────────┐
+│        Admin        │
+├─────────────────────┤
+│ - role: string      │
+├─────────────────────┤
+│ + manageProducts()  │
+│ + manageUsers()     │
+└─────────────────────┘
+
+
+┌──────────────────────┐         ┌─────────────────────┐
+│       Category       │         │       Product        │
+├──────────────────────┤         ├─────────────────────┤
+│ - id: number         │◇──1:N──▶│ - id: number        │
+│ - name: string       │         │ - categoryId: number │
+│ - description: string│         │ - name: string       │
+├──────────────────────┤         │ - price: decimal     │
+│ + getProducts()      │         │ - developer: string  │
+│ + getName()          │         │ - genre: string      │
+└──────────────────────┘         │ - releaseDate: date  │
+                                 │ - rating: decimal    │
+                                 │ - inStock: boolean   │
+                                 ├─────────────────────┤
+                                 │ + getDetails()       │
+                                 │ + updatePrice()      │
+                                 │ + checkStock()       │
+                                 └─────────────────────┘
+
+
+┌──────────────────────┐         ┌─────────────────────┐
+│         Cart         │         │      CartItem        │
+├──────────────────────┤         ├─────────────────────┤
+│ - id: number         │◇──1:N──▶│ - id: number        │
+│ - userId: number     │         │ - cartId: number     │
+│ - createdAt: date    │         │ - productId: number  │
+├──────────────────────┤         │ - quantity: number   │
+│ + addItem()          │         ├─────────────────────┤
+│ + removeItem()       │         │ + updateQuantity()   │
+│ + getTotalPrice()    │         │ + getSubtotal()      │
+│ + checkout()         │         └─────────────────────┘
+└──────────────────────┘
+
+
+┌──────────────────────┐         ┌─────────────────────┐
+│        Order         │         │     OrderItem        │
+├──────────────────────┤         ├─────────────────────┤
+│ - id: number         │◇──1:N──▶│ - id: number        │
+│ - userId: number     │         │ - orderId: number    │
+│ - totalPrice: decimal│         │ - productId: number  │
+│ - status: string     │         │ - quantity: number   │
+│ - createdAt: date    │         │ - unitPrice: decimal │
+├──────────────────────┤         ├─────────────────────┤
+│ + create()           │         │ + getSubtotal()      │
+│ + getStatus()        │         │ + getProduct()       │
+│ + cancel()           │         └─────────────────────┘
+└──────────────────────┘
+```
+
+### Relaciones
+
+- **1:N** — Una categoría contiene muchos productos
+- **1:N** — Un carrito contiene muchos items
+- **1:N** — Un pedido contiene muchos items de pedido
+- **Herencia** — Admin extiende de User
+
+### Descripción de Entidades
+
+| Clase | Responsabilidad | Atributos Principales | Métodos |
+|-------|-----------------|----------------------|---------|
+| **User** | Gestionar datos y autenticación de usuarios | id, email, password, name | CRUD completo |
+| **Admin** | Operaciones administrativas | role | manageProducts(), manageUsers() |
+| **Category** | Agrupar productos por tipo | id, name, description | getProducts() |
+| **Product** | Información de juegos disponibles | id, categoryId, name, price, developer, genre | getDetails(), checkStock() |
+| **Cart** | Carrito temporal de usuario | id, userId, createdAt | addItem(), removeItem(), checkout() |
+| **CartItem** | Items dentro del carrito | id, cartId, productId, quantity | updateQuantity(), getSubtotal() |
+| **Order** | Registro de compra finalizada | id, userId, totalPrice, status, createdAt | create(), getStatus(), cancel() |
+| **OrderItem** | Items dentro de una orden | id, orderId, productId, quantity, unitPrice | getSubtotal(), getProduct() |
+
+---
+
+## 2. DIAGRAMAS DE SECUENCIA
+
+Diagramas UML de secuencia para los casos de uso más relevantes, mostrando la interacción entre objetos a lo largo del tiempo y el flujo de mensajes.
+
+### 2.1 Caso de Uso: Visualizar Productos de una Categoría
+
+```
+Usuario      Frontend         Backend          Base de Datos
+  │              │               │                   │
+  │─ click en ──▶│               │                   │
+  │  categoría   │               │                   │
+  │              │─ GET /api/categories/1/products ──▶│
+  │              │               │                   │
+  │              │               │─ SELECT * FROM products WHERE categoryId=1 ─▶│
+  │              │               │                   │
+  │              │               │◀─ [products...]   │
+  │              │◀──────────────│                   │
+  │◀─ mostrar ───│               │                   │
+  │  productos   │               │                   │
+```
+
+**Flujo:**
+1. Usuario hace clic en una categoría
+2. Frontend envía GET request al backend
+3. Backend consulta base de datos
+4. Base de datos retorna productos filtrados
+5. Frontend recibe datos y renderiza lista
+
+---
+
+### 2.2 Caso de Uso: Registro de Usuario
+
+```
+Usuario      Frontend         Backend          Base de Datos
+  │              │               │                   │
+  │─ completar ─▶│               │                   │
+  │  formulario  │               │                   │
+  │              │─ POST /api/auth/register ─────────▶│
+  │              │  (email, password, name)            │
+  │              │               │                   │
+  │              │               │─ validar email    │
+  │              │               │─ hash password    │
+  │              │               │─ INSERT INTO users ─▶│
+  │              │               │                   │
+  │              │               │◀─ success/error   │
+  │              │◀──────────────│                   │
+  │◀─ confirmación│              │                   │
+```
+
+**Flujo:**
+1. Usuario completa formulario de registro
+2. Frontend valida datos básicos
+3. Frontend envía POST con credenciales
+4. Backend valida email único
+5. Backend hashea contraseña con scrypt
+6. Backend inserta usuario en base de datos
+7. Retorna confirmación o error
+
+---
+
+### 2.3 Caso de Uso: Agregar Producto al Carrito
+
+```
+Usuario      Frontend         Backend          Base de Datos
+  │              │               │                   │
+  │─ click ──────▶│              │                   │
+  │  "Añadir al  │               │                   │
+  │   carrito"   │─ POST /api/cart/items ────────────▶│
+  │              │  (productId, quantity)              │
+  │              │               │                   │
+  │              │               │─ verificar stock  │
+  │              │               │─ INSERT INTO cartItems ─▶│
+  │              │               │                   │
+  │              │               │◀─ itemAdded       │
+  │              │◀──────────────│                   │
+  │◀─ actualizar ─│              │                   │
+  │   carrito    │               │                   │
+```
+
+**Flujo:**
+1. Usuario hace clic en "Añadir al carrito"
+2. Frontend envía POST con producto y cantidad
+3. Backend verifica disponibilidad de stock
+4. Backend inserta item en cartItems
+5. Retorna confirmación
+6. Frontend actualiza UI del carrito
+
+---
+
+### 2.4 Caso de Uso: Checkout (Realizar Compra)
+
+```
+Usuario      Frontend         Backend          Base de Datos
+  │              │               │                   │
+  │─ click ──────▶│              │                   │
+  │  "Realizar   │               │                   │
+  │   compra"    │─ POST /api/orders ────────────────▶│
+  │              │               │                   │
+  │              │               │─ validar carrito  │
+  │              │               │─ BEGIN TRANSACTION │
+  │              │               │─ INSERT INTO orders ─▶│
+  │              │               │─ INSERT INTO orderItems ─▶│
+  │              │               │─ UPDATE products (stock) ─▶│
+  │              │               │─ COMMIT           │
+  │              │◀──────────────│                   │
+  │◀─ pedido ────│               │                   │
+  │   confirmado │               │                   │
+```
+
+**Flujo:**
+1. Usuario hace clic en "Realizar compra"
+2. Frontend envía carrito al backend
+3. Backend inicia transacción
+4. Backend inserta orden
+5. Backend inserta items de orden
+6. Backend actualiza stock de productos
+7. Backend confirma la transacción
+8. Frontend recibe confirmación y limpia carrito
+
+---
+
+### 2.5 Caso de Uso: Login de Usuario
+
+```
+Usuario      Frontend         Backend          Base de Datos
+  │              │               │                   │
+  │─ completar ─▶│               │                   │
+  │  login       │               │                   │
+  │              │─ POST /api/auth/login ────────────▶│
+  │              │  (email, password)                  │
+  │              │               │                   │
+  │              │               │─ SELECT * FROM users WHERE email ─▶│
+  │              │               │                   │
+  │              │               │◀─ usuario         │
+  │              │               │─ comparar hashes  │
+  │              │               │─ generar token    │
+  │              │◀──────────────│                   │
+  │◀─ token/error│               │                   │
+  │   + redirect │               │                   │
+```
+
+**Flujo:**
+1. Usuario ingresa email y contraseña
+2. Frontend valida formato
+3. Frontend envía POST con credenciales
+4. Backend busca usuario por email
+5. Backend compara hash de contraseña
+6. Si es correcto, genera JWT token
+7. Frontend almacena token y redirige
+
+---
+
+## 3. DIAGRAMA ENTIDAD–RELACIÓN (E/R)
+
+### Modelo Conceptual de la Base de Datos
+
+```
+┌─────────────┐
+│    Users    │
+├─────────────┤
+│ id (PK)     │
+│ email       │
+│ password    │
+│ name        │
+│ createdAt   │
+└──────┬──────┘
+       │ 1:N
+       ├──────────────────────┐
+       │                      │
+┌──────▼──────┐        ┌──────▼──────┐
+│    Carts    │        │   Orders    │
+├─────────────┤        ├─────────────┤
+│ id (PK)     │        │ id (PK)     │
+│ userId (FK) │        │ userId (FK) │
+│ createdAt   │        │ totalPrice  │
+└──────┬──────┘        │ status      │
+       │ 1:N           │ createdAt   │
+┌──────▼──────────┐    └──────┬──────┘
+│   CartItems     │           │ 1:N
+├─────────────────┤    ┌──────▼──────────┐
+│ id (PK)         │    │   OrderItems    │
+│ cartId (FK)     │    ├─────────────────┤
+│ productId (FK) ─┼──┐ │ id (PK)         │
+│ quantity        │  │ │ orderId (FK)     │
+└─────────────────┘  │ │ productId (FK) ─┼──┐
+                     │ │ quantity         │  │
+                     │ │ unitPrice        │  │
+                     │ └─────────────────┘  │
+                     │                      │
+                     └──────────┬───────────┘
+                                │ N:1
+┌─────────────┐         ┌───────▼───────┐
+│ Categories  │         │   Products    │
+├─────────────┤         ├───────────────┤
+│ id (PK)     │──1:N───▶│ id (PK)       │
+│ name        │         │ categoryId(FK)│
+│ description │         │ name          │
+└─────────────┘         │ description   │
+                        │ price         │
+                        │ developer     │
+                        │ genre         │
+                        │ players       │
+                        │ releaseDate   │
+                        │ rating        │
+                        │ inStock       │
+                        │ image         │
+                        └───────────────┘
+```
+
+### Entidades y Atributos
+
+#### USERS
+- **id** (PK): Identificador único del usuario (autoincrement)
+- **email**: Correo electrónico único del usuario
+- **password**: Contraseña hasheada con scrypt + salt
+- **name**: Nombre completo del usuario
+- **createdAt**: Timestamp de creación de la cuenta
+
+#### CATEGORIES
+- **id** (PK): Identificador único de categoría
+- **name**: Nombre de la categoría (único)
+- **description**: Descripción de la categoría
+
+#### PRODUCTS
+- **id** (PK): Identificador único de producto
+- **categoryId** (FK → Categories.id): Categoría a la que pertenece
+- **name**: Nombre del producto
+- **description**: Descripción completa
+- **shortDescription**: Descripción corta para listados
+- **longDescription**: Descripción extendida para detalles
+- **price**: Precio del juego (decimal)
+- **developer**: Desarrollador/Studio del juego
+- **genre**: Género del juego
+- **players**: Rango de jugadores (ej: "2-5")
+- **releaseDate**: Fecha de lanzamiento
+- **rating**: Calificación del producto (0-5)
+- **inStock**: Disponibilidad en stock (booleano)
+- **image**: URL de la imagen del producto
+- **createdAt**: Timestamp de creación
+- **updatedAt**: Timestamp de última actualización
+
+#### CARTS
+- **id** (PK): Identificador único del carrito
+- **userId** (FK → Users.id): Usuario propietario del carrito
+- **createdAt**: Timestamp de creación
+
+#### CARTITEMS
+- **id** (PK): Identificador único del item
+- **cartId** (FK → Carts.id): Carrito asociado
+- **productId** (FK → Products.id): Producto en el carrito
+- **quantity**: Cantidad de unidades del producto
+- **createdAt**: Timestamp de adición al carrito
+
+#### ORDERS
+- **id** (PK): Identificador único del pedido
+- **userId** (FK → Users.id): Usuario que realizó la compra
+- **totalPrice**: Precio total del pedido (decimal)
+- **status**: Estado del pedido (pending, completed, cancelled)
+- **createdAt**: Timestamp del pedido
+- **updatedAt**: Timestamp de última actualización
+
+#### ORDERITEMS
+- **id** (PK): Identificador único del item
+- **orderId** (FK → Orders.id): Pedido asociado
+- **productId** (FK → Products.id): Producto comprado
+- **quantity**: Cantidad comprada
+- **unitPrice**: Precio unitario en el momento de compra (snapshot)
+- **createdAt**: Timestamp de creación
+
+---
+
+## 4. DIAGRAMA RELACIONAL
+
+### Modelo Lógico Normalizado (3FN)
+
+#### Creación de Tablas
+
+```sql
+-- =============================================
+-- TABLA: USERS
+-- =============================================
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  name TEXT NOT NULL,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT uk_email UNIQUE (email)
+);
+
+-- =============================================
+-- TABLA: CATEGORIES
+-- =============================================
+CREATE TABLE categories (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL UNIQUE,
+  description TEXT,
+  CONSTRAINT uk_category_name UNIQUE (name)
+);
+
+-- =============================================
+-- TABLA: PRODUCTS
+-- =============================================
+CREATE TABLE products (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  categoryId INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  description TEXT,
+  shortDescription TEXT,
+  longDescription TEXT,
+  price DECIMAL(10, 2) NOT NULL,
+  developer TEXT,
+  genre TEXT,
+  players TEXT,
+  releaseDate TEXT,
+  rating DECIMAL(3, 1),
+  inStock BOOLEAN DEFAULT 1,
+  image TEXT,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+  FOREIGN KEY (categoryId) REFERENCES categories (id) ON DELETE CASCADE,
+  CONSTRAINT chk_price CHECK (price >= 0),
+  CONSTRAINT chk_rating CHECK (rating >= 0 AND rating <= 5),
+  CONSTRAINT chk_instock CHECK (inStock IN (0, 1))
+);
+
+-- =============================================
+-- TABLA: CARTS
+-- =============================================
+CREATE TABLE carts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  userId INTEGER NOT NULL,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+  FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
+  CONSTRAINT uk_user_cart UNIQUE (userId)
+);
+
+-- =============================================
+-- TABLA: CARTITEMS
+-- =============================================
+CREATE TABLE cartItems (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  cartId INTEGER NOT NULL,
+  productId INTEGER NOT NULL,
+  quantity INTEGER NOT NULL DEFAULT 1,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+  FOREIGN KEY (cartId) REFERENCES carts (id) ON DELETE CASCADE,
+  FOREIGN KEY (productId) REFERENCES products (id) ON DELETE RESTRICT,
+  CONSTRAINT chk_quantity CHECK (quantity > 0),
+  CONSTRAINT uk_cart_product UNIQUE (cartId, productId)
+);
+
+-- =============================================
+-- TABLA: ORDERS
+-- =============================================
+CREATE TABLE orders (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  userId INTEGER NOT NULL,
+  totalPrice DECIMAL(10, 2) NOT NULL,
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'completed', 'cancelled')),
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+  FOREIGN KEY (userId) REFERENCES users (id) ON DELETE RESTRICT,
+  CONSTRAINT chk_total CHECK (totalPrice >= 0)
+);
+
+-- =============================================
+-- TABLA: ORDERITEMS
+-- =============================================
+CREATE TABLE orderItems (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  orderId INTEGER NOT NULL,
+  productId INTEGER NOT NULL,
+  quantity INTEGER NOT NULL,
+  unitPrice DECIMAL(10, 2) NOT NULL,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+  FOREIGN KEY (orderId) REFERENCES orders (id) ON DELETE CASCADE,
+  FOREIGN KEY (productId) REFERENCES products (id) ON DELETE RESTRICT,
+  CONSTRAINT chk_qty CHECK (quantity > 0),
+  CONSTRAINT chk_unit_price CHECK (unitPrice >= 0)
+);
+```
+
+#### Índices para Optimización
+
+```sql
+CREATE INDEX idx_products_category ON products (categoryId);
+CREATE INDEX idx_cartitems_cart ON cartItems (cartId);
+CREATE INDEX idx_cartitems_product ON cartItems (productId);
+CREATE INDEX idx_orders_user ON orders (userId);
+CREATE INDEX idx_orderitems_order ON orderItems (orderId);
+CREATE INDEX idx_orderitems_product ON orderItems (productId);
+CREATE INDEX idx_users_email ON users (email);
+CREATE INDEX idx_carts_user ON carts (userId);
+```
+
+#### Restricciones de Integridad
+
+| Restricción | Tipo | Descripción | Impacto |
+|-------------|------|-------------|---------|
+| PK (id) | PRIMARY KEY | Cada tabla tiene identificador único | Garantiza unicidad |
+| FK (categoryId) | FOREIGN KEY | Producto debe existir en categoría | Integridad referencial |
+| FK (userId) | FOREIGN KEY | Carrito/Orden debe pertenecer a usuario | Integridad referencial |
+| UNIQUE (email) | UNIQUE | No hay usuarios con mismo email | Evita duplicados |
+| UNIQUE (name) | UNIQUE | No hay categorías con mismo nombre | Evita duplicados |
+| UNIQUE (cartId, productId) | UNIQUE | Un producto solo una vez por carrito | Lógica de negocio |
+| CHECK (price >= 0) | CHECK | Precios no negativos | Validación de datos |
+| CHECK (rating 0-5) | CHECK | Ratings válidos | Validación de datos |
+| CHECK (quantity > 0) | CHECK | Cantidades positivas | Validación de datos |
+| CHECK (status) | CHECK | Estados permitidos | Validación de datos |
+| ON DELETE CASCADE | REFERENTIAL | Borrar categoría borra sus productos | Cascada de eliminación |
+| ON DELETE RESTRICT | REFERENTIAL | No borrar producto si está en órdenes | Protege datos críticos |
+
+#### Normalización
+
+El modelo está en **Tercera Forma Normal (3FN)**:
+
+- ✅ **1FN:** Todos los atributos contienen valores atómicos (no hay listas dentro de columnas)
+- ✅ **2FN:** Todos los atributos dependen funcionalmente de la clave primaria completa
+- ✅ **3FN:** No hay dependencias transitivas entre atributos no-clave
+
+#### Diagrama de Dependencias
+
+```
+USERS (1) ──────────▶ (N) CARTS
+          └──────────▶ (N) ORDERS
+
+CATEGORIES (1) ─────▶ (N) PRODUCTS
+
+CARTS (1) ──────────▶ (N) CARTITEMS
+PRODUCTS (1) ───────▶ (N) CARTITEMS
+
+ORDERS (1) ─────────▶ (N) ORDERITEMS
+PRODUCTS (1) ───────▶ (N) ORDERITEMS
+```
+
+---
+
+## 5. PROTOTIPO DE LA APLICACIÓN
+
+### 5.1 Wireframes Principales
+
+#### Pantalla de Inicio (Home)
+
+```
+┌─────────────────────────────────────────┐
+│ Logo        GAME STORE        🛒 Carrito│
+├─────────────────────────────────────────┤
+│                                         │
+│     Explora nuestras categorías         │
+│                                         │
+│  ┌──────────┐  ┌──────────┐  ┌───────┐ │
+│  │ Juegos   │  │ Juegos   │  │Juegos │ │
+│  │ de Mesa  │  │ PC       │  │ Xbox  │ │
+│  │    📦    │  │    🖥️    │  │   🎮  │ │
+│  │ [Click]  │  │ [Click]  │  │[Click]│ │
+│  └──────────┘  └──────────┘  └───────┘ │
+│                                         │
+│  ┌──────────┐  ┌──────────┐            │
+│  │ Juegos   │  │ Juegos   │            │
+│  │Nintendo  │  │   PS5    │            │
+│  │    🎮    │  │    🎮    │            │
+│  │ [Click]  │  │ [Click]  │            │
+│  └──────────┘  └──────────┘            │
+│                                         │
+│  ┌─────────────────────────────────┐   │
+│  │ ℹ️ Información de la tienda     │   │
+│  │    Contacto | Sobre nosotros    │   │
+│  └─────────────────────────────────┘   │
+└─────────────────────────────────────────┘
+```
+
+**Elementos:** Barra de navegación fija · Logo · Carrito (badge con cantidad) · Grid de categorías responsivo · Efecto hover · Footer informativo
+
+---
+
+#### Pantalla de Productos por Categoría
+
+```
+┌─────────────────────────────────────────┐
+│ Logo       GAME STORE         🛒(3)     │
+├─────────────────────────────────────────┤
+│ Inicio > Juegos PC                      │
+├─────────────────────────────────────────┤
+│                                         │
+│ Juegos PC disponibles (12 productos)    │
+│                                         │
+│  ┌────────────┐  ┌────────────┐        │
+│  │  [Imagen]  │  │  [Imagen]  │        │
+│  │   CS 2     │  │ Minecraft  │        │
+│  │ Acción/FPS │  │  Sandbox   │        │
+│  │  29.99€    │  │  26.99€    │        │
+│  │  ⭐ 4.8    │  │  ⭐ 4.9    │        │
+│  │ [Ver info] │  │ [Ver info] │        │
+│  └────────────┘  └────────────┘        │
+│                                         │
+│  ┌────────────┐  ┌────────────┐        │
+│  │  [Imagen]  │  │  [Imagen]  │        │
+│  │  Fortnite  │  │  Valorant  │        │
+│  │ Action/FPS │  │ FPS Táctico│        │
+│  │   Gratis   │  │   Gratis   │        │
+│  │  ⭐ 4.5    │  │  ⭐ 4.7    │        │
+│  │ [Ver info] │  │ [Ver info] │        │
+│  └────────────┘  └────────────┘        │
+│                                         │
+│       [Cargar más productos...]         │
+└─────────────────────────────────────────┘
+```
+
+**Elementos:** Breadcrumb · Grid responsivo · Tarjetas con imagen/título/género/precio/rating · Paginación
+
+---
+
+#### Pantalla de Detalle de Producto
+
+```
+┌─────────────────────────────────────────┐
+│ Logo       GAME STORE         🛒(3)     │
+├─────────────────────────────────────────┤
+│ Inicio > Juegos PC > Counter-Strike 2   │
+├─────────────────────────────────────────┤
+│                                         │
+│  ┌─────────┐  Información del Juego    │
+│  │         │  ━━━━━━━━━━━━━━━━━━━━━    │
+│  │         │  Counter-Strike 2          │
+│  │  Imagen │  ⭐ 4.8 / 5 (1.234 reseñas)│
+│  │  Grande │  Desarrollador: Valve      │
+│  │ 300x300 │  Género: Disparos / FPS   │
+│  │         │  Jugadores: 10-64          │
+│  │         │  Fecha: 01/09/2023         │
+│  └─────────┘  Stock: ✓ Disponible      │
+│                                         │
+│  Descripción:                           │
+│  Counter-Strike 2 es el juego de        │
+│  disparos táctico en equipos más        │
+│  popular del mundo...                   │
+│                                         │
+│  💰 Precio: 29.99€                      │
+│                                         │
+│  Cantidad: [ ▼ 1 ▲ ]                   │
+│                                         │
+│  ┌─────────────────────────────────┐   │
+│  │  🛒 Añadir al carrito           │   │
+│  └─────────────────────────────────┘   │
+│                                         │
+│  Productos Relacionados:                │
+│  ┌──────┐ ┌──────┐ ┌──────┐           │
+│  │ Dota2│ │ L4D2 │ │ TF2  │           │
+│  └──────┘ └──────┘ └──────┘           │
+└─────────────────────────────────────────┘
+```
+
+**Elementos:** Breadcrumb · Imagen grande · Info detallada · Rating · Descripción extendida · Precio · Selector de cantidad · Botón añadir al carrito · Productos relacionados
+
+---
+
+#### Pantalla de Carrito
+
+```
+┌─────────────────────────────────────────┐
+│ Logo       GAME STORE         🛒(3)     │
+├─────────────────────────────────────────┤
+│ Inicio > Carrito                        │
+├─────────────────────────────────────────┤
+│                                         │
+│ Tu carrito (3 productos)                │
+│ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
+│                                         │
+│  CS 2                 Qty: [ ▼ 1 ▲ ]  │
+│  29.99€               Subtotal: 29.99€ ❌│
+│                                         │
+│ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
+│                                         │
+│  Minecraft            Qty: [ ▼ 1 ▲ ]  │
+│  26.99€               Subtotal: 26.99€ ❌│
+│                                         │
+│ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
+│                                         │
+│  Fortnite (Gratis)    Qty: [ ▼ 2 ▲ ]  │
+│  0.00€                Subtotal:  0.00€ ❌│
+│                                         │
+│ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
+│ Subtotal:                      56.98€   │
+│ Impuestos (21%):               11.97€   │
+│ Envío:                          0.00€   │
+│ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
+│ TOTAL:                         68.95€   │
+│                                         │
+│  ┌─────────────────────────────────┐   │
+│  │  ✓ Proceder a Checkout          │   │
+│  └─────────────────────────────────┘   │
+│  ┌─────────────────────────────────┐   │
+│  │  ↩️ Seguir comprando            │   │
+│  └─────────────────────────────────┘   │
+└─────────────────────────────────────────┘
+```
+
+**Elementos:** Lista de productos · Modificar cantidad · Eliminar producto · Resumen de costos · Total destacado · Botones de acción
+
+---
+
+#### Pantalla de Checkout
+
+```
+┌─────────────────────────────────────────┐
+│ Logo       GAME STORE         🛒        │
+├─────────────────────────────────────────┤
+│ Inicio > Carrito > Checkout             │
+├─────────────────────────────────────────┤
+│                                         │
+│ Paso 1: ENVÍO     ✓ Completado          │
+│ Paso 2: PAGO      → En progreso         │
+│ Paso 3: CONFIRMACIÓN  ○ Pendiente       │
+│                                         │
+│ INFORMACIÓN DE ENVÍO                    │
+│ ┌─────────────────────────────────┐   │
+│ │ Nombre:    [________________]   │   │
+│ │ Dirección: [________________]   │   │
+│ │ Ciudad: [________]  CP: [_____] │   │
+│ │ País:   [ España          ▼ ]   │   │
+│ └─────────────────────────────────┘   │
+│                                         │
+│ MÉTODO DE PAGO                          │
+│ ☑ Tarjeta de Crédito                   │
+│   Número:  [____] [____] [____] [____] │
+│   Vence:   [__/____]   CVC: [___]      │
+│ ☐ PayPal                                │
+│ ☐ Transferencia Bancaria                │
+│                                         │
+│ RESUMEN FINAL: 3 productos — 68.95€    │
+│                                         │
+│  ┌─────────────────────────────────┐   │
+│  │  ✓ Confirmar compra             │   │
+│  └─────────────────────────────────┘   │
+│                                         │
+│  🔒 Pago seguro — SSL 128-bit          │
+└─────────────────────────────────────────┘
+```
+
+---
+
+#### Pantalla de Confirmación de Compra
+
+```
+┌─────────────────────────────────────────┐
+│ Logo       GAME STORE         🛒        │
+├─────────────────────────────────────────┤
+│ Inicio > Carrito > Confirmación         │
+├─────────────────────────────────────────┤
+│                                         │
+│    ✅ ¡COMPRA REALIZADA CON ÉXITO!     │
+│                                         │
+│  Número de Pedido: #ORD-2026-001547     │
+│  Fecha: 21/04/2026 15:30:22             │
+│                                         │
+│ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
+│  Gracias por tu compra, usuario@mail   │
+│  Tu pedido está siendo procesado.      │
+│  Recibirás email de confirmación       │
+│  en los próximos 5 minutos.            │
+│ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
+│                                         │
+│  DETALLES DEL PEDIDO:                  │
+│  1. CS 2                    29.99€      │
+│  2. Minecraft               26.99€      │
+│  3. Fortnite                 0.00€      │
+│  Subtotal:                  56.98€      │
+│  Impuestos:                 11.97€      │
+│  TOTAL:                     68.95€      │
+│                                         │
+│  Estado: En preparación                 │
+│  Envío estimado: 3-5 días hábiles      │
+│                                         │
+│  ┌─────────────────────────────────┐   │
+│  │  📦 Rastrear pedido             │   │
+│  └─────────────────────────────────┘   │
+│  ┌─────────────────────────────────┐   │
+│  │  🏠 Volver a inicio             │   │
+│  └─────────────────────────────────┘   │
+│                                         │
+│  📧 support@gamestore.com               │
+│  📞 +34 900 123 456                     │
+└─────────────────────────────────────────┘
+```
+
+---
+
+### 5.2 Flujo de Navegación
+
+```
+        ┌─────────────┐
+        │  Login/Reg  │
+        └──────┬──────┘
+               │
+        ┌──────▼──────┐
+        │    Home     │ ◄──────────────┐
+        │ (Categorías)│                │
+        └──────┬──────┘                │
+               │                       │
+        ┌──────▼──────────────┐        │
+        │     Productos       │        │
+        │  (por Categoría)    │        │
+        └──────┬──────────────┘        │
+               │                       │
+        ┌──────▼──────────────┐        │
+        │  Detalle Producto   │        │
+        │ [Añadir al carrito] │        │
+        └──────┬──────────────┘        │
+               │                       │
+        ┌──────▼──────────────┐        │
+        │      Carrito        │────────┘
+        │  [Modificar items]  │  (Seguir comprando)
+        └──────┬──────────────┘
+               │
+        ┌──────▼──────────────┐
+        │     Checkout        │
+        │  [Envío + Pago]     │
+        └──────┬──────────────┘
+               │
+        ┌──────▼──────────────┐
+        │    Confirmación     │
+        │  [Número Pedido]    │
+        └─────────────────────┘
+```
+
+---
+
+### 5.3 Guía de Estilos y Colores
+
+#### Paleta de Colores
+
+| Elemento | Color | Hex | Uso |
+|----------|-------|-----|-----|
+| Primario | Azul Marino | `#0066CC` | CTA principales, enlaces |
+| Secundario | Verde Éxito | `#28A745` | Acciones positivas, stock |
+| Peligro | Rojo | `#DC3545` | Errores, eliminación |
+| Advertencia | Naranja | `#FFC107` | Alertas, atención |
+| Información | Cian | `#17A2B8` | Info, notificaciones |
+| Fondo | Blanco | `#FFFFFF` | Fondos principales |
+| Fondo Alt | Gris Claro | `#F8F9FA` | Fondos alternativos |
+| Texto Principal | Gris Oscuro | `#333333` | Texto normal |
+| Texto Secundario | Gris Medio | `#666666` | Texto secundario |
+| Borde | Gris Claro | `#E0E0E0` | Separadores, bordes |
+
+#### Tipografía
+
+| Elemento | Fuente | Tamaño | Peso |
+|----------|--------|--------|------|
+| Títulos H1 | Inter, sans-serif | 2.5rem (40px) | 700 Bold |
+| Títulos H2 | Inter, sans-serif | 2rem (32px) | 700 Bold |
+| Títulos H3 | Inter, sans-serif | 1.5rem (24px) | 600 Semi-bold |
+| Párrafo | Inter, sans-serif | 1rem (16px) | 400 Regular |
+| Small | Inter, sans-serif | 0.875rem (14px) | 400 Regular |
+| Labels | Inter, sans-serif | 0.875rem (14px) | 600 Semi-bold |
+
+#### Espaciado y Bordes
+
+- Padding pequeño: `8px` · Mediano: `16px` · Grande: `24px`
+- Margin pequeño: `8px` · Mediano: `16px` · Grande: `32px`
+- Bordes redondeados: Pequeño `4px` · Mediano `8px` · Grande `12px` · Botones `6px`
+
+---
+
+### 5.4 Componentes Reutilizables
+
+#### SectionCard
+
+Tarjeta versátil para mostrar categorías y productos:
+
+```jsx
+<SectionCard
+  title="Counter-Strike 2"
+  subtitle="FPS Competitivo"
+  description="Juego táctico de disparos en equipos"
+  imageSrc="/cs2.jpg"
+  buttonText="Ver detalles"
+  onButtonClick={() => navigate(`/products/${id}`)}
+  badge="Popular"
+/>
+```
+
+#### ProductsList
+
+Grid responsivo de productos:
+
+```jsx
+<ProductsList
+  products={products}
+  columns={{ xs: 1, md: 2, lg: 3, xl: 4 }}
+  onProductSelect={(id) => navigate(`/product/${id}`)}
+  showFilters={true}
+/>
+```
+
+#### Breadcrumb
+
+Navegación jerárquica:
+
+```jsx
+<Breadcrumb
+  items={[
+    { label: "Inicio", path: "/" },
+    { label: "Juegos PC", path: "/category/2" },
+    { label: "Counter-Strike 2" }
+  ]}
+  onNavigate={(path) => navigate(path)}
+  separator="›"
+/>
+```
+
+#### CartBadge
+
+Badge del carrito con cantidad:
+
+```jsx
+<CartBadge
+  itemCount={3}
+  totalPrice={68.95}
+  onClick={() => navigate('/cart')}
+/>
+```
+
+#### PriceTag
+
+Etiqueta de precio con descuento opcional:
+
+```jsx
+<PriceTag
+  price={29.99}
+  originalPrice={39.99}
+  discount={25}
+  currency="€"
+  highlighted={true}
+/>
+```
+
+---
+
+## 6. DECISIONES DE DISEÑO JUSTIFICADAS
+
+### Backend
+
+**Express.js** — Framework ligero y flexible, gran comunidad, performance suficiente para aplicaciones medianas y fácil integración con SQLite.
+
+**SQLite** — Base de datos embebida sin servidor adicional, perfecta para desarrollo y proyectos de tamaño académico. Suficiente para el catálogo de productos. Backup sencillo (es un único archivo).
+
+**Arquitectura por Capas** — Separación clara de responsabilidades: `Models → Services → Controllers → Routes`. Facilita mantenimiento y escalabilidad.
+
+**Better-sqlite3** — Driver síncrono que simplifica la lectura del código, con mejor rendimiento que sqlite3 asíncrono. Ideal para operaciones CRUD básicas.
+
+### Frontend
+
+**React + Vite** — Herramientas modernas con Hot Module Replacement (HMR) para desarrollo ágil y build optimization automático.
+
+**Bootstrap 5** — Sistema de grid responsivo robusto, componentes pre-construidos y personalizables, curva de aprendizaje baja.
+
+**i18n Local** — Soporte multiidioma sin dependencias complejas, ideal para proyectos pequeños/medianos.
+
+**React Hooks** — Funciones puras, código más limpio, sin necesidad de Redux para estado simple.
+
+### Base de Datos
+
+**3FN Normalizado** — Reduce redundancia, mantiene integridad referencial, facilita actualizaciones y elimina anomalías.
+
+**Claves Foráneas y Restricciones** — `ON DELETE CASCADE/RESTRICT` previene inconsistencias. `CHECK constraints` validan datos directamente en BD.
+
+**Índices Estratégicos** — Mejoran rendimiento en consultas frecuentes: búsqueda por email, productos por categoría, órdenes por usuario.
+
+### Arquitectura General
+
+**Separación Frontend-Backend** — Frontend consume API REST; backend es agnóstico a la UI. Facilita escalado y cambios futuros.
+
+**JWT para Autenticación** — Stateless, escalable, seguro con HTTPS + secure cookies.
+
+**Versionado de API** — `/api/v1/*` permite cambios sin romper clientes existentes.
+
+---
+
+## 7. MEJORAS FUTURAS
+
+- [ ] Sistema de búsqueda y filtros avanzados
+- [ ] Carrito persistente (localStorage)
+- [ ] Historial de pedidos del usuario
+- [ ] Sistema de favoritos / Wishlist
+- [ ] Calificaciones y comentarios de usuarios
+- [ ] Recomendaciones personalizadas
+- [ ] Descuentos y cupones
+- [ ] Sistema de notificaciones
+- [ ] Integración con métodos de pago reales
+- [ ] Panel administrativo completo
+
+---
+
+## 8. REFERENCIAS
+
+- [UML Class Diagrams — Oracle](https://docs.oracle.com/cd/E19798-01/821-1770/bnbuk/index.html)
+- [Entity-Relationship Model — Wikipedia](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model)
+- [Database Normalization — W3Schools](https://www.w3schools.com/sql/sql_ref_normalization.asp)
+- [REST API Best Practices — restfulapi.net](https://restfulapi.net)
+
+---
+
+*Última actualización: 21 de Abril de 2026*  
+*Versión del documento: 1.0*  
+*Estado: ✅ Completado*  
+*Autor: Equipo de Desarrollo DAM*  
+*Fase: Diseño*
