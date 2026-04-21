@@ -1,0 +1,149 @@
+<mxfile host="app.diagrams.net" modified="2026-04-21T12:00:00.000Z" agent="5.0" version="24.0.0">
+  <diagram name="Diagrama de Clases" id="c4acf3e9-155e-7222-9cf6-157b1445b519">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- CLASE USER -->
+        <mxCell id="user" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=1;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="user_attr" value="- id: number&#xa;- email: string&#xa;- password: string&#xa;- name: string&#xa;- createdAt: date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="user">
+          <mxGeometry y="26" width="200" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="user_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=top;spacingTop=-1;spacingLeft=4;spacingRight=4;rotatable=0;deletable=0;editable=0;connectable=0;" vertex="1" parent="user">
+          <mxGeometry y="110" width="200" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="user_methods" value="+ create()&#xa;+ findByEmail()&#xa;+ findById()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="user">
+          <mxGeometry y="111" width="200" height="49" as="geometry" />
+        </mxCell>
+
+        <!-- CLASE ADMIN (HERENCIA) -->
+        <mxCell id="admin" value="Admin" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=1;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_attr" value="- role: string&#xa;- permissions: string[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="admin">
+          <mxGeometry y="26" width="200" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=top;spacingTop=-1;spacingLeft=4;spacingRight=4;rotatable=0;deletable=0;editable=0;connectable=0;" vertex="1" parent="admin">
+          <mxGeometry y="80" width="200" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_methods" value="+ manageProducts()&#xa;+ manageUsers()&#xa;+ generateReports()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="admin">
+          <mxGeometry y="81" width="200" height="49" as="geometry" />
+        </mxCell>
+
+        <!-- HERENCIA User -> Admin -->
+        <mxCell id="inherit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;strokeWidth=2;" edge="1" parent="1" source="admin" target="user">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- CLASE CATEGORY -->
+        <mxCell id="category" value="Category" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=1;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="40" width="200" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="category_attr" value="- id: number&#xa;- name: string&#xa;- description: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="category">
+          <mxGeometry y="26" width="200" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="category_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=top;spacingTop=-1;spacingLeft=4;spacingRight=4;rotatable=0;deletable=0;editable=0;connectable=0;" vertex="1" parent="category">
+          <mxGeometry y="90" width="200" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="category_methods" value="+ getProducts()&#xa;+ getName()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="category">
+          <mxGeometry y="91" width="200" height="49" as="geometry" />
+        </mxCell>
+
+        <!-- CLASE PRODUCT -->
+        <mxCell id="product" value="Product" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=1;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="40" width="220" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="product_attr" value="- id: number&#xa;- categoryId: number&#xa;- name: string&#xa;- description: string&#xa;- price: decimal&#xa;- developer: string&#xa;- genre: string&#xa;- releaseDate: date&#xa;- rating: decimal&#xa;- inStock: boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="product">
+          <mxGeometry y="26" width="220" height="134" as="geometry" />
+        </mxCell>
+        <mxCell id="product_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=top;spacingTop=-1;spacingLeft=4;spacingRight=4;rotatable=0;deletable=0;editable=0;connectable=0;" vertex="1" parent="product">
+          <mxGeometry y="160" width="220" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="product_methods" value="+ getDetails()&#xa;+ updatePrice()&#xa;+ checkStock()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="product">
+          <mxGeometry y="161" width="220" height="39" as="geometry" />
+        </mxCell>
+
+        <!-- RELACIÓN Category 1:N Product -->
+        <mxCell id="rel_cat_prod" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;startArrow=open;strokeWidth=2;" edge="1" parent="1" source="category" target="product">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_1n_1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="120" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="label_1n_2" value="N" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="120" width="30" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- CLASE CART -->
+        <mxCell id="cart" value="Cart" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=1;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="420" width="200" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="cart_attr" value="- id: number&#xa;- userId: number&#xa;- createdAt: date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="cart">
+          <mxGeometry y="26" width="200" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="cart_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=top;spacingTop=-1;spacingLeft=4;spacingRight=4;rotatable=0;deletable=0;editable=0;connectable=0;" vertex="1" parent="cart">
+          <mxGeometry y="90" width="200" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cart_methods" value="+ addItem()&#xa;+ removeItem()&#xa;+ getTotalPrice()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="cart">
+          <mxGeometry y="91" width="200" height="49" as="geometry" />
+        </mxCell>
+
+        <!-- CLASE CARTITEM -->
+        <mxCell id="cartitem" value="CartItem" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=1;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="420" width="200" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="cartitem_attr" value="- id: number&#xa;- cartId: number&#xa;- productId: number&#xa;- quantity: number" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="cartitem">
+          <mxGeometry y="26" width="200" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="cartitem_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=top;spacingTop=-1;spacingLeft=4;spacingRight=4;rotatable=0;deletable=0;editable=0;connectable=0;" vertex="1" parent="cartitem">
+          <mxGeometry y="110" width="200" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cartitem_methods" value="+ updateQuantity()&#xa;+ getSubtotal()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="cartitem">
+          <mxGeometry y="111" width="200" height="29" as="geometry" />
+        </mxCell>
+
+        <!-- RELACIÓN Cart 1:N CartItem -->
+        <mxCell id="rel_cart_item" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;startArrow=open;strokeWidth=2;" edge="1" parent="1" source="cart" target="cartitem">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- CLASE ORDER -->
+        <mxCell id="order" value="Order" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=1;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="420" width="220" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="order_attr" value="- id: number&#xa;- userId: number&#xa;- totalPrice: decimal&#xa;- status: string&#xa;- createdAt: date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="order">
+          <mxGeometry y="26" width="220" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="order_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=top;spacingTop=-1;spacingLeft=4;spacingRight=4;rotatable=0;deletable=0;editable=0;connectable=0;" vertex="1" parent="order">
+          <mxGeometry y="120" width="220" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="order_methods" value="+ create()&#xa;+ getStatus()&#xa;+ cancel()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="order">
+          <mxGeometry y="121" width="220" height="39" as="geometry" />
+        </mxCell>
+
+        <!-- CLASE ORDERITEM -->
+        <mxCell id="orderitem" value="OrderItem" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=1;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="620" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="orderitem_attr" value="- id: number&#xa;- orderId: number&#xa;- productId: number&#xa;- quantity: number&#xa;- unitPrice: decimal" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="orderitem">
+          <mxGeometry y="26" width="220" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="orderitem_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=top;spacingTop=-1;spacingLeft=4;spacingRight=4;rotatable=0;deletable=0;editable=0;connectable=0;" vertex="1" parent="orderitem">
+          <mxGeometry y="120" width="220" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="orderitem_methods" value="+ getSubtotal()&#xa;+ getProduct()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="orderitem">
+          <mxGeometry y="121" width="220" height="29" as="geometry" />
+        </mxCell>
+
+        <!-- RELACIÓN Order 1:N OrderItem -->
+        <mxCell id="rel_order_item" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;startArrow=open;strokeWidth=2;" edge="1" parent="1" source="order" target="orderitem">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
