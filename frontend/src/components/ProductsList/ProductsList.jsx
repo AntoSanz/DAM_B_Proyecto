@@ -21,7 +21,7 @@ function ProductsList({ products, categoryName, onProductSelect }) {
     // Contenedor principal con grid de Bootstrap (12 columnas)
     <section className="row mt-4">
       {/* Título: Muestra "Productos en [Categoría]" */}
-      <div className="col-12">
+      <div className="col-12 mb-5">
         <h3>{t('products.sectionTitle').replace('{category}', categoryName)}</h3>
       </div>
 
