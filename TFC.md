@@ -1702,8 +1702,119 @@ Etiqueta de precio con descuento opcional:
 
 ---
 
-*Última actualización: 21 de Abril de 2026*  
+# 7. IMPLEMENTACIÓN
+
+## 7.1 Proceso de desarrollo
+La implementación se realizó de forma **iterativa**, siguiendo un enfoque ágil basado en pequeñas entregas (sprints). El trabajo se dividió en tareas manejables (Kanban en GitHub Projects) y se integró mediante **ramas y Pull Requests**, manteniendo la rama estable para versiones funcionales. Este método permitió validar pronto las funcionalidades críticas (autenticación, catálogo y carrito) y reducir riesgos de integración al final.
+
+A nivel técnico, se trabajó con una **arquitectura separada Frontend–Backend**: el frontend consume una API REST y el backend concentra la lógica de negocio y el acceso a datos. Esto facilita el mantenimiento, la escalabilidad y la posibilidad de sustituir o mejorar la interfaz sin reescribir el servidor.
+
+## 7.2 Tecnologías utilizadas
+- **Frontend:** **React + Vite** para una interfaz modular y rápida (HMR), y **Bootstrap 5** para maquetación responsiva y componentes consistentes. Se emplean **React Hooks** para gestionar estado y lógica de componentes sin necesidad de Redux en escenarios simples.  
+- **Backend:** **Node.js + Express.js** para construir una **API REST** ligera, con estructura por capas.  
+- **Base de datos:** **SQLite** como sistema relacional embebido (ideal para un proyecto académico por simplicidad y despliegue) y **better-sqlite3** como driver por su rendimiento y claridad de código.  
+- **Seguridad y sesión:** **JWT** para autenticación stateless (alineado con una arquitectura desacoplada).  
+- **Control de versiones y coordinación:** GitHub (ramas, PRs, revisiones) + Kanban en Projects.
+
+## 7.3 Estructura global del proyecto (visión lógica)
+La solución se organiza por responsabilidades:
+
+**Backend (arquitectura por capas):**
+- **Routes:** define endpoints REST (`/api/v1/...`) y delega a controladores.
+- **Controllers:** gestionan request/response, validación básica y códigos de estado.
+- **Services:** encapsulan lógica de negocio (registro/login, carrito, pedidos, etc.).
+- **Models/DAO:** acceso a datos y consultas SQL hacia SQLite.
+- **Middlewares:** autenticación (verificación JWT), validaciones y control de errores.
+
+**Frontend (estructura por componentes):**
+- **Vistas/páginas:** Home (categorías), listado por categoría, detalle de producto, carrito, checkout y confirmación.
+- **Componentes reutilizables:** tarjetas de sección/producto, listados en grid, breadcrumb, badge del carrito, etiquetas de precio, etc.
+- **Servicios de API:** capa de llamadas HTTP al backend y gestión del token/sesión.
+
+Esta estructura refuerza la mantenibilidad: cada cambio queda localizado (por ejemplo, cambiar el modelo de datos no obliga a modificar la UI directamente).
+
+## 7.4 Decisiones técnicas relevantes
+- **Separación Frontend–Backend + API REST:** permite escalar y mantener cada parte de forma independiente.
+- **Base de datos normalizada (3FN) con integridad referencial:** uso de claves foráneas, restricciones `CHECK` y reglas `ON DELETE CASCADE/RESTRICT` para evitar inconsistencias (por ejemplo, impedir borrar productos ligados a pedidos).
+- **Transacciones en checkout:** durante la compra se agrupan operaciones (crear orden, añadir orderItems y actualizar stock) para mantener consistencia.
+- **JWT:** autenticación eficiente para un sistema desacoplado, donde el cliente mantiene su sesión sin depender de estado en servidor.
+- **Bootstrap 5 + diseño responsive:** asegura compatibilidad móvil/escritorio y acelera el desarrollo visual.
+- **Versionado de API (`/api/v1/*`):** deja preparada la evolución futura sin romper clientes.
+
+## 7.5 Secciones implementadas (módulos principales)
+- **Autenticación:** registro y login con credenciales; generación y validación de JWT.
+- **Catálogo:** categorías y productos con listado por categoría y **vista de detalle**.
+- **Carrito:** añadir/eliminar productos, modificar cantidades, cálculo de subtotales y total.
+- **Checkout:** formulario de envío y selección de pago (simulado), validación y confirmación.
+- **Pedidos:** creación de orden y persistencia de items de pedido, con estado (pending/completed/cancelled).
+- **Interfaz y navegación:** breadcrumbs, grids responsivos, feedback de acciones y consistencia visual mediante guía de estilos.
+
+---
+
+# 8. CONCLUSIONES
+
+El proyecto cumple el objetivo principal de construir una **tienda online funcional** que cubre el flujo esencial de un e-commerce: autenticación, catálogo, carrito y compra simulada, utilizando tecnologías actuales y un proceso de trabajo colaborativo similar al profesional.
+
+Las dificultades más relevantes fueron:
+- **Integración entre capas** (frontend con API y persistencia), especialmente en operaciones encadenadas como checkout.
+- **Diseño de base de datos y restricciones**, para mantener consistencia sin bloquear casos válidos (por ejemplo, eliminaciones y dependencias).
+- **Gestión del estado en UI** (carrito, sesión, navegación) manteniendo una experiencia fluida.
+
+Lecciones aprendidas:
+- La **arquitectura por capas** reduce deuda técnica y facilita depurar.
+- Definir bien el **modelo E/R y normalización** desde el inicio evita cambios costosos después.
+- Integrar con PRs y revisiones mejora la calidad y reduce conflictos.
+
+Líneas de mejora:
+- Completar funcionalidades planteadas como futuras: búsqueda/filtros avanzados, historial de pedidos, wishlist, valoraciones, cupones y notificaciones.
+- Reforzar **testing automatizado** (unitario, integración, e2e) y añadir herramientas de calidad (lint/format).
+- Mejorar el despliegue: contenedorización (Docker) y pipeline CI/CD con GitHub Actions.
+
+---
+
+# 9. INNOVACIÓN Y PROSPECTIVA
+
+La innovación del proyecto no se fundamenta en “inventar” el comercio electrónico, sino en la forma de diseñar e implementar una tienda online completa aplicando criterios técnicos propios de entornos profesionales: arquitectura desacoplada, modularidad, persistencia y seguridad, con un alcance realista para un proyecto académico.
+
+Elementos innovadores de la solución desarrollada
+1.	Arquitectura desacoplada basada en API REST
+Se ha adoptado una separación clara entre interfaz y lógica de negocio mediante un frontend consumidor de una API REST y un backend independiente. Este enfoque mejora la mantenibilidad, facilita la escalabilidad y permite la evolución del sistema sin acoplar cambios de interfaz con cambios de servidor.
+2.	Modelo de datos relacional consistente y normalizado
+La solución incorpora un diseño de base de datos relacional normalizado (3FN), apoyado en claves primarias y foráneas, restricciones de integridad (CHECK) y políticas de borrado controladas (CASCADE/RESTRICT). Esta decisión refuerza la calidad del dato y reduce inconsistencias típicas en sistemas de catálogo, carrito y pedidos.
+3.	Flujo de compra realista con control de consistencia
+Se ha planteado el proceso de checkout como una operación compuesta (creación de pedido, inserción de líneas e impacto sobre stock), evitando estados intermedios incoherentes. Este tratamiento resulta relevante porque replica patrones habituales de sistemas reales, donde la consistencia entre operaciones es crítica.
+4.	Autenticación moderna y escalable mediante JWT
+Se ha implementado autenticación basada en JSON Web Tokens, alineada con arquitecturas sin estado. Esta aproximación permite gestionar el acceso de forma eficiente en aplicaciones desacopladas y deja preparada la ampliación hacia permisos, roles o estrategias de seguridad más avanzadas.
+5.	Interfaz modular y coherente
+La interfaz se ha construido con componentes reutilizables y criterios de diseño consistentes (guía de estilos, responsive y patrones repetibles). Esta modularidad reduce duplicidad, facilita la evolución del frontend y mejora la experiencia de usuario sin introducir complejidad innecesaria.
+6.	Metodología y herramientas de trabajo similares a las de empresa
+El desarrollo se ha apoyado en control de versiones con ramas, Pull Requests y un tablero Kanban para la planificación y seguimiento. Esta combinación aporta trazabilidad, mejora la calidad del código y reduce conflictos de integración, diferenciando el proyecto por su enfoque organizativo además del resultado técnico.
+
+Encaje como mejora técnica en un contexto empresarial
+La solución desarrollada resulta aplicable como base de un sistema real por su orientación a mantenibilidad, escalabilidad y consistencia. La separación por capas, el modelo de datos robusto y la autenticación mediante tokens permiten incorporar evoluciones (búsqueda avanzada, panel administrativo, historial de pedidos o nuevos clientes como móvil) sin reestructuraciones profundas, favoreciendo una mejora técnica progresiva en un entorno empresarial.
+
+---
+
+# 10. BIBLIOGRAFÍA (formato APA)
+
+- Bootstrap. (s. f.). *Bootstrap Documentation*. https://getbootstrap.com/docs/5.0/getting-started/introduction/  
+- Ecma International. (2024). *ECMAScript® 2024 Language Specification*. https://tc39.es/ecma262/  
+- Express. (s. f.). *Express - Node.js web application framework*. https://expressjs.com/  
+- GitHub. (s. f.). *GitHub Docs*. https://docs.github.com/  
+- Mozilla Developer Network. (s. f.). *CSS*. https://developer.mozilla.org/docs/Web/CSS  
+- Mozilla Developer Network. (s. f.). *HTML*. https://developer.mozilla.org/docs/Web/HTML  
+- Mozilla Developer Network. (s. f.). *JavaScript*. https://developer.mozilla.org/docs/Web/JavaScript  
+- Oracle. (s. f.). *UML Class Diagrams*. https://docs.oracle.com/cd/E19798-01/821-1770/bnbuk/index.html  
+- React. (s. f.). *React Documentation*. https://react.dev/  
+- RESTfulAPI.net. (s. f.). *REST API Best Practices*. https://restfulapi.net/  
+- SQLite. (s. f.). *SQLite Documentation*. https://www.sqlite.org/docs.html  
+- Vite. (s. f.). *Vite Guide*. https://vitejs.dev/guide/  
+- Wikipedia contributors. (s. f.). *Entity–relationship model*. *Wikipedia*. https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model  
+- W3Schools. (s. f.). *Database Normalization*. https://www.w3schools.com/sql/sql_ref_normalization.asp  
+
+
+*Última actualización: 26 de Abril de 2026*  
 *Versión del documento: 1.0*  
 *Estado: ✅ Completado*  
 *Autor: Equipo de Desarrollo DAM*  
-*Fase: Diseño*
+*Fase: FINAL*
