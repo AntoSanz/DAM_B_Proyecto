@@ -35,48 +35,26 @@
    - [Hitos y Distribución del Tiempo](#hitos-y-distribución-del-tiempo)
    - [Diagrama de Gantt](#diagrama-de-gantt)
 6. [ANÁLISIS DE REQUISITOS Y CASOS DE USO](#análisis-de-requisitos-y-casos-de-uso)
-   - [1. REQUISITOS INICIALES](#1-requisitos-iniciales)
-      - [1.1 Requisitos Funcionales](#11-requisitos-funcionales)
-         - [1.1.1 Gestión de Usuarios](#111-gestión-de-usuarios)
-         - [1.1.2 Gestión de Datos](#112-gestión-de-datos)
-         - [1.1.3 Interfaz de Usuario](#113-interfaz-de-usuario)
-         - [1.1.4 Notificaciones](#114-notificaciones)
-         - [1.1.5 Seguridad](#115-seguridad)
-      - [1.2 Requisitos No Funcionales](#12-requisitos-no-funcionales)
-         - [1.2.1 Disponibilidad y Confiabilidad](#121-disponibilidad-y-confiabilidad)
-         - [1.2.2 Rendimiento](#122-rendimiento)
-         - [1.2.3 Escalabilidad](#123-escalabilidad)
-         - [1.2.4 Seguridad](#124-seguridad)
-         - [1.2.5 Usabilidad](#125-usabilidad)
-         - [1.2.6 Mantenibilidad](#126-mantenibilidad)
-         - [1.2.7 Compatibilidad](#127-compatibilidad)
-      - [1.3 Requisitos Técnicos](#13-requisitos-técnicos)
-         - [1.3.1 Frontend](#131-frontend)
-         - [1.3.2 Backend](#132-backend)
-         - [1.3.3 Base de Datos](#133-base-de-datos)
-         - [1.3.4 Infraestructura](#134-infraestructura)
-         - [1.3.5 Testing y Calidad](#135-testing-y-calidad)
-         - [1.3.6 Monitoreo y Logging](#136-monitoreo-y-logging)
-   - [2. CASOS DE USO](#2-casos-de-uso)
-      - [2.1 Diagrama de Casos de Uso](#21-diagrama-de-casos-de-uso)
-      - [2.2 Descripción de Casos de Uso](#22-descripción-de-casos-de-uso)
-         - [UC-001: Autenticación de Usuario](#uc-001-autenticación-de-usuario)
-         - [UC-002: Gestión de Perfil de Usuario](#uc-002-gestión-de-perfil-de-usuario)
-         - [UC-003: Crear Registro](#uc-003-crear-registro)
-         - [UC-004: Visualizar Registros](#uc-004-visualizar-registros)
-         - [UC-005: Actualizar Registro](#uc-005-actualizar-registro)
-         - [UC-006: Eliminar Registro](#uc-006-eliminar-registro)
-         - [UC-007: Búsqueda y Filtrado de Registros](#uc-007-búsqueda-y-filtrado-de-registros)
-         - [UC-008: Exportar Datos](#uc-008-exportar-datos)
-         - [UC-009: Recibir Notificaciones](#uc-009-recibir-notificaciones)
-         - [UC-010: Configurar Preferencias de Usuario](#uc-010-configurar-preferencias-de-usuario)
-   - [3. RELACIONES ENTRE CASOS DE USO](#3-relaciones-entre-casos-de-uso)
+   - [6.1 Requisitos Iniciales](#61-requisitos-iniciales)
+      - [6.1.1 Requisitos Funcionales](#611-requisitos-funcionales)
+      - [6.1.2 Requisitos No Funcionales](#612-requisitos-no-funcionales)
+      - [6.1.3 Requisitos Técnicos](#613-requisitos-técnicos)
+   - [6.2 Casos de Uso](#62-casos-de-uso)
+      - [6.2.1 Diagrama de Casos de Uso](#621-diagrama-de-casos-de-uso)
+      - [6.2.2 Descripción de Casos de Uso](#622-descripción-de-casos-de-uso)
+   - [6.3 Relaciones entre Casos de Uso](#63-relaciones-entre-casos-de-uso)
 7. [FASE DE DISEÑO](#fase-de-diseño)
-   - [1. DIAGRAMA DE CLASES](#1-diagrama-de-clases)
-      - [Estructura Principal](#estructura-principal)
-      - [Relaciones](#relaciones)
-      - [Descripción de Entidades](#descripción-de-entidades)
-   - [2. DIAGRAMAS DE SECUENCIA](#2-diagramas-de-secuencia)
+   - [7.1 Diagrama de Clases](#71-diagrama-de-clases)
+      - [7.1.1 Estructura Principal](#711-estructura-principal)
+      - [7.1.2 Relaciones](#712-relaciones)
+      - [7.1.3 Descripción de Entidades](#713-descripción-de-entidades)
+   - [7.2 Diagramas de Secuencia](#72-diagramas-de-secuencia)
+      - [7.2.1 Visualizar Productos de una Categoría](#721-visualizar-productos-de-una-categoría)
+      - [7.2.2 Registro de Usuario](#722-registro-de-usuario)
+      - [7.2.3 Agregar Producto al Carrito](#723-agregar-producto-al-carrito)
+      - [7.2.4 Checkout - Realizar Compra](#724-checkout---realizar-compra)
+      - [7.2.5 Autenticación de Usuario](#725-autenticación-de-usuario)
+   - [7.3 Diagrama Entidad-Relación](#73-diagrama-entidad-relación)
 
 ---
 
@@ -139,16 +117,16 @@ La aplicación incluirá las siguientes características:
 
 ### Enfoque de Desarrollo
 
-Se adoptará un enfoque ágil e iterativo, dividiendo el proyecto en ciclos de desarrollo cortos (sprints) que permitan la entrega incremental de funcionalidades. Cada sprint se alineará con las entregas programadas en el entorno académico, garantizando una planificación coherente con el calendario establecido.
+Se adopta un enfoque ágil e iterativo, dividiendo el proyecto en ciclos de desarrollo cortos (sprints) que permiten la entrega incremental de funcionalidades. Cada sprint se alinea con las entregas programadas en el entorno académico, garantizando una planificación coherente con el calendario establecido.
 
-Esta organización permitirá disponer de mecanismos de retroalimentación temprana, facilitando la detección y corrección de posibles desviaciones, así como la adaptación progresiva a cambios o ajustes en los requisitos definidos. De este modo, se favorece un proceso de desarrollo más controlado, flexible y orientado a la mejora continua.
+Esta organización permite disponer de mecanismos de retroalimentación temprana, facilitando la detección y corrección de posibles desviaciones, así como la adaptación progresiva a cambios o ajustes en los requisitos definidos. De este modo, se favorece un proceso de desarrollo más controlado, flexible y orientado a la mejora continua.
 
 ### Metodología de Trabajo Colaborativo
 
 - **Control de versiones:** Utilización de GitHub con un flujo de ramas (Git Flow) donde la rama "master" permanece estable y los cambios se integran mediante Pull Requests revisadas.
 - **Gestión de tareas:** Tablero Kanban en GitHub Projects para visualizar el estado de las tareas (Backlog, Ready, In progress, Done, Discarded).
 - **Comunicación:** Reuniones periódicas de sincronización y uso de canales de comunicación asincrónica.
-- **Revisión de código:** Cada Pull Request será revisada al menos por un compañero antes de su integración.
+- **Revisión de código:** Cada Pull Request es revisada al menos por un compañero antes de su integración.
 
 ### Metodología Técnica
 
@@ -184,12 +162,12 @@ El proyecto se estructurará en las siguientes fases:
 | Fase 3: Desarrollo Backend (MVP) | 21 días | Diseño de API REST, modelos de datos y lógica de autenticación |
 | Fase 4: Desarrollo Frontend (MVP) | 21 días | Componentes principales, navegación, integración con API |
 | Fase 5: Integración y Testing | 14 días | Sistema integrado, testing completo, corrección de errores críticos |
-| Fase 6: Refinamiento y Mejoras | 14 días | Optimización, mejoras opcionales, corrección de errores documentación final |
+| Fase 6: Refinamiento y Mejoras | 14 días | Optimización, mejoras opcionales, corrección de errores, documentación final |
 | Fase 7: Revisión Final y Entrega | 12 días | Testing final, documentación completa, presentación preparada |
 
 ### Hitos y Distribución del Tiempo
 
-Los hitos tendrán asignados unas fechas aproximadas que podrían variar según se desarrolle el proyecto:
+Los hitos tienen asignados fechas aproximadas que pueden variar según se desarrolle el proyecto:
 
 | Hito | Inicio | Duración | Fin |
 |------|--------|----------|-----|
@@ -214,13 +192,13 @@ Los hitos tendrán asignados unas fechas aproximadas que podrían variar según 
 
 ## ANÁLISIS DE REQUISITOS Y CASOS DE USO
 
-### 1. REQUISITOS INICIALES
+### 6.1 REQUISITOS INICIALES
 
-#### 1.1 Requisitos Funcionales
+#### 6.1.1 Requisitos Funcionales
 
 Los requisitos funcionales definen las funcionalidades específicas que debe cumplir el sistema:
 
-##### 1.1.1 Gestión de Usuarios
+##### 6.1.1.1 Gestión de Usuarios
 
 - **RF-001:** El sistema debe permitir el registro de nuevos usuarios con validación de datos.
 - **RF-002:** El sistema debe permitir la autenticación de usuarios mediante credenciales.
@@ -228,7 +206,7 @@ Los requisitos funcionales definen las funcionalidades específicas que debe cum
 - **RF-004:** El sistema debe permitir la recuperación de contraseña mediante correo electrónico.
 - **RF-005:** El sistema debe permitir la gestión de roles y permisos de usuarios.
 
-##### 1.1.2 Gestión de Datos
+##### 6.1.1.2 Gestión de Datos
 
 - **RF-006:** El sistema debe permitir crear, leer, actualizar y eliminar registros (CRUD).
 - **RF-007:** El sistema debe permitir la búsqueda avanzada de registros con múltiples filtros.
@@ -236,80 +214,80 @@ Los requisitos funcionales definen las funcionalidades específicas que debe cum
 - **RF-009:** El sistema debe permitir la importación de datos desde archivos externos.
 - **RF-010:** El sistema debe mantener un registro histórico de cambios en los datos.
 
-##### 1.1.3 Interfaz de Usuario
+##### 6.1.1.3 Interfaz de Usuario
 
 - **RF-011:** El sistema debe proporcionar una interfaz responsiva compatible con dispositivos móviles y de escritorio.
 - **RF-012:** El sistema debe incluir un panel de control (dashboard) con métricas principales.
 - **RF-013:** El sistema debe permitir la personalización de la interfaz según preferencias del usuario.
 - **RF-014:** El sistema debe proporcionar mensajes claros de retroalimentación en todas las operaciones.
 
-##### 1.1.4 Notificaciones
+##### 6.1.1.4 Notificaciones
 
 - **RF-015:** El sistema debe generar notificaciones en tiempo real para eventos importantes.
 - **RF-016:** El sistema debe permitir que los usuarios configuren sus preferencias de notificaciones.
 - **RF-017:** El sistema debe enviar notificaciones por correo electrónico para eventos críticos.
 
-##### 1.1.5 Seguridad
+##### 6.1.1.5 Seguridad
 
 - **RF-018:** El sistema debe validar todos los datos de entrada contra inyecciones.
 - **RF-019:** El sistema debe implementar autenticación de dos factores (2FA) opcional.
 - **RF-020:** El sistema debe cifrar datos sensibles tanto en tránsito como en reposo.
 
-#### 1.2 Requisitos No Funcionales
+#### 6.1.2 Requisitos No Funcionales
 
 Los requisitos no funcionales definen las características de calidad del sistema:
 
-##### 1.2.1 Disponibilidad y Confiabilidad
+##### 6.1.2.1 Disponibilidad y Confiabilidad
 
 - **RNF-001:** El sistema debe tener una disponibilidad mínima del 99.5% mensualmente.
 - **RNF-002:** El sistema debe implementar mecanismos de recuperación ante fallos automáticos.
 - **RNF-003:** El sistema debe hacer backup de datos al menos una vez al día.
 - **RNF-004:** El tiempo de recuperación ante desastres (RTO) no debe exceder 4 horas.
 
-##### 1.2.2 Rendimiento
+##### 6.1.2.2 Rendimiento
 
 - **RNF-005:** El tiempo de respuesta de cualquier operación no debe exceder 3 segundos.
 - **RNF-006:** La aplicación debe cargar en menos de 2 segundos en conexiones 3G.
 - **RNF-007:** El sistema debe soportar al menos 1000 usuarios concurrentes.
 - **RNF-008:** Las consultas a base de datos deben completarse en menos de 1 segundo.
 
-##### 1.2.3 Escalabilidad
+##### 6.1.2.3 Escalabilidad
 
 - **RNF-009:** El sistema debe diseñarse para crecer a 10000 usuarios sin degradación significativa.
 - **RNF-010:** La arquitectura debe permitir el escalado horizontal de servidores.
 - **RNF-011:** El sistema debe gestionar al menos 10GB de datos sin problemas de rendimiento.
 
-##### 1.2.4 Seguridad
+##### 6.1.2.4 Seguridad
 
 - **RNF-012:** Todos los datos en tránsito deben cifrase con TLS 1.2 o superior.
 - **RNF-013:** Las contraseñas deben cumplir una política de complejidad mínima.
 - **RNF-014:** El sistema debe registrar todos los accesos y cambios significativos (auditoría).
 - **RNF-015:** El sistema debe cumplir con normativas de protección de datos (GDPR, LOPD).
 
-##### 1.2.5 Usabilidad
+##### 6.1.2.5 Usabilidad
 
 - **RNF-016:** La interfaz debe ser intuitiva sin necesidad de formación adicional.
 - **RNF-017:** El sistema debe estar disponible en múltiples idiomas (mínimo inglés y español).
 - **RNF-018:** El tiempo de aprendizaje para nuevos usuarios no debe exceder 30 minutos.
 - **RNF-019:** El sistema debe cumplir estándares de accesibilidad WCAG 2.1 nivel AA.
 
-##### 1.2.6 Mantenibilidad
+##### 6.1.2.6 Mantenibilidad
 
 - **RNF-020:** El código debe seguir estándares de buenas prácticas y convenciones establecidas.
 - **RNF-021:** La documentación debe mantenerse actualizada con el código.
 - **RNF-022:** El sistema debe permitir actualizaciones sin tiempo de inactividad (zero-downtime deployments).
 
-##### 1.2.7 Compatibilidad
+##### 6.1.2.7 Compatibilidad
 
 - **RNF-023:** El sistema debe ser compatible con los últimos navegadores (Chrome, Firefox, Safari, Edge).
 - **RNF-024:** El sistema debe funcionar en dispositivos iOS y Android.
 - **RNF-025:** El sistema debe ser compatible con diferentes sistemas operativos (Windows, macOS, Linux).
 
-#### 1.3 Requisitos Técnicos
+#### 6.1.3 Requisitos Técnicos
 
 Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
-##### 1.3.1 Frontend
+##### 6.1.3.1 Frontend
 
 - **RT-001:** Desarrollo con JavaScript/React como framework principal.
 - **RT-002:** Uso de herramientas de construcción (Webpack, Vite) para optimización.
@@ -317,7 +295,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 - **RT-004:** Uso de librerías de UI (Material-UI, Bootstrap) para consistencia visual.
 - **RT-005:** Implementación de CSS responsive y Mobile-First.
 
-##### 1.3.2 Backend
+##### 6.1.3.2 Backend
 
 - **RT-006:** Desarrollo con Node.js como entorno de ejecución.
 - **RT-007:** Uso de Express.js como framework web.
@@ -325,21 +303,21 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 - **RT-009:** Uso de autenticación basada en JWT (JSON Web Tokens).
 - **RT-010:** Implementación de middleware para validación y seguridad.
 
-##### 1.3.3 Base de Datos
+##### 6.1.3.3 Base de Datos
 
 - **RT-011:** SQL como base de datos principal para datos estructurados.
 - **RT-012:** Redis para caché y sesiones.
 - **RT-013:** Implementación de índices para optimizar consultas.
 - **RT-014:** Versionado y migración de esquemas de base de datos.
 
-##### 1.3.4 Infraestructura
+##### 6.1.3.4 Infraestructura
 
 - **RT-015:** Despliegue en contenedores Docker.
 - **RT-016:** Orquestación con Docker Compose o Kubernetes.
 - **RT-017:** CI/CD pipeline con GitHub Actions, Jenkins o GitLab CI.
 - **RT-018:** Hosting en cloud (AWS, Azure, Google Cloud) o servidor dedicado.
 
-##### 1.3.5 Testing y Calidad
+##### 6.1.3.5 Testing y Calidad
 
 - **RT-019:** Tests unitarios con Jest o Mocha.
 - **RT-020:** Tests de integración para APIs.
@@ -347,7 +325,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 - **RT-022:** Cobertura de código mínima del 80%.
 - **RT-023:** Linting y formateado automático con ESLint y Prettier.
 
-##### 1.3.6 Monitoreo y Logging
+##### 6.1.3.6 Monitoreo y Logging
 
 - **RT-024:** Sistema de logging centralizado (ELK, Splunk, Datadog).
 - **RT-025:** Monitoreo de rendimiento (APM) en tiempo real.
@@ -356,15 +334,15 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
-### 2. CASOS DE USO
+### 6.2 CASOS DE USO
 
-#### 2.1 Diagrama de Casos de Uso
+#### 6.2.1 Diagrama de Casos de Uso
 
 [Diagrama de Casos de Uso - Ver en documento visual]
 
-#### 2.2 Descripción de Casos de Uso
+#### 6.2.2 Descripción de Casos de Uso
 
-##### UC-001: Autenticación de Usuario
+##### 6.2.2.1 UC-001: Autenticación de Usuario
 
 **Actor Principal:** Usuario no autenticado
 
@@ -394,7 +372,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
-##### UC-002: Gestión de Perfil de Usuario
+##### 6.2.2.2 UC-002: Gestión de Perfil de Usuario
 
 **Actor Principal:** Usuario autenticado
 
@@ -426,7 +404,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
-##### UC-003: Crear Registro
+##### 6.2.2.3 UC-003: Crear Registro
 
 **Actor Principal:** Usuario autenticado con permisos de creación
 
@@ -462,7 +440,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
-##### UC-004: Visualizar Registros
+##### 6.2.2.4 UC-004: Visualizar Registros
 
 **Actor Principal:** Usuario autenticado con permisos de lectura
 
@@ -494,7 +472,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
-##### UC-005: Actualizar Registro
+##### 6.2.2.5 UC-005: Actualizar Registro
 
 **Actor Principal:** Usuario autenticado con permisos de actualización
 
@@ -532,7 +510,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
-##### UC-006: Eliminar Registro
+##### 6.2.2.6 UC-006: Eliminar Registro
 
 **Actor Principal:** Usuario autenticado con permisos de eliminación
 
@@ -567,7 +545,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
-##### UC-007: Búsqueda y Filtrado de Registros
+##### 6.2.2.7 UC-007: Búsqueda y Filtrado de Registros
 
 **Actor Principal:** Usuario autenticado
 
@@ -600,7 +578,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
-##### UC-008: Exportar Datos
+##### 6.2.2.8 UC-008: Exportar Datos
 
 **Actor Principal:** Usuario autenticado con permisos de exportación
 
@@ -635,7 +613,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
-##### UC-009: Recibir Notificaciones
+##### 6.2.2.9 UC-009: Recibir Notificaciones
 
 **Actor Principal:** Usuario autenticado
 
@@ -667,7 +645,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
-##### UC-010: Configurar Preferencias de Usuario
+##### 6.2.2.10 UC-010: Configurar Preferencias de Usuario
 
 **Actor Principal:** Usuario autenticado
 
@@ -705,7 +683,7 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 ---
 
-### 3. RELACIONES ENTRE CASOS DE USO
+### 6.3 RELACIONES ENTRE CASOS DE USO
 
 | Caso de Uso | Relación | Relacionado con |
 |-------------|----------|-----------------|
@@ -724,16 +702,16 @@ Los requisitos técnicos especifican la tecnología y arquitectura a utilizar:
 
 # FASE DE DISEÑO
 
-La fase de diseño recoge todas las decisiones arquitectónicas y estructurales tomadas antes de iniciar la implementación del proyecto. El objetivo es disponer de un modelo completo y coherente del sistema que sirva de guía durante el desarrollo.
+La fase de diseño recoge todas las decisiones arquitectónicas y estructurales tomadas para estructurar el sistema. El objetivo es disponer de un modelo completo y coherente que sirva de guía durante la implementación.
 
 ---
 
-## 1. DIAGRAMA DE CLASES
+## 7.1 DIAGRAMA DE CLASES
 
 > 📌 **Nota:** Una vez generado el diagrama con Lucidchart o Draw.io, sustituir la siguiente sección por la imagen exportada:
 > `![Diagrama UML de Clases - Game Store](./docs/diseño/diagramas/diagrama-uml-clases.png)`
 
-### Estructura Principal
+### 7.1.1 Estructura Principal
 
 ```
 ┌─────────────────────┐
@@ -811,14 +789,14 @@ La fase de diseño recoge todas las decisiones arquitectónicas y estructurales 
 └──────────────────────┘
 ```
 
-### Relaciones
+### 7.1.2 Relaciones
 
 - **1:N** — Una categoría contiene muchos productos
 - **1:N** — Un carrito contiene muchos items
 - **1:N** — Un pedido contiene muchos items de pedido
 - **Herencia** — Admin extiende de User
 
-### Descripción de Entidades
+### 7.1.3 Descripción de Entidades
 
 | Clase | Responsabilidad | Atributos Principales | Métodos |
 |-------|-----------------|----------------------|---------|
@@ -833,11 +811,11 @@ La fase de diseño recoge todas las decisiones arquitectónicas y estructurales 
 
 ---
 
-## 2. DIAGRAMAS DE SECUENCIA
+## 7.2 DIAGRAMAS DE SECUENCIA
 
 Diagramas UML de secuencia para los casos de uso más relevantes, mostrando la interacción entre objetos a lo largo del tiempo y el flujo de mensajes.
 
-### 2.1 Caso de Uso: Visualizar Productos de una Categoría
+### 7.2.1 Caso de Uso: Visualizar Productos de una Categoría
 
 ```
 Usuario      Frontend         Backend          Base de Datos
@@ -863,7 +841,7 @@ Usuario      Frontend         Backend          Base de Datos
 
 ---
 
-### 2.2 Caso de Uso: Registro de Usuario
+### 7.2.2 Caso de Uso: Registro de Usuario
 
 ```
 Usuario      Frontend         Backend          Base de Datos
@@ -893,7 +871,7 @@ Usuario      Frontend         Backend          Base de Datos
 
 ---
 
-### 2.3 Caso de Uso: Agregar Producto al Carrito
+### 7.2.3 Caso de Uso: Agregar Producto al Carrito
 
 ```
 Usuario      Frontend         Backend          Base de Datos
@@ -922,7 +900,7 @@ Usuario      Frontend         Backend          Base de Datos
 
 ---
 
-### 2.4 Caso de Uso: Checkout (Realizar Compra)
+### 7.2.4 Caso de Uso: Checkout (Realizar Compra)
 
 ```
 Usuario      Frontend         Backend          Base de Datos
@@ -954,7 +932,7 @@ Usuario      Frontend         Backend          Base de Datos
 
 ---
 
-### 2.5 Caso de Uso: Login de Usuario
+### 7.2.5 Caso de Uso: Login de Usuario
 
 ```
 Usuario      Frontend         Backend          Base de Datos
@@ -985,7 +963,7 @@ Usuario      Frontend         Backend          Base de Datos
 
 ---
 
-## 3. DIAGRAMA ENTIDAD–RELACIÓN (E/R)
+## 7.3 DIAGRAMA ENTIDAD–RELACIÓN (E/R)
 
 ### Modelo Conceptual de la Base de Datos
 
