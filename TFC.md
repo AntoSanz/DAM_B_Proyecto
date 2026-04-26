@@ -1678,29 +1678,6 @@ Etiqueta de precio con descuento opcional:
 
 ---
 
-## 7. MEJORAS FUTURAS
-
-- [ ] Sistema de búsqueda y filtros avanzados
-- [ ] Carrito persistente (localStorage)
-- [ ] Historial de pedidos del usuario
-- [ ] Sistema de favoritos / Wishlist
-- [ ] Calificaciones y comentarios de usuarios
-- [ ] Recomendaciones personalizadas
-- [ ] Descuentos y cupones
-- [ ] Sistema de notificaciones
-- [ ] Integración con métodos de pago reales
-- [ ] Panel administrativo completo
-
----
-
-## 8. REFERENCIAS
-
-- [UML Class Diagrams — Oracle](https://docs.oracle.com/cd/E19798-01/821-1770/bnbuk/index.html)
-- [Entity-Relationship Model — Wikipedia](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model)
-- [Database Normalization — W3Schools](https://www.w3schools.com/sql/sql_ref_normalization.asp)
-- [REST API Best Practices — restfulapi.net](https://restfulapi.net)
-
----
 
 # 7. IMPLEMENTACIÓN
 
@@ -1812,6 +1789,19 @@ La solución desarrollada resulta aplicable como base de un sistema real por su 
 - Wikipedia contributors. (s. f.). *Entity–relationship model*. *Wikipedia*. https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model  
 - W3Schools. (s. f.). *Database Normalization*. https://www.w3schools.com/sql/sql_ref_normalization.asp  
 
+# 11. ANEXO
+## MEJORAS FUTURAS
+
+- [ ] Sistema de búsqueda y filtros avanzados
+- [ ] Carrito persistente (localStorage)
+- [ ] Historial de pedidos del usuario
+- [ ] Sistema de favoritos / Wishlist
+- [ ] Calificaciones y comentarios de usuarios
+- [ ] Recomendaciones personalizadas
+- [ ] Descuentos y cupones
+- [ ] Sistema de notificaciones
+- [ ] Integración con métodos de pago reales
+- [ ] Panel administrativo completo
 
 *Última actualización: 26 de Abril de 2026*  
 *Versión del documento: 1.0*  
