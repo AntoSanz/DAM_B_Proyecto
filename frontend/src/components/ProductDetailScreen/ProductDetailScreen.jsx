@@ -103,24 +103,22 @@ function ProductDetailScreen({ product, onBack }) {
             {/* Sección de precio y compra */}
             <div className="price-section mt-4">
               {/* Precio del producto formateado con 2 decimales */}
-              <p className="price">€{product.price.toFixed(2)}</p>
+              <p className="price">{product.price.toFixed(2)} €</p>
 
               {/* Selector de cantidad y botón para añadir al carrito */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+              <div className="purchase-controls">
                 <input
                   type="number"
                   min="1"
                   max={typeof product.inStock === 'number' ? product.inStock : 99}
-                  className="form-control"
+                  className="form-control quantity-input-custom"
                   value={quantity}
                   onChange={e => setQuantity(Math.max(1, Number(e.target.value)))}
-                  style={{ width: 70, textAlign: 'center' }}
                   aria-label="Cantidad"
                 />
                 <button
-                  className="btn btn-success btn-lg"
+                  className="btn btn-success btn-lg add-to-cart-btn-custom"
                   type="button"
-                  style={{ whiteSpace: 'nowrap' }}
                   onClick={handleAddToCart}
                 >
                   {t('products.addToCart')}

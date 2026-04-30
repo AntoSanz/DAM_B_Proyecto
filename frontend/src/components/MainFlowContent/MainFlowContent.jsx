@@ -40,6 +40,8 @@ function ContentByState({
   )
 }
 
+// MainFlowContent.jsx
+
 function MainFlowContent({
   selectedCategory,
   selectedProducts,
@@ -51,13 +53,19 @@ function MainFlowContent({
   onProductSelect,
   onCategorySelect
 }) {
+  // Solo necesitamos saber si hay un producto seleccionado para mostrar su nombre
+  const isDetail = !!selectedProductDetail;
+
   return (
     <div className="index-container">
+      {/* El Breadcrumb solo aparece si hemos elegido una categoría */}
       {selectedCategory && (
         <Breadcrumb
           categoryName={selectedCategory.name}
-          showProducts={selectedProducts.length > 0}
-          showProductDetail={!!selectedProductDetail}
+          /* Ponemos false directamente para que NUNCA pinte la palabra "Productos" */
+          showProducts={false} 
+          /* Solo mostramos el siguiente nivel si estamos viendo el detalle de un juego */
+          showProductDetail={isDetail}
           productName={selectedProductDetail?.name}
           onHomeClick={onHomeClick}
           onBackToCategory={onBackToCategory}
@@ -65,6 +73,7 @@ function MainFlowContent({
         />
       )}
 
+      {/* Este componente es el que decide si dibuja la lista de juegos o la ficha del juego */}
       <ContentByState
         selectedProductDetail={selectedProductDetail}
         selectedProducts={selectedProducts}
