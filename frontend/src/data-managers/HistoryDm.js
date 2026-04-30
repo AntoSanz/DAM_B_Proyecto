@@ -20,15 +20,6 @@ export async function getHistoryByUserId(userId) {
   return fetchJson(`${API_BASE_URL}/history-orders/user/${userId}`)
 }
 
-/**
- * Obtiene todos los pedidos del historial (admin)
- * @returns {Promise<Array>}
- */
-export async function getAllHistory() {
-  return fetchJson(`${API_BASE_URL}/history-orders`)
-}
-
 export default {
   getHistoryByUserId,
-  getAllHistory,
 }
