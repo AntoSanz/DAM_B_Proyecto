@@ -1,609 +1,113 @@
-# 🎮 Game Store - Tienda de Juegos
+# Frontend
 
-Una aplicación web moderna de e-commerce para la venta de videojuegos, construida con **React**, **Vite** y **Bootstrap 5**.
+Aplicacion cliente construida con React + Vite.
 
-> 💡 **¿Quieres empezar rápido?** Consulta [QUICK_START.md](./QUICK_START.md) para comandos esenciales.
+## Requisitos
 
-<a id="indice-rapido"></a>
+- Node.js 20 o superior
+- npm
 
-## Índice rápido
+## Instalacion
 
-- [Demos de Componentes (Playground)](#demos-playground)
-- [Instalación y Configuración](#instalacion-configuracion)
-- [Estructura del Proyecto](#estructura-proyecto)
-- [Integración con Backend](#integracion-backend)
-- [Componentes Principales](#componentes-principales)
+Desde `frontend`:
 
-## 📋 Características Principales
-
-- ✅ **Sistema de categorías**: Navega entre diferentes tipos de juegos (Juegos de Mesa, PC, Xbox, Nintendo, PS5)
-- ✅ **Catálogo de productos**: Visualiza productos enriquecidos con información detallada
-- ✅ **Vista detallada de productos**: Información completa incluyendo género, desarrollador, jugadores, fecha de lanzamiento, calificación
-- ✅ **Navegación intuitiva**: Breadcrumb interactivo para facilitar la navegación
-- ✅ **Localización en español**: Toda la interfaz en español (i18n)
-- ✅ **Diseño responsivo**: Funciona perfectamente en dispositivos móviles, tablets y desktop
-- ✅ **Integración Front + Back**: Consume endpoints reales en Express
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-
-## 🛠️ Tecnologías Utilizadas
-
-| Tecnología | Propósito |
-|-----------|----------|
-| **React** | Framework de UI |
-| **Vite** | Herramienta de build y desarrollo |
-| **Bootstrap** | Framework CSS responsivo |
-| **Vitest** | Testing |
-| **Testing Library** | Testing de componentes |
-| **ESLint** | Linting |
-
-**Nota:** Todas las dependencias han sido revisadas y solo se mantienen las necesarias. Si añades nuevas, asegúrate de que realmente se usen en el código.
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-<a id="estructura-proyecto"></a>
-
-## 📁 Estructura del Proyecto
-
-```
-frontend/
-├── src/
-│   ├── pages/
-│   │   ├── Index.jsx              # Página principal
-│   │   └── MainContent.jsx        # Orquestador de navegación
-│   │
-│   ├── components/
-│   │   ├── NavBar/
-│   │   │   ├── NavBar.jsx         # Barra de navegación fija
-│   │   │   └── NavBar.css
-│   │   │
-│   │   ├── Breadcrumb/
-│   │   │   ├── Breadcrumb.jsx     # Migas de pan interactivas
-│   │   │   └── Breadcrumb.css
-│   │   │
-│   │   ├── SectionCard/
-│   │   │   ├── SectionCard.jsx    # Componente reutilizable de tarjeta
-│   │   │   └── SectionCard.css
-│   │   │
-│   │   ├── CategoriesList/
-│   │   │   ├── CategoriesList.jsx # Grid de categorías
-│   │   │   └── CategoriesList.css
-│   │   │
-│   │   ├── ProductsList/
-│   │   │   ├── ProductsList.jsx   # Grid de productos
-│   │   │   └── ProductsList.css
-│   │   │
-│   │   └── ProductDetailScreen/
-│   │       ├── ProductDetailScreen.jsx  # Vista detallada de producto
-│   │       └── ProductDetailScreen.css
-│   │
-│   ├── locales/
-│   │   ├── i18n.js               # Sistema de traducción
-│   │   └── es-ES.js              # Diccionario español
-│   │
-│   ├── mocks/
-│   │   ├── api.js                # Cliente HTTP hacia backend Express
-│   │   ├── categories.json       # Datos de categorías
-│   │   └── products/             # Datos de productos por categoría
-│   │       ├── boardGames.json
-│   │       ├── pcGames.json
-│   │       ├── xboxGames.json
-│   │       ├── nintendoGames.json
-│   │       └── ps5Games.json
-│   │
-│   ├── App.jsx                   # Componente raíz
-│   ├── App.css
-│   ├── main.jsx                  # Entry point
-│   ├── index.css                 # Estilos globales
-│   └── assets/                   # Imágenes y recursos
-│
-├── public/                       # Archivos públicos estáticos
-├── index.html                    # HTML principal
-├── .env                          # Configuración de URL API (local)
-├── .env.example                  # Plantilla de variables de entorno
-├── package.json                  # Dependencias y scripts
-├── vite.config.js               # Configuración de Vite
-├── eslint.config.js             # Configuración de ESLint
-└── README.md                     # Este archivo
-```
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-<a id="instalacion-configuracion"></a>
-
-## 🚀 Instalación y Configuración
-
-### Requisitos Previos
-- **Node.js** v16 o superior
-- **npm** o **yarn**
-
-### Pasos de Instalación
-
-1. **Clonar el repositorio**
-```bash
-git clone <url-del-repositorio>
-cd frontend
-```
-
-2. **Instalar dependencias**
 ```bash
 npm install
 ```
 
-3. **Iniciar frontend (solo React)**
+O desde la raiz del repo:
+
+```bash
+npm run install:all
+```
+
+## Configuracion
+
+Crear archivo `.env` en `frontend`:
+
+```env
+VITE_API_BASE_URL=http://localhost:3000/api
+```
+
+Plantilla disponible en `.env.example`.
+
+## Ejecucion
+
+Solo frontend:
+
 ```bash
 npm run dev
 ```
 
-La aplicación estará disponible en: `http://localhost:5173`
+Frontend + backend desde `frontend`:
 
-4. **Iniciar frontend + backend con un solo comando**
 ```bash
 npm run dev:full
 ```
 
-Este comando levanta:
-- Frontend (Vite): `http://localhost:5173`
-- Backend (Express): `http://localhost:3000`
+URLs esperadas:
 
-5. **Build para producción**
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3000
+
+## Build y preview
+
 ```bash
 npm run build
+npm run preview
 ```
 
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 💡 Cómo Usar
-
-<a id="demos-playground"></a>
-
-### Demos de Componentes (Playground)
-
-Para visualizar y probar componentes de forma aislada, ejecuta el frontend y abre:
-
-`http://localhost:5173/?demo=components`
-
-#### Qué ofrece este modo
-
-- Menú lateral izquierdo con lista de componentes
-- Buscador en el menú para filtrar por nombre
-- Vista única: al pulsar una entrada se muestra solo esa demo
-- Estado compartible por URL (filtro + componente activo)
-
-#### Componentes disponibles
-
-- Breadcrumb
-- SectionCard
-- ComponenteModal
-- CategoriesList
-- ProductsList
-- ProductDetailScreen
-
-#### Parámetros de URL
-
-- `demo=components` → activa el modo playground
-- `component=<id>` → abre directamente una demo concreta
-- `q=<texto>` → filtra el menú lateral por texto
-
-IDs válidos para `component`:
-
-- `breadcrumb`
-- `sectioncard`
-- `modal`
-- `categories`
-- `products`
-- `product-detail`
-
-#### Ejemplos de enlaces compartibles
-
-- `http://localhost:5173/?demo=components&component=products`
-- `http://localhost:5173/?demo=components&component=product-detail`
-- `http://localhost:5173/?demo=components&component=products&q=prod`
-
-Para volver al flujo normal de la app, usa `http://localhost:5173/`.
-
-### Vista General de la Aplicación
-
-1. **Página de Inicio**: Muestra todas las categorías de juegos disponibles como tarjetas interactivas
-2. **Lista de Productos**: Al seleccionar una categoría, se muestran los productos disponibles
-3. **Detalle de Producto**: Accede a información completa del juego seleccionado
-
-### Navegación
-
-- **Navbar Fija**: Accede rápidamente a la página de inicio desde cualquier lugar
-- **Breadcrumb**: Visualiza tu ubicación en la jerarquía y navega hacia atrás
-- **Botones de Acción**: Cada elemento tiene botones para acceder a opciones relacionadas
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 📊 Estructura de Datos
-
-### Categorías
-```json
-{
-  "id": 1,
-  "name": "Juegos de Mesa",
-  "description": "Juegos tradicionales y estratégicos"
-}
-```
-
-### Productos
-```json
-{
-  "id": 1,
-  "categoryId": 1,
-  "name": "Carcassonne",
-  "shortDescription": "Juego de construcción de mapa medieval",
-  "longDescription": "Carcassonne es un fascinante juego de construcción...",
-  "price": 29.99,
-  "image": "url-de-imagen",
-  "genre": "Estrategia",
-  "developer": "Klaus Teuber",
-  "players": "2-5",
-  "releaseDate": "2000",
-  "rating": 4.5,
-  "inStock": true
-}
-```
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 🌍 Sistema de Localización (i18n)
-
-### Estructura de Traducciones
-
-Las traducciones se encuentran en `src/locales/es-ES.js` organizadas por secciones:
-
-```javascript
-{
-  brand: { ... },
-  nav: { ... },
-  welcome: { ... },
-  button: { ... },
-  products: { ... },
-  breadcrumb: { ... }
-}
-```
-
-### Uso en Componentes
-
-```jsx
-import { t } from '../locales/i18n'
-
-// Uso simple
-<h1>{t('welcome.title')}</h1>
-
-// Acceso anidado
-<p>{t('products.viewButton')}</p>
-```
-
-### Cambiar Localización
-
-```javascript
-import { setLocale } from '../locales/i18n'
-
-setLocale('es-ES')  // Cambiar a español
-// En futuro: setLocale('en-US') para inglés
-```
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-<a id="integracion-backend"></a>
-
-## 🔄 Integración con Backend
-
-El frontend usa funciones en `src/mocks/api.js` como capa de acceso a datos, pero actualmente esas funciones llaman a endpoints reales del backend.
-
-### Funciones Disponibles
-
-#### `getCategories(options)`
-Consulta categorías desde backend
-```javascript
-const categories = await getCategories({ delayMs: 300 })
-```
-
-#### `getProductsByCategory(categoryId, options)`
-Consulta productos filtrados por categoría desde backend
-```javascript
-const products = await getProductsByCategory(1, { delayMs: 300 })
-```
-
-### Características
-
-- ✅ **Base URL configurable**: `VITE_API_BASE_URL` (archivo `.env`)
-- ✅ **Endpoints reales**: `GET /api/categories` y `GET /api/categories/:id/products`
-- ✅ **Misma interfaz de funciones**: no rompe componentes consumidores
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-<a id="componentes-principales"></a>
-
-## 🎨 Componentes Principales
-
-### NavBar
-Barra de navegación fija en la parte superior con:
-- Logo/marca de la tienda
-- Enlaces de navegación centrados
-- Responsive menu hamburguesa en móviles
-
-### Breadcrumb
-Sistema interactivo de migas de pan que:
-- Muestra la ubicación actual
-- Permite navegar hacia atrás clickeando
-- Se actualiza dinámicamente
-
-### SectionCard
-Componente reutilizable de tarjeta que puede:
-- Mostrar título, subtítulo y descripción
-- Incluir enlaces internos
-- Tener un botón de acción personalizado
-
-### CategoriesList
-Grid responsivo que:
-- Muestra todas las categorías
-- Usa Bootstrap grid layout
-- Tarjetas con efecto hover
-
-### ProductsList
-Grid responsivo que:
-- Muestra productos de una categoría específica
-- Tarjetas con información resumida
-- Botón para ver detalles completos
-
-### ProductDetailScreen
-Pantalla completa que:
-- Muestra imagen grande del producto
-- Información detallada (género, desarrollador, jugadores, etc.)
-- Precio prominente
-- Botón de acción (Añadir al carrito)
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 🎯 Flujo de Navegación
-
-```
-Inicio (Index)
-  ↓
-Categorías (CategoriesList)
-  ↓ [Click en categoría]
-Productos (ProductsList)
-  ↓ [Click en producto]
-Detalle de Producto (ProductDetailScreen)
-  ↓ [Click atrás]
-Vuelve a Productos
-```
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 🔧 Personalización
-
-### Añadir Nueva Categoría
-
-1. Editar `src/mocks/categories.json`
-2. Crear archivo de productos en `src/mocks/products/newCategory.json`
-3. Actualizar el mapeo en backend para exponer la nueva categoría
-
-> Nota: mientras los datos estén en archivos JSON del frontend, el backend los lee desde `frontend/src/mocks`. Si cambias estructura o nombres, actualiza también el backend.
-
-### Cambiar Colores de Bootstrap
-
-Editar los colores en los archivos CSS individuales o agregar variables CSS en `src/index.css`:
-
-```css
-:root {
-  --bs-primary: #new-color;
-  --bs-secondary: #new-color;
-  /* ... más variables ... */
-}
-```
-
-### Traducir a Otro Idioma
-
-1. Crear archivo `src/locales/en-US.js` (o el idioma deseado)
-2. Agregar las traducciones
-3. Registrar en `src/locales/i18n.js`:
-```javascript
-const translations = {
-  'es-ES': es,
-  'en-US': en  // Nuevo idioma
-}
-```
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 📱 Responsividad
-
-La aplicación es completamente responsiva gracias a:
-- **Bootstrap Grid System**: Layout flexible
-- **Media Queries**: Ajustes CSS para diferentes tamaños
-- **Navbar Responsive**: Menú hamburguesa en móviles
-- **Componentes Adaptables**: Se redimensionan según pantalla
-
-### Puntos de Quiebre
-
-- **Extra pequeño**: < 576px (Móviles)
-- **Pequeño**: ≥ 576px (Móviles grandes)
-- **Mediano**: ≥ 768px (Tablets)
-- **Grande**: ≥ 992px (Desktops)
-- **Extra grande**: ≥ 1200px (Desktops grandes)
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 🧪 Testing
-
-El proyecto incluye una suite de tests automatizados para componentes, API e i18n.
-
-### Cobertura de Tests
-
-- ✅ Cobertura de sentencias
-- ✅ Cobertura de funciones
-- ✅ Cobertura de ramas
-
-> Consulta los valores actualizados ejecutando `npm run test:coverage`.
-
-### Ejecutar Tests
+## Testing
 
 ```bash
-# Ejecutar tests una vez
 npm test
-
-# Modo watch (re-ejecuta al cambiar archivos)
 npm run test:watch
-
-# Ver cobertura detallada
 npm run test:coverage
-
-# Ver interfaz gráfica interactiva
 npm run test:ui
 ```
 
-### Framework de Testing
+## Playground de componentes
 
-- **Vitest** (compatible con ES Modules de Vite)
-- **React Testing Library** (testea como un usuario)
-- **@testing-library/jest-dom** (matchers útiles)
+Con frontend en ejecucion:
 
-### Test Suites
+http://localhost:5173/?demo=components
 
-1. **SectionCard.test.jsx**
-   - Renderizado de componentes
-   - Props y estado
-   - Callbacks y eventos
+Parametros utiles:
 
-2. **Breadcrumb.test.jsx**
-   - Navegación interactiva
-   - Estados de renderización
-   - Funciones callback
+- `component=<id>` abre una demo concreta.
+- `q=<texto>` filtra componentes en el menu.
 
-3. **NavBar.test.jsx**
-   - Estructura Bootstrap
-   - Responsive design
-   - Eventos de click
+IDs soportados:
 
-4. **ProductDetailScreen.test.jsx**
-   - Renderizado de datos
-   - Estados de producto
-   - Disponibilidad de stock
+- breadcrumb
+- sectioncard
+- modal
+- categories
+- products
+- product-detail
 
-5. **api.test.js**
-   - Latencia simulada
-   - Filtrado de productos
-   - Manejo de categorías
+## Estructura
 
-6. **i18n.test.js**
-   - Traducción de textos
-   - Cambio de idioma
-   - Acceso a clave anidadas
-
-7. **MainContent.test.jsx**
-  - Orquestación de estado y navegación
-  - Handlers principales de flujo
-  - Renderizado condicional de vistas
-
-8. **CategoriesList.test.jsx**
-  - Renderizado de categorías y descripciones
-  - Callback `onCategorySelect`
-  - Grid Bootstrap e integración con SectionCard
-
-### Cobertura pendiente (sin test unitario dedicado)
-
-Actualmente no existe archivo de test específico para:
-- `ProductsList`
-- `ProductDetailModal`
-- `Index`
-- `App`
-
-Estos casos están parcialmente cubiertos de forma indirecta por pruebas de integración entre componentes.
-
-Para más detalles, consulta [TESTING_GUIDE.md](./TESTING_GUIDE.md).
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 🚀 Mejoras Futuras
-
-- [ ] Carrito de compras con estado persistente
-- [ ] Búsqueda y filtros de productos
-- [ ] Sistema de calificaciones y comentarios
-- [ ] Favoritos/Wishlist
-- [ ] Integración con API real
-- [ ] Autenticación y registro de usuarios
-- [ ] Historial de pedidos
-- [ ] Múltiples idiomas (soporte en i18n)
-- [ ] Tema oscuro
-- [ ] Análisis y seguimiento
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 📄 Documentación del Código
-
-Todo el código incluye comentarios en español explicando:
-- Propósito de cada componente
-- Parámetros y props esperados
-- Lógica de funciones
-- Decisiones de diseño
-
-Para entender mejor un componente específico, consulta el archivo correspondiente donde encontrarás documentación detallada.
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 🐛 Solución de Problemas
-
-### El servidor no inicia
-```bash
-# Eliminar node_modules y reinstalar
-rm -r node_modules
-npm install
-npm run dev
+```text
+frontend/
+|- public/
+|- src/
+|  |- assets/
+|  |- components/
+|  |- data-managers/
+|  |- hooks/
+|  |- locales/
+|  |- mocks/
+|  |- pages/
+|  |- App.jsx
+|  |- main.jsx
+|- tests/
+|- .env.example
+|- package.json
+|- README.md
 ```
 
-### Los estilos no se aplican
-- Asegúrate de que Bootstrap está importado en `src/main.jsx`
-- Verifica que los archivos CSS están importados en los componentes
-- Limpia la caché del navegador (Ctrl+Shift+Delete)
+## Documentacion relacionada
 
-### No se muestran las imágenes
-- Verifica que las URLs en los archivos JSON de productos son correctas
-- Asegúrate de que las imágenes están en `src/assets/` o son URLs válidas
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 📝 Notas de Desarrollo
-
-- **Estado**: La aplicación usa React Hooks (useState) para gestionar el estado
-- **No se usa Redux**: Para este proyecto, el estado es simple y se maneja localmente
-- **CSS**: Se prefiere Bootstrap utilities sobre CSS personalizado
-- **Componentes**: Cada componente está en su propia carpeta con JSX y CSS separados
-- **Convención de extensiones**: Archivos con JSX usan `.jsx`; utilidades, mocks, locales y tests sin JSX usan `.js`; imports internos JS/JSX se escriben sin extensión
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 🤝 Contribuir
-
-Para contribuir al proyecto:
-
-1. Hacer un fork del repositorio
-2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 📞 Contacto
-
-Para preguntas o sugerencias sobre el proyecto, contacta al equipo de desarrollo.
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## 📜 Licencia
-
-Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
-
-[↑ Volver al índice rápido](#indice-rapido)
-
----
-
-**Última actualización**: Febrero 2026  
-**Versión**: 1.0.0  
-**Estado**: ✅ Producción lista
+- [../README.md](../README.md)
+- [../FIRST-INSTALL.md](../FIRST-INSTALL.md)

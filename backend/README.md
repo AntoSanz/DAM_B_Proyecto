@@ -1,129 +1,103 @@
-# Backend (Node.js + Express + SQLite)
+# Backend
 
-API del proyecto con base de datos SQLite y estructura por capas.
-
+API REST del proyecto, construida con Node.js + Express y persistencia SQLite.
 
 ## Requisitos
 
-- Node.js 20+
+- Node.js 20 o superior
 - npm
 
-## Dependencias
+## Instalacion
 
-Solo se mantienen las dependencias necesarias para el backend: `express`, `cors` y `better-sqlite3`. Si añades nuevas, revisa que realmente se usen en el código.
-
-## Instalación
+Desde la carpeta `backend`:
 
 ```bash
-cd backend
 npm install
 ```
 
+O desde la raiz:
+
+```bash
+npm run install:all
+```
+
 ## Arranque
+
+Desde `backend`:
 
 ```bash
 npm start
 ```
 
-Servidor por defecto:
+Servidor por defecto: http://localhost:3000
 
-- `http://localhost:3000`
+## Scripts
 
-## Scripts útiles
-
-- `npm start`: inicia la API
-- `npm run db:reset`: limpia datos, recrea estado base y aplica seed automático de catálogo
-- `npm run db:seed:users`: aplica seed SQL de usuarios demo
-- `npm run db:bootstrap`: ejecuta reset + seed de usuarios en un único comando
-
-## Endpoints actuales
-
-- `GET /health`
-- `GET /api/categories`
-- `GET /api/categories/:id/products`
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-
-### Auth (request body)
-
-`POST /api/auth/register`
-
-```json
-{
-	"email": "user@test.com",
-	"password": "secret123",
-	"name": "Usuario Demo"
-}
-```
-
-`POST /api/auth/login`
-
-```json
-{
-	"email": "user@test.com",
-	"password": "secret123"
-}
-```
-
-Las contraseñas se almacenan con hash `scrypt` + `salt`.
-No se desencriptan: se validan comparando hash de forma segura.
-
-## Estructura recomendada (actual)
-
-- `src/config/`: configuración e inicialización de DB
-- `src/models/`: acceso a datos (SQL/prepared statements)
-- `src/services/`: lógica de negocio
-- `src/controllers/`: manejo de request/response
-- `src/routes/`: definición de endpoints
-- `src/app.js`: composición de middlewares y rutas
-- `src/server.js`: bootstrap del servidor
-
-- `database/seeds/catalog.seed.sql`: seed de categorías y productos
-- `database/seeds/users.seed.sql`: seed SQL de usuarios
+- `npm start`: inicia la API.
+- `npm test`: ejecuta tests del backend.
+- `npm run db:reset`: reinicia datos y deja catalogo base.
+- `npm run db:seed:users`: inserta usuarios demo.
+- `npm run db:bootstrap`: ejecuta reset + usuarios demo.
 
 ## Base de datos
 
-- Driver: `better-sqlite3`
-- Archivo: `backend/database.sqlite`
-- Inicialización: automática al iniciar el servidor (`initializeDatabase()` en `src/config/db.js`)
-- Tablas `users`, `categories` y `products` creadas automáticamente si no existen
+- Motor: better-sqlite3
+- Archivo generado: `backend/database.sqlite`
+- Inicializacion automatica al arrancar servidor
 
-## Seed
+Seeds:
 
-Archivos seed:
+- `database/seeds/catalog.seed.sql`
+- `database/seeds/users.seed.sql`
 
-- `backend/database/seeds/catalog.seed.sql` (carga automática si categorías/productos están vacíos)
-- `backend/database/seeds/users.seed.sql` (ejecución manual)
-
-Flujo sugerido:
-
-1. Ejecuta `npm run db:bootstrap` para dejar la base lista (catálogo + usuarios demo).
-
-Desde la raíz del repo, puedes usar:
+Preparacion recomendada:
 
 ```bash
 npm run db:bootstrap
 ```
 
-Alternativa paso a paso:
+## Endpoints
 
-1. Ejecuta `npm run db:reset` para regenerar base limpia con catálogo.
-2. Ejecuta `npm run db:seed:users` para cargar usuarios demo.
+- GET /health
+- GET /api/categories
+- GET /api/categories/:id/products
+- POST /api/auth/register
+- POST /api/auth/login
 
-Desde la raíz del repo, equivalente:
+Ejemplo `POST /api/auth/register`:
 
-```bash
-npm run db:reset
-npm run db:seed:users
+```json
+{
+  "email": "user@test.com",
+  "password": "secret123",
+  "name": "Usuario Demo"
+}
 ```
 
-## Modelo de usuario
+Ejemplo `POST /api/auth/login`:
 
-Implementado en `src/models/user.model.js` con prepared statements:
+```json
+{
+  "email": "user@test.com",
+  "password": "secret123"
+}
+```
 
-- `create(email, hashedPassword, name)`
-- `findByEmail(email)`
-- `findById(id)`
-- `findAll()`
-- `update(id, data)`
-- `delete(id)`
+## Estructura
+
+```text
+backend/
+|- database/
+|  |- seeds/
+|- src/
+|  |- config/
+|  |- controllers/
+|  |- models/
+|  |- routes/
+|  |- scripts/
+|  |- services/
+|  |- app.js
+|  |- server.js
+|- tests/
+|- README.md
+```
