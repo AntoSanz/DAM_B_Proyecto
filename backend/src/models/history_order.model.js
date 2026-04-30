@@ -4,7 +4,14 @@ const { db } = require('../config/db');
 
 const HistoryOrder = {
     getByUserId(user_id) {
-      return db.prepare('SELECT * FROM history_orders WHERE user_id = ?').all(user_id);
+      return db.prepare(`
+        SELECT h.id, h.user_id, h.order_id, h.fecha,
+               o.detalles
+        FROM history_orders h
+        LEFT JOIN orders o ON o.id = h.order_id
+        WHERE h.user_id = ?
+        ORDER BY h.fecha DESC
+      `).all(user_id);
     },
   getAll() {
     return db.prepare('SELECT * FROM history_orders').all();

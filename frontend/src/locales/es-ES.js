@@ -107,6 +107,16 @@ const es = {
   sectionCard: {
     defaultTitle: 'Card title',
     defaultText: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
+  },
+  historial: {
+    title: 'Historial de pedidos',
+    back: 'Volver',
+    loading: 'Cargando historial...',
+    empty: 'No tienes pedidos en tu historial.',
+    errorLoad: 'No se pudo cargar el historial de pedidos.',
+    colOrder: 'Nº Pedido',
+    colDetails: 'Detalles',
+    colDate: 'Fecha'
   }
 }
 

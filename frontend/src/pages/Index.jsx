@@ -10,6 +10,7 @@ function Index() {
   const [isContactoOpen, setIsContactoOpen] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
   const [showCartScreen, setShowCartScreen] = useState(false);
+  const [showHistorialScreen, setShowHistorialScreen] = useState(false);
   const isLoggedIn = Boolean(currentUser)
   const userName = currentUser?.name || currentUser?.email || t('nav.welcomeFallback')
   const sessionKey = 'dam.currentUser'
@@ -42,6 +43,7 @@ function Index() {
 
   const handleLoginSuccess = (user) => {
     const nextUser = {
+      id: user?.id ?? null,
       email: user?.email || '',
       name: user?.name || '',
     }
@@ -52,7 +54,11 @@ function Index() {
   // Handler para volver al home desde el carrito
   const handleBackToHome = () => {
     setShowCartScreen(false);
-    // Opcional: podrías resetear más estados aquí si quieres limpiar selección
+  };
+
+  // Handler para volver al home desde el historial
+  const handleBackFromHistorial = () => {
+    setShowHistorialScreen(false);
   };
 
   // Handler para requerir login desde el carrito
@@ -69,6 +75,7 @@ function Index() {
         onLogoutClick={() => setIsLogoutModalOpen(true)}
         onShowCartScreen={() => setShowCartScreen(true)}
         onContactoClick={() => setIsContactoOpen(true)}
+        onHistorial={() => setShowHistorialScreen(true)}
       />
       <MainContent
         isLoginModalOpen={isLoginModalOpen}
@@ -81,6 +88,9 @@ function Index() {
         onContactoClose={() => setIsContactoOpen(false)}
         isLoggedIn={isLoggedIn}
         onRequireLogin={handleRequireLogin}
+        showHistorialScreen={showHistorialScreen}
+        onBackFromHistorial={handleBackFromHistorial}
+        currentUser={currentUser}
       />
       <LogoutConfirmModal
         isOpen={isLogoutModalOpen}
