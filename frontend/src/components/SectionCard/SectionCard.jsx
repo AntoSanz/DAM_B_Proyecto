@@ -46,8 +46,9 @@ function SectionCard({
 }) {
   return (
     // Contenedor de tarjeta Bootstrap con ancho dinámico y clases adicionales
-    <div className={`card ${className}`} style={{ width }}>
-      <div className="card-body">
+    // He añadido la clase 'section-card-custom' para que el CSS funcione en todas las vistas
+    <div className={`card section-card-custom ${className}`} style={{ width }}>
+      <div className="card-body d-flex flex-column">
         {/* Renderiza el título si existe */}
         {title && <h5 className="card-title">{title}</h5>}
         
@@ -65,12 +66,11 @@ function SectionCard({
         ))}
         
         {/* Botón de acción - solo se muestra si se proporciona ctaText y onCta callback */}
+        {/* mt-auto empuja el botón al fondo gracias al d-flex del padre */}
         {ctaText && (
-          <div>
-            <button type="button" className="btn btn-primary btn-sm mt-2" onClick={onCta}>
-              {ctaText}
-            </button>
-          </div>
+          <button type="button" className="btn btn-primary btn-sm mt-auto" onClick={onCta}>
+            {ctaText}
+          </button>
         )}
       </div>
     </div>
