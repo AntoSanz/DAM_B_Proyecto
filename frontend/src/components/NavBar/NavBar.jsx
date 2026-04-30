@@ -79,8 +79,8 @@ function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isL
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                <i className="bi bi-star-fill me-1"></i> {t('nav.favorites')}
+              <a className="nav-link" href="#" onClick={(e) => { e.preventDefault(); if (onHistorial) onHistorial(); }}>
+                <i className="bi bi-clock-history me-1"></i> {t('nav.historial')}
               </a>
             </li>
             <li className="nav-item">

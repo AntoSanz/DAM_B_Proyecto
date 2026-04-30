@@ -16,6 +16,7 @@ const es = {
     register: 'Registrarse',
     settings: 'Ajustes',
     favorites: 'Favoritos',
+    historial: 'Historial de pedidos',
     contact: 'Contacto',
     cart: 'Carrito'
   },
