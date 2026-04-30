@@ -34,8 +34,6 @@ function saveCartToStorage(cart) {
 
 function useCarritoDm() {
   const [cart, setCart] = useState(getCartFromStorage());
-  // Nueva función para obtener el total de items
-  const getTotalItems = useCallback(() => cart.reduce((sum, item) => sum + (item.quantity || 1), 0), [cart]);
 
   // Sincroniza con localStorage
   useEffect(() => {
@@ -82,7 +80,6 @@ function useCarritoDm() {
     addToCart,
     removeFromCart,
     clearCart,
-    getTotalItems,
     totalItems: cart.reduce((sum, item) => sum + (item.quantity || 1), 0),
     totalPrice: cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0)
   };

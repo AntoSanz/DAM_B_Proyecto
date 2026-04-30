@@ -6,7 +6,7 @@ import CarritoTooltipList from '../CarritoTooltipList/CarritoTooltipList'
 import { t } from '../../locales/i18n'
 import CustomDropdown from '../CustomDropdown/CustomDropdown'
 
-function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, userName = '', onShowCartScreen, onPerfil, onFavoritos, onHistorial }) {
+function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isLoggedIn = false, userName = '', onShowCartScreen, onHistorial }) {
   const { totalItems } = useCarrito();
   const [showTooltip, setShowTooltip] = React.useState(false);
   const tooltipRef = React.useRef(null);
@@ -109,20 +109,6 @@ function NavBar({ onContactoClick, onHomeClick, onLoginClick, onLogoutClick, isL
                   </button>
                 }
                 items={[
-                  {
-                    id: 'perfil',
-                    nombre: 'Perfil',
-                    type: 'info',
-                    icon: 'person-fill',
-                    onClick: () => { setShowUserMenu(false); if (onPerfil) onPerfil(); }
-                  },
-                  {
-                    id: 'favoritos',
-                    nombre: 'Favoritos',
-                    type: 'info',
-                    icon: 'star-fill',
-                    onClick: () => { setShowUserMenu(false); if (onFavoritos) onFavoritos(); }
-                  },
                   {
                     id: 'historial',
                     nombre: 'Historial',
