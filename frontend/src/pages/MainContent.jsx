@@ -3,6 +3,7 @@ import '../App.css'
 import LoginModal from '../components/LoginModal/LoginModal'
 import MainFlowContent from '../components/MainFlowContent/MainFlowContent'
 import CarritoScreen from '../components/CarritoScreen/CarritoScreen'
+import HistorialScreen from '../components/HistorialScreen/HistorialScreen'
 import { getCategories, getProductsByCategory } from '../mocks/api'
 import Contacto from '../components/Contacto/Contacto'
 
@@ -15,7 +16,7 @@ import Contacto from '../components/Contacto/Contacto'
  * - La renderización condicional de componentes según el contexto
  * - La comunicación entre componentes hermanos
  */
-function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, onLoginSuccess, isContactoOpen, onContactoClose, showCartScreen = false, onShowCartScreen, onBackToHome, isLoggedIn = false, onRequireLogin }) {
+function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, onLoginSuccess, isContactoOpen, onContactoClose, showCartScreen = false, onShowCartScreen, onBackToHome, isLoggedIn = false, onRequireLogin, showHistorialScreen = false, onBackFromHistorial, currentUser }) {
   const [selectedProducts, setSelectedProducts] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [selectedProductDetail, setSelectedProductDetail] = useState(null)
@@ -23,6 +24,7 @@ function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, on
   const [showCart, setShowCart] = useState(false);
   // Permitir control externo (Index) o interno
   const isCartScreen = typeof showCartScreen === 'boolean' ? showCartScreen : showCart;
+  const isHistorialScreen = Boolean(showHistorialScreen);
   const handleShowCartScreen = () => {
     if (onShowCartScreen) onShowCartScreen();
     else setShowCart(true);
@@ -83,13 +85,19 @@ function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, on
       <LoginModal isOpen={isLoginModalOpen} onClose={onLoginModalClose} onLoginSuccess={onLoginSuccess} />
       <Contacto isOpen={isContactoOpen} onClose={onContactoClose} />
 
-      {isCartScreen ? (
+      {isHistorialScreen ? (
+        <HistorialScreen
+          onBack={onBackFromHistorial}
+          currentUser={currentUser}
+        />
+      ) : isCartScreen ? (
         <CarritoScreen 
           onBack={handleHideCartScreen} 
           onHome={handleHomeClick}
           onCloseCartScreen={handleHideCartScreen}
           isLoggedIn={isLoggedIn}
           onRequireLogin={onRequireLogin}
+          currentUser={currentUser}
         />
       ) : (
         children || (

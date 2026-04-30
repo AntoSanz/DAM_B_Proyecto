@@ -1,5 +1,24 @@
 import React, { useEffect, useState, useCallback, useContext, createContext } from 'react';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api';
+
+async function postJson(url, payload) {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(body.message || `Error HTTP ${response.status}`);
+  }
+  return body;
+}
+
+export async function createCheckout(userId, items) {
+  return postJson(`${API_BASE_URL}/checkout`, { user_id: userId, items });
+}
+
 function getCartFromStorage() {
 	try {
 		const stored = localStorage.getItem('cart');

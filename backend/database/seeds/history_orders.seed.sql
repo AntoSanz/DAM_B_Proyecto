@@ -1,0 +1,23 @@
+-- SEED: Tabla history_orders
+DELETE FROM history_orders;
+DELETE FROM sqlite_sequence WHERE name = 'history_orders';
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (1, 1, '2024-04-01 10:05:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (1, 2, '2024-04-02 11:05:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (1, 3, '2024-04-03 12:05:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (1, 4, '2024-04-04 13:05:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (1, 5, '2024-04-05 14:05:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (1, 6, '2024-04-06 15:05:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (1, 7, '2024-04-07 16:05:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (1, 8, '2024-04-08 17:05:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (1, 9, '2024-04-09 18:05:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (1, 10, '2024-04-10 19:05:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (2, 11, '2024-04-01 10:35:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (2, 12, '2024-04-02 11:35:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (2, 13, '2024-04-03 12:35:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (2, 14, '2024-04-04 13:35:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (2, 15, '2024-04-05 14:35:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (2, 16, '2024-04-06 15:35:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (2, 17, '2024-04-07 16:35:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (2, 18, '2024-04-08 17:35:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (2, 19, '2024-04-09 18:35:00');
+INSERT INTO history_orders (user_id, order_id, fecha) VALUES (2, 20, '2024-04-10 19:35:00');

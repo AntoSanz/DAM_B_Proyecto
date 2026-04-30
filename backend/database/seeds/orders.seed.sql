@@ -1,0 +1,23 @@
+-- SEED: Tabla orders
+DELETE FROM orders;
+DELETE FROM sqlite_sequence WHERE name = 'orders';
+INSERT INTO orders (user_id, detalles, fecha) VALUES (1, 'Pedido 1 para admin', '2024-04-01 10:00:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (1, 'Pedido 2 para admin', '2024-04-02 11:00:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (1, 'Pedido 3 para admin', '2024-04-03 12:00:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (1, 'Pedido 4 para admin', '2024-04-04 13:00:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (1, 'Pedido 5 para admin', '2024-04-05 14:00:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (1, 'Pedido 6 para admin', '2024-04-06 15:00:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (1, 'Pedido 7 para admin', '2024-04-07 16:00:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (1, 'Pedido 8 para admin', '2024-04-08 17:00:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (1, 'Pedido 9 para admin', '2024-04-09 18:00:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (1, 'Pedido 10 para admin', '2024-04-10 19:00:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (2, 'Pedido 1 para QA User', '2024-04-01 10:30:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (2, 'Pedido 2 para QA User', '2024-04-02 11:30:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (2, 'Pedido 3 para QA User', '2024-04-03 12:30:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (2, 'Pedido 4 para QA User', '2024-04-04 13:30:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (2, 'Pedido 5 para QA User', '2024-04-05 14:30:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (2, 'Pedido 6 para QA User', '2024-04-06 15:30:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (2, 'Pedido 7 para QA User', '2024-04-07 16:30:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (2, 'Pedido 8 para QA User', '2024-04-08 17:30:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (2, 'Pedido 9 para QA User', '2024-04-09 18:30:00');
+INSERT INTO orders (user_id, detalles, fecha) VALUES (2, 'Pedido 10 para QA User', '2024-04-10 19:30:00');
