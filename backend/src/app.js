@@ -6,6 +6,7 @@ const healthRoutes = require('./routes/health.routes');
 const catalogRoutes = require('./routes/catalog.routes');
 const authRoutes = require('./routes/auth.routes');
 const historyOrderRoutes = require('./routes/history_order.routes');
+const checkoutRoutes = require('./routes/checkout.routes');
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use('/', healthRoutes);
 app.use('/api', catalogRoutes);
 app.use('/api', authRoutes);
 app.use('/api/history-orders', historyOrderRoutes);
+app.use('/api/checkout', checkoutRoutes);
 
 module.exports = app;

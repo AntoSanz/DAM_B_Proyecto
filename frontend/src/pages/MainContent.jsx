@@ -97,6 +97,7 @@ function MainContent({ children, isLoginModalOpen = false, onLoginModalClose, on
           onCloseCartScreen={handleHideCartScreen}
           isLoggedIn={isLoggedIn}
           onRequireLogin={onRequireLogin}
+          currentUser={currentUser}
         />
       ) : (
         children || (
