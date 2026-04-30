@@ -108,47 +108,44 @@
 
 /**
  * Precio del producto
- * 
- * - Tamaño muy grande (2.5rem) para destacar
+ * * - Tamaño muy grande (2.5rem) para destacar
  * - Peso: 700 (bold)
  * - Color verde (#28a745) para indicar "precio disponible"
  * - Margen inferior para separación del botón
  */
-.price {
+ .price {
   font-size: 2.5rem;
   font-weight: 700;
   color: #28a745;
   margin-bottom: 1rem;
 }
 
+/* --- NUEVOS ESTILOS PARA ELIMINAR EL STYLE INLINE --- */
+
 /**
- * Botón "Atrás" (btn-secondary) en la pantalla de detalle
- * 
- * - Margen inferior para separación
+ * Contenedor del selector de cantidad y el botón
+ * (Reemplaza el style={{ display: 'flex' ... }} de la línea 97)
  */
-.product-detail-screen .btn-secondary {
-  margin-bottom: 1.5rem;
+.purchase-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 /**
- * Media query para dispositivos medianos (tablets, max-width 768px)
- * 
- * Ajusta tamaños para mejor visualización en pantallas más pequeñas:
- * - Imagen más compacta (300px)
- * - Precio más pequeño (2rem)
- * - Padding de detalles reducido (1.5rem)
+ * Estilo para el input de cantidad
+ * (Reemplaza el style={{ width: 70 ... }} de la línea 104)
  */
-@media (max-width: 768px) {
-  .product-detail-image {
-    max-height: 300px;
-  }
-
-  .price {
-    font-size: 2rem;
-  }
-
-  .product-details {
-    padding: 1.5rem;
-  }
+.quantity-input-custom {
+  width: 70px !important;
+  text-align: center;
 }
 
+/**
+ * Estilo para el botón de añadir al carrito
+ * (Reemplaza el style={{ whiteSpace: 'nowrap' }} de la línea 111)
+ */
+.add-to-cart-btn-custom {
+  white-space: nowrap;
+}

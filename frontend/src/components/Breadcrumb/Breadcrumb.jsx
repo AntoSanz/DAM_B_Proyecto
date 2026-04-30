@@ -51,7 +51,7 @@ function Breadcrumb({ categoryName, showProducts, showProductDetail, productName
         )}
 
         {/* ELEMENTO 3: Productos - Mostrado en lista de productos (no en detalles) */}
-        {showProducts && !showProductDetail && (
+        {categoryName && showProducts && !showProductDetail && (
           <li className="breadcrumb-item active">
             {t('breadcrumb.products')}
           </li>

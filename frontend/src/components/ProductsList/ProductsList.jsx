@@ -21,7 +21,7 @@ function ProductsList({ products, categoryName, onProductSelect }) {
     // Contenedor principal con grid de Bootstrap (12 columnas)
     <section className="row mt-4">
       {/* Título: Muestra "Productos en [Categoría]" */}
-      <div className="col-12">
+      <div className="col-12 mb-5">
         <h3>{t('products.sectionTitle').replace('{category}', categoryName)}</h3>
       </div>
 
@@ -49,7 +49,7 @@ function ProductsList({ products, categoryName, onProductSelect }) {
               </h6>
 
               {/* Precio formateado a 2 decimales */}
-              <p className="card-text">{t('products.priceLabel')} €{p.price.toFixed(2)}</p>
+              <p className="card-text">{t('products.priceLabel')} {p.price.toFixed(2)} €</p>
 
               {/* Botón que llama a onProductSelect con el producto seleccionado */}
               <button

@@ -19,6 +19,29 @@ const es = {
     contact: 'Contacto',
     cart: 'Carrito'
   },
+  contact: {
+    developmentTeam: "Equipo de desarrollo",
+    people: {
+      antonio: {
+        name: "Antonio",
+        lastname1: "Sanz",
+        lastname2: "Pans",
+        mail: "antonio.sanzpans@alu.ceacfp.es"
+      },
+      daniel: {
+        name: "Daniel",
+        lastname1: "Jordá",
+        lastname2: "Conde",
+        mail: "daniel.jorda@alu.ceacfp.es"
+      },
+      lucas: {
+        name: "Lucas",
+        lastname1: "Ezequiel",
+        lastname2: "Juncos",
+        mail: "lucas.juncos@alu.ceacfp.es"
+      }
+    }
+  },
   welcome: {
     title: 'Bienvenido',
     subtitle: 'Esta es la página índice.'

@@ -3,17 +3,28 @@ import ComponenteModal from '../ComponenteModal/ComponenteModal';
 import { t } from '../../locales/i18n';
 
 function Contacto({ isOpen, onClose }) {
+  const getPersonData = (key) => {
+    const name = t(`contact.people.${key}.name`);
+    const ap1 = t(`contact.people.${key}.lastname1`);
+    const ap2 = t(`contact.people.${key}.lastname2`);
+    const mail = t(`contact.people.${key}.mail`);
+    return `${name} ${ap1} ${ap2} - ${mail}`;
+  };
+
   return (
     <ComponenteModal 
-      isOpenExternal={isOpen}    
-      onOpenChange={onClose}     
-      title={t('nav.contact')}   
-      showTrigger={false}        
+      isOpenExternal={isOpen} 
+      onOpenChange={onClose}
+      title={t('nav.contact')}
+      showTrigger={false}
     >
       <div style={{ textAlign: 'center', color: 'black', padding: '20px' }}>
-        <p><strong>Equipo de desarrollo:</strong></p>
-        <p>Daniel - tu@email.com</p>
-        <p>Antonio - el@email.com</p>
+        <p><strong>{t('contact.developmentTeam')}:</strong></p>
+        
+        {/* Llamamos a la función para cada uno */}
+        <p>{getPersonData('antonio')}</p>
+        <p>{getPersonData('daniel')}</p>
+        <p>{getPersonData('lucas')}</p>
       </div>
     </ComponenteModal>
   );
