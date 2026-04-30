@@ -1,169 +1,105 @@
 # DAM_B_Proyecto
 
-Proyecto fullstack con frontend en React/Vite (`frontend`) y backend en Node.js/Express + SQLite (`backend`).
+Proyecto fullstack con frontend en React + Vite y backend en Node.js + Express + SQLite.
 
-<a id="indice-rapido"></a>
+## Documentacion principal
 
-## Índice rápido
+- Instalacion inicial paso a paso: [FIRST-INSTALL.md](FIRST-INSTALL.md)
+- Frontend: [frontend/README.md](frontend/README.md)
+- Backend: [backend/README.md](backend/README.md)
 
-- [Puesta en marcha rápida](#puesta-en-marcha-rápida)
-- [Demo de componentes (Playground)](#demo-de-componentes-playground)
-- [Scripts disponibles (raíz)](#scripts-disponibles-raíz)
-- [Integración Front-Back](#integración-front-back)
-- [Backend API](#backend-api)
-- [Base de datos SQLite](#base-de-datos-sqlite)
+## Requisitos previos
 
-## Estructura
-
-```text
-DAM_B_Proyecto/
-├── backend/
-│   ├── database/
-│   │   └── seeds/
-│   ├── src/
-│   │   ├── config/
-│   │   ├── controllers/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   ├── scripts/
-│   │   └── services/
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── locales/
-│   │   ├── mocks/
-│   │   │   └── products/
-│   │   └── pages/
-├── tests/
-│   └── integration/
-```
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## Requisitos
-
-- Node.js 20+ (recomendado)
+- Node.js 20 o superior
 - npm
 
-[↑ Volver al índice rápido](#indice-rapido)
+Comprobar version:
 
-## Puesta en marcha rápida
+```bash
+node -v
+npm -v
+```
 
-1. Instala dependencias del frontend y backend:
+## Instalacion (todo el proyecto)
+
+Desde la raiz:
 
 ```bash
 npm run install:all
 ```
 
-2. Levanta frontend + backend juntos (desde la raíz):
+## Configuracion de entorno
 
-```bash
-npm run dev:full
-```
-
-Servicios esperados:
-
-- Frontend: `http://localhost:5173`
-- Backend: `http://localhost:3000`
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## Demo de componentes (Playground)
-
-El frontend incluye un modo de demos para probar componentes de forma aislada.
-
-Acceso rápido:
-
-- `http://localhost:5173/?demo=components`
-
-Resumen:
-
-- Menú lateral con componentes disponibles
-- Vista única por componente
-- Enlaces compartibles con estado de filtro y componente activo
-
-Documentación completa en:
-
-- `frontend/README.md` (sección **Demos de Componentes (Playground)**)
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## Scripts disponibles (raíz)
-
-- `npm run install:all`: instala dependencias de backend y frontend (solo las necesarias, dependencias revisadas y optimizadas)
-- `npm run dev:full`: levanta frontend + backend
-- `npm run dev:front`: levanta solo frontend
-- `npm run dev:back`: levanta solo backend
-- `npm run db:reset`: resetea DB SQLite del backend y carga catálogo
-- `npm run db:seed:users`: aplica seed de usuarios demo en backend
-- `npm run db:bootstrap`: resetea y siembra la base SQLite del backend
-- `npm run test:integration:front-back`: prueba especial de conexión Front-Back (config frontend + API backend + contrato de datos)
-# Notas sobre dependencias
-
-Todas las dependencias de frontend y backend han sido revisadas y solo se mantienen las necesarias para el funcionamiento, desarrollo y testing del proyecto. Si añades nuevas dependencias, revisa que realmente sean usadas en el código.
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## Integración Front-Back
-
-El frontend usa `VITE_API_BASE_URL` para apuntar al backend.
-
-Archivo:
-
-- `frontend/.env`
-
-Valor local por defecto:
+Crear un archivo `.env` dentro de `frontend` con:
 
 ```env
 VITE_API_BASE_URL=http://localhost:3000/api
 ```
 
-[↑ Volver al índice rápido](#indice-rapido)
+Referencia: [frontend/.env.example](frontend/.env.example)
 
-## Backend API
+## Base de datos
 
-Endpoints principales:
-
-- `GET /health`
-- `GET /api/categories`
-- `GET /api/categories/:id/products`
-
-[↑ Volver al índice rápido](#indice-rapido)
-
-## Base de datos SQLite
-
-- Motor: `better-sqlite3`
-- Archivo local: `backend/database.sqlite`
-- Inicialización automática al arrancar backend
-- Seed catálogo (auto): `backend/database/seeds/catalog.seed.sql`
-- Seed usuarios (manual): `backend/database/seeds/users.seed.sql`
-
-Comando recomendado para dejar DB lista en backend:
+Preparar base SQLite con catalogo y usuarios demo:
 
 ```bash
-npm --prefix backend run db:bootstrap
+npm run db:bootstrap
 ```
 
-Flujo recomendado desde la raíz:
+Alternativa paso a paso:
 
 ```bash
-# Opción rápida (recomendada)
-npm run db:bootstrap
-
-# Opción paso a paso
 npm run db:reset
 npm run db:seed:users
 ```
 
-[↑ Volver al índice rápido](#indice-rapido)
+## Ejecucion
 
-## Git y archivos ignorados
+Levantar frontend + backend:
 
-En `.gitignore` ya está configurado:
+```bash
+npm run dev:full
+```
 
-- `node_modules/`
-- `*.sqlite`
-- `*.sqlite3`
-- `*.db`
+Servicios:
 
-[↑ Volver al índice rápido](#indice-rapido)
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3000
+- Health: http://localhost:3000/health
+
+Levantar por separado:
+
+```bash
+npm run dev:front
+npm run dev:back
+```
+
+## Scripts de la raiz
+
+- `npm run install:all`: instala frontend y backend.
+- `npm run dev:full`: levanta frontend y backend.
+- `npm run dev:front`: levanta solo frontend.
+- `npm run dev:back`: levanta solo backend.
+- `npm run db:reset`: reinicia DB y carga catalogo.
+- `npm run db:seed:users`: carga usuarios demo.
+- `npm run db:bootstrap`: reset + seed de usuarios.
+- `npm run test:integration:front-back`: prueba de integracion front-back.
+
+## Endpoints principales
+
+- GET /health
+- GET /api/categories
+- GET /api/categories/:id/products
+- POST /api/auth/register
+- POST /api/auth/login
+
+## Estructura general
+
+```text
+DAM_B_Proyecto/
+|- backend/
+|- frontend/
+|- tests/integration/
+|- FIRST-INSTALL.md
+|- README.md
+```
