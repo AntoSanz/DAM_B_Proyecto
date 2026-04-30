@@ -21,7 +21,7 @@ function ProductsList({ products, categoryName, onProductSelect }) {
     // Contenedor principal con grid de Bootstrap (12 columnas)
     <section className="row mt-4">
       {/* Título: Muestra "Productos en [Categoría]" */}
-      <div className="col-12 mb-5">
+      <div className="col-12 mb-5 mb-4">
         <h3>{t('products.sectionTitle').replace('{category}', categoryName)}</h3>
       </div>
 
@@ -31,11 +31,10 @@ function ProductsList({ products, categoryName, onProductSelect }) {
         - En móvil: 1 producto por fila (col-12)
       */}
       {products.map((p) => (
-        <div key={p.id} className="col-12 col-md-4 d-flex justify-content-center mb-3">
+        <div key={p.id} className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex justify-content-center mb-3">
           {/* Tarjeta de Bootstrap */}
           <div 
-            className="card" 
-            style={{ width: '18rem' }}
+            className="card product-card-custom" 
             id={`product-card-${p.id}`}
             data-product-id={p.id}
           >
