@@ -10,7 +10,9 @@
     "db:reset": "npm --prefix backend run db:reset",
     "db:seed:users": "npm --prefix backend run db:seed:users",
     "db:bootstrap": "npm --prefix backend run db:bootstrap",
-    "test:integration:front-back": "node tests/integration/front-back.integration.js"
+    "test:front": "npm --prefix frontend test",
+    "test:back": "node --test --test-concurrency=1 tests/back/*.test.js",
+    "test:integration": "node tests/integration/front-back.integration.js"
   },
   "dependencies": {
     "react-router-dom": "^7.13.1"

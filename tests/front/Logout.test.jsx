@@ -1,54 +1,24 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
-import Index from '../src/pages/Index'
-import LogoutConfirmModal from '../src/components/LogoutConfirmModal/LogoutConfirmModal'
-
-vi.mock('../src/data-managers/CarritoDm', () => ({
-  useCarrito: () => ({
-    totalItems: 0,
-    addToCart: vi.fn(),
-    removeFromCart: vi.fn(),
-    clearCart: vi.fn(),
-    cart: [],
-    totalPrice: 0
-  })
-}))
+import Index from '../../frontend/src/pages/Index'
+import LogoutConfirmModal from '../../frontend/src/components/LogoutConfirmModal/LogoutConfirmModal'
 
 const SESSION_KEY = 'dam.currentUser'
 
 describe('Index logout flow', () => {
   test('borra sessionStorage al confirmar desconexion', async () => {
-    sessionStorage.clear()
     sessionStorage.setItem(SESSION_KEY, JSON.stringify({ name: 'Demo User', email: 'demo@test.com' }))
 
-    const { container } = render(<Index />)
+    render(<Index />)
 
-    // Buscar botón de desconectar de forma más flexible
-    const logoutButton = screen.queryAllByRole('button').find(btn => 
-      btn.textContent?.toLowerCase().includes('desconectar')
-    )
-    
-    if (logoutButton) {
-      fireEvent.click(logoutButton)
-      
-      // Intentar encontrar el modal
-      try {
-        const dialog = await screen.findByRole('dialog').catch(() => null)
-        if (dialog) {
-          const confirmButton = within(dialog).queryAllByRole('button').find(btn => 
-            btn.textContent?.toLowerCase().includes('desconectar')
-          )
-          if (confirmButton) {
-            fireEvent.click(confirmButton)
-          }
-        }
-      } catch (e) {
-        // Si no hay modal, solo verificar que el sessionStorage fue usado
-      }
-    }
-    
-    // Verificar que el componente se renderizó correctamente
-    expect(container.firstChild).toBeTruthy()
+    const logoutButton = screen.getByRole('button', { name: /desconectar/i })
+    fireEvent.click(logoutButton)
+
+    const dialog = await screen.findByRole('dialog')
+    const confirmButton = within(dialog).getByRole('button', { name: /desconectar/i })
+    fireEvent.click(confirmButton)
+
+    expect(sessionStorage.getItem(SESSION_KEY)).toBe(null)
   })
 })
 

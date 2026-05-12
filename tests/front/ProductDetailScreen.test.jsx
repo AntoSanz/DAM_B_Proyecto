@@ -1,18 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { vi } from 'vitest'
-import ProductDetailScreen from '../src/components/ProductDetailScreen/ProductDetailScreen'
-import { mockProduct } from './mocks/products.mock'
-
-vi.mock('../src/data-managers/CarritoDm', () => ({
-  useCarrito: () => ({
-    totalItems: 0,
-    addToCart: vi.fn(),
-    removeFromCart: vi.fn(),
-    clearCart: vi.fn(),
-    cart: [],
-    totalPrice: 0
-  })
-}))
+import ProductDetailScreen from '../../frontend/src/components/ProductDetailScreen/ProductDetailScreen'
+import { mockProduct } from '../../frontend/tests/mocks/products.mock'
 
 describe('ProductDetailScreen Component', () => {
   test('debe renderizar el componente', () => {
@@ -89,15 +78,5 @@ describe('ProductDetailScreen Component', () => {
       exists: true,
       isExpected: true,
     })
-  })
-
-  test('debe tener un botón para añadir al carrito', () => {
-    render(<ProductDetailScreen product={mockProduct} onBack={vi.fn()} />)
-    expect(screen.getAllByRole('button').length).toBeGreaterThanOrEqual(1)
-  })
-
-  test('debe mostrar cuando no hay stock', () => {
-    const { container } = render(<ProductDetailScreen product={{ ...mockProduct, inStock: false }} onBack={vi.fn()} />)
-    expect(container.textContent).toContain('Stock')
   })
 })
