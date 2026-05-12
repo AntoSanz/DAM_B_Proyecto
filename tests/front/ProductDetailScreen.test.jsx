@@ -3,6 +3,17 @@ import { vi } from 'vitest'
 import ProductDetailScreen from '../../frontend/src/components/ProductDetailScreen/ProductDetailScreen'
 import { mockProduct } from '../../frontend/tests/mocks/products.mock'
 
+vi.mock('../../frontend/src/data-managers/CarritoDm', () => ({
+  useCarrito: () => ({
+    totalItems: 0,
+    addToCart: vi.fn(),
+    removeFromCart: vi.fn(),
+    clearCart: vi.fn(),
+    cart: [],
+    totalPrice: 0,
+  }),
+}))
+
 describe('ProductDetailScreen Component', () => {
   test('debe renderizar el componente', () => {
     render(<ProductDetailScreen product={mockProduct} onBack={vi.fn()} />)

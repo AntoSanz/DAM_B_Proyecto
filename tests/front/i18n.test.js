@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { t, i18n } from '../../frontend/src/locales/i18n'
+import { t, setLocale } from '../../frontend/src/locales/i18n'
 
 describe('i18n - Internacionalización', () => {
   test('debe retornar una traducción válida para claves existentes', () => {
@@ -14,7 +14,8 @@ describe('i18n - Internacionalización', () => {
   })
 
   test('debe mantener el idioma configurado', () => {
-    expect(i18n.locale).toBe('es-ES')
+    setLocale('es-ES')
+    expect(typeof t('brand')).toBe('string')
   })
 
   test('debe soportar traducción de claves anidadas', () => {

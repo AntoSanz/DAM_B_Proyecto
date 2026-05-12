@@ -21,7 +21,7 @@ describe('CarritoScreen Component', () => {
     })
 
     render(<CarritoScreen onBack={vi.fn()} onHome={vi.fn()} />)
-    expect(screen.getByText('El carrito esta vacio.')).toBeInTheDocument()
+    expect(screen.getByText('El carrito está vacío.')).toBeInTheDocument()
   })
 
   test('quita item al pulsar boton Quitar', () => {

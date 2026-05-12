@@ -3,6 +3,17 @@ import { describe, expect, test, vi } from 'vitest'
 import Index from '../../frontend/src/pages/Index'
 import LogoutConfirmModal from '../../frontend/src/components/LogoutConfirmModal/LogoutConfirmModal'
 
+vi.mock('../../frontend/src/data-managers/CarritoDm', () => ({
+  useCarrito: () => ({
+    totalItems: 0,
+    addToCart: vi.fn(),
+    removeFromCart: vi.fn(),
+    clearCart: vi.fn(),
+    cart: [],
+    totalPrice: 0,
+  }),
+}))
+
 const SESSION_KEY = 'dam.currentUser'
 
 describe('Index logout flow', () => {
@@ -11,7 +22,8 @@ describe('Index logout flow', () => {
 
     render(<Index />)
 
-    const logoutButton = screen.getByRole('button', { name: /desconectar/i })
+    fireEvent.click(screen.getByRole('button', { name: /bienvenido/i }))
+    const logoutButton = screen.getByText(/^Desconectar$/)
     fireEvent.click(logoutButton)
 
     const dialog = await screen.findByRole('dialog')
@@ -37,7 +49,7 @@ describe('LogoutConfirmModal Component', () => {
 
     expect(screen.getByText(/seguro que quieres desconectar/i)).toBeInTheDocument()
 
-    fireEvent.click(screen.getByText(/cancelar/i))
+    fireEvent.click(screen.getByText(/^Cancelar$/))
 
     expect(onCancel).toHaveBeenCalledTimes(1)
     expect(onConfirm).not.toHaveBeenCalled()

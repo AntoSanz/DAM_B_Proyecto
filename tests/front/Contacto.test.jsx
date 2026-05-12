@@ -18,7 +18,7 @@ describe('Contacto Component', () => {
   test('al cerrar modal llama onClose(false)', () => {
     const onClose = vi.fn()
     render(<Contacto isOpen={true} onClose={onClose} />)
-    fireEvent.click(screen.getByRole('button', { name: 'Cerrar' }))
+    fireEvent.click(screen.getByText(/^Cerrar$/))
     expect(onClose).toHaveBeenCalledWith(false)
   })
 

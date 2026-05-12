@@ -29,7 +29,13 @@ describe('useAuthModalState Hook', () => {
     act(() => {
       result.current.setLoginEmail('admin@test.com')
       result.current.setLoginPass('123456')
+    })
+
+    act(() => {
       result.current.changeStep('login')
+    })
+
+    act(() => {
       result.current.changeStep('register')
     })
 
@@ -46,9 +52,12 @@ describe('useAuthModalState Hook', () => {
       useAuthModalState({ isOpen: true, onClose: vi.fn(), onLoginSuccess })
     )
 
-    await act(async () => {
+    act(() => {
       result.current.setLoginEmail('admin@test.com')
       result.current.setLoginPass('admin123')
+    })
+
+    await act(async () => {
       await result.current.submitLogin()
     })
 
