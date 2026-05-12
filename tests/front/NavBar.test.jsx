@@ -1,17 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
-import NavBar from '../src/components/NavBar/NavBar'
-
-vi.mock('../src/data-managers/CarritoDm', () => ({
-  useCarrito: () => ({
-    totalItems: 0,
-    addToCart: vi.fn(),
-    removeFromCart: vi.fn(),
-    clearCart: vi.fn(),
-    cart: [],
-    totalPrice: 0
-  })
-}))
+import NavBar from '../../frontend/src/components/NavBar/NavBar'
 
 describe('NavBar Component', () => {
   test('debe renderizar el navbar', () => {

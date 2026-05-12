@@ -5,6 +5,7 @@ Proyecto fullstack con frontend en React + Vite y backend en Node.js + Express +
 ## Documentacion principal
 
 - Instalacion inicial paso a paso: [FIRST-INSTALL.md](FIRST-INSTALL.md)
+- Guia de tests (front, back e integracion): [TEST.md](TEST.md)
 - Frontend: [frontend/README.md](frontend/README.md)
 - Backend: [backend/README.md](backend/README.md)
 
@@ -83,7 +84,8 @@ npm run dev:back
 - `npm run db:reset`: reinicia DB y carga catalogo.
 - `npm run db:seed:users`: carga usuarios demo.
 - `npm run db:bootstrap`: reset + seed de usuarios.
-- `npm run test:integration:front-back`: prueba de integracion front-back.
+- `npm run test:back`: ejecuta los tests de backend en `tests/back`.
+- `npm run test:integration`: prueba de integracion front-back.
 
 ## Endpoints principales
 
