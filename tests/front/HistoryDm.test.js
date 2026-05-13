@@ -45,7 +45,7 @@ describe('HistoryDm - Data Manager', () => {
       })
     )
     
-    expect(HistoryDm.getHistoryByUserId(999)).rejects.toThrow()
+    await expect(HistoryDm.getHistoryByUserId(999)).rejects.toThrow()
   })
 
   test('debe tener export default con la función', async () => {

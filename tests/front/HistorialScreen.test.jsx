@@ -8,6 +8,10 @@ vi.mock('../../frontend/src/data-managers/HistoryDm', () => ({
   getHistoryByUserId: (...args) => getHistoryByUserIdMock(...args),
 }))
 
+beforeEach(() => {
+  vi.clearAllMocks()
+})
+
 describe('HistorialScreen Component', () => {
   test('carga historial del usuario y renderiza filas', async () => {
     getHistoryByUserIdMock.mockResolvedValue([
@@ -46,6 +50,11 @@ describe('HistorialScreen Component', () => {
     getHistoryByUserIdMock.mockResolvedValue([])
     const onBack = vi.fn()
     render(<HistorialScreen onBack={onBack} currentUser={{ id: 7 }} />)
+
+    await waitFor(() => {
+      expect(getHistoryByUserIdMock).toHaveBeenCalledWith(7)
+      expect(screen.getByText(/No tienes pedidos en tu historial/i)).toBeInTheDocument()
+    })
 
     fireEvent.click(screen.getByRole('button', { name: /Volver/i }))
     expect(onBack).toHaveBeenCalledTimes(1)

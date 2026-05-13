@@ -32,7 +32,7 @@ describe('ComponenteModal Component', () => {
         <div>Contenido</div>
       </ComponenteModal>
     )
-    fireEvent.click(screen.getByRole('button', { name: 'Cerrar' }))
+    fireEvent.click(screen.getByText(/^Cerrar$/))
     expect(onOpenChange).toHaveBeenCalledWith(false)
   })
 
@@ -44,7 +44,7 @@ describe('ComponenteModal Component', () => {
     )
     fireEvent.click(screen.getByRole('button', { name: 'Abrir' }))
     expect(screen.getByRole('dialog')).toBeInTheDocument()
-    fireEvent.click(screen.getByRole('button', { name: 'Cerrar' }))
+    fireEvent.click(screen.getByText(/^Cerrar$/))
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 })

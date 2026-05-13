@@ -4,16 +4,14 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   test: {
-    // Usar jsdom para simulation del DOM del navegador
     environment: 'jsdom',
-    
-    // Cargar configuración de setup antes de los tests
+
+    include: ['../tests/front/**/*.{test,spec}.{js,jsx}'],
+
     setupFiles: './vitest.setup.js',
-    
-    // Incluir automáticamente funciones de testing globales (describe, it, etc.)
+
     globals: true,
-    
-    // Mostrar cobertura en la consola
+
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],

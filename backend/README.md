@@ -1,6 +1,6 @@
 # Backend
 
-API REST del proyecto, construida con Node.js + Express y persistencia SQLite.
+API REST construida con Node.js + Express y persistencia local SQLite.
 
 ## Requisitos
 
@@ -9,13 +9,13 @@ API REST del proyecto, construida con Node.js + Express y persistencia SQLite.
 
 ## Instalacion
 
-Desde la carpeta `backend`:
+Desde la carpeta backend:
 
 ```bash
 npm install
 ```
 
-O desde la raiz:
+Desde la raiz del repositorio:
 
 ```bash
 npm run install:all
@@ -23,7 +23,7 @@ npm run install:all
 
 ## Arranque
 
-Desde `backend`:
+Desde backend:
 
 ```bash
 npm start
@@ -31,24 +31,41 @@ npm start
 
 Servidor por defecto: http://localhost:3000
 
-## Scripts
+## Arquitectura por capas
 
-- `npm start`: inicia la API.
-- `npm test`: ejecuta tests del backend.
-- `npm run db:reset`: reinicia datos y deja catalogo base.
-- `npm run db:seed:users`: inserta usuarios demo.
-- `npm run db:bootstrap`: ejecuta reset + usuarios demo.
+1. Rutas: definen endpoints HTTP y delegan en controladores.
+2. Controladores: validan request/response y orquestan casos de uso.
+3. Servicios: encapsulan logica de dominio cuando aplica.
+4. Modelos: acceso a datos SQLite y transformacion de registros.
+5. Config DB: conexion, pragma y bootstrap de tablas/seeds.
+
+Estructura de codigo:
+
+```text
+src/
+|- app.js
+|- server.js
+|- config/
+|  |- db.js
+|- routes/
+|- controllers/
+|- services/
+|- models/
+|- scripts/
+```
 
 ## Base de datos
 
 - Motor: better-sqlite3
-- Archivo generado: `backend/database.sqlite`
-- Inicializacion automatica al arrancar servidor
+- Archivo: backend/database.sqlite
+- Inicializacion de tablas al levantar el servidor
 
-Seeds:
+Semillas disponibles:
 
-- `database/seeds/catalog.seed.sql`
-- `database/seeds/users.seed.sql`
+- database/seeds/catalog.seed.sql
+- database/seeds/users.seed.sql
+- database/seeds/orders.seed.sql
+- database/seeds/history_orders.seed.sql
 
 Preparacion recomendada:
 
@@ -56,15 +73,41 @@ Preparacion recomendada:
 npm run db:bootstrap
 ```
 
+## Scripts
+
+- `npm start`: inicia la API.
+- `npm test`: ejecuta tests locales de backend.
+- `npm run db:reset`: limpia tablas y secuencias.
+- `npm run db:seed:users`: inserta usuarios demo.
+- `npm run db:bootstrap`: prepara base completa para desarrollo.
+
 ## Endpoints
 
+Salud:
+
 - GET /health
+
+Catalogo:
+
 - GET /api/categories
 - GET /api/categories/:id/products
+
+Autenticacion:
+
 - POST /api/auth/register
 - POST /api/auth/login
 
-Ejemplo `POST /api/auth/register`:
+Checkout e historial:
+
+- POST /api/checkout
+- GET /api/history-orders
+- GET /api/history-orders/:id
+- GET /api/history-orders/user/:user_id
+- POST /api/history-orders
+- PUT /api/history-orders/:id
+- DELETE /api/history-orders/:id
+
+Ejemplo de registro:
 
 ```json
 {
@@ -74,7 +117,7 @@ Ejemplo `POST /api/auth/register`:
 }
 ```
 
-Ejemplo `POST /api/auth/login`:
+Ejemplo de login:
 
 ```json
 {
@@ -83,21 +126,12 @@ Ejemplo `POST /api/auth/login`:
 }
 ```
 
-## Estructura
+## Testing
 
-```text
-backend/
-|- database/
-|  |- seeds/
-|- src/
-|  |- config/
-|  |- controllers/
-|  |- models/
-|  |- routes/
-|  |- scripts/
-|  |- services/
-|  |- app.js
-|  |- server.js
-|- tests/
-|- README.md
+Desde la raiz se ejecuta la suite backend principal con:
+
+```bash
+npm run test:back
 ```
+
+Documentacion de pruebas: ../TEST.md

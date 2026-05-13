@@ -12,7 +12,7 @@ describe('CarritoTooltipList Component', () => {
   test('muestra mensaje de carrito vacio', () => {
     useCarritoMock.mockReturnValue({ cart: [] })
     render(<CarritoTooltipList />)
-    expect(screen.getByText('El carrito esta vacio.')).toBeInTheDocument()
+    expect(screen.getByText('El carrito está vacío.')).toBeInTheDocument()
   })
 
   test('renderiza items, cantidad y subtotal', () => {

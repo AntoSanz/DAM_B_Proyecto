@@ -98,5 +98,15 @@ describe('MainContent auth flow', () => {
     fireEvent.change(screen.getByLabelText(/repetir contraseña/i), { target: { value: '12345' } })
     fireEvent.change(screen.getByLabelText(/nombre de usuario/i), { target: { value: 'nuevoUser' } })
     fireEvent.click(screen.getByRole('button', { name: /^registrarse$/i }))
+
+    await waitFor(() => {
+      expect(screen.getByText(/al menos 6 caracteres/i)).toBeInTheDocument()
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: /atr[aá]s/i }))
+
+    await waitFor(() => {
+      expect(screen.queryByText(/al menos 6 caracteres/i)).not.toBeInTheDocument()
+    })
   })
 })

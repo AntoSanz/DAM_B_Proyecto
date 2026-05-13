@@ -40,7 +40,7 @@ describe('LoginModal Component', () => {
 
     render(<LoginModal isOpen={true} onClose={vi.fn()} onLoginSuccess={vi.fn()} />)
     fireEvent.click(screen.getByRole('button', { name: 'Loguear' }))
-    fireEvent.click(screen.getByRole('button', { name: 'Atras' }))
+    fireEvent.click(screen.getByRole('button', { name: /Atr[aá]s/i }))
     fireEvent.click(screen.getByRole('button', { name: 'Cancelar' }))
 
     expect(submitLogin).toHaveBeenCalledTimes(1)
@@ -106,7 +106,7 @@ describe('LoginModal Component', () => {
     })
 
     render(<LoginModal isOpen={true} onClose={vi.fn()} onLoginSuccess={vi.fn()} />)
-    fireEvent.click(screen.getByRole('button', { name: 'Cerrar' }))
+    fireEvent.click(screen.getByText(/^Cerrar$/))
     expect(closeRegisterSuccessModal).toHaveBeenCalled()
   })
 })

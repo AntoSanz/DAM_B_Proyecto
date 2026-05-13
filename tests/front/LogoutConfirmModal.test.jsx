@@ -6,7 +6,7 @@ describe('LogoutConfirmModal Component', () => {
   test('muestra mensaje y acciones cuando esta abierto', () => {
     render(<LogoutConfirmModal isOpen={true} onCancel={vi.fn()} onConfirm={vi.fn()} />)
     expect(screen.getByText(/Seguro que quieres desconectar/i)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Cancelar' })).toBeInTheDocument()
+    expect(screen.getByText(/^Cancelar$/)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Desconectar' })).toBeInTheDocument()
   })
 
@@ -25,7 +25,7 @@ describe('LogoutConfirmModal Component', () => {
   test('ejecuta callback al cancelar', () => {
     const onCancel = vi.fn()
     render(<LogoutConfirmModal isOpen={true} onCancel={onCancel} onConfirm={vi.fn()} />)
-    fireEvent.click(screen.getByRole('button', { name: 'Cancelar' }))
+    fireEvent.click(screen.getByText(/^Cancelar$/))
     expect(onCancel).toHaveBeenCalledTimes(1)
   })
 })

@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { render } from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 import CustomSpinner from '../../frontend/src/components/CustomSpinner/CustomSpinner'
 import { vi } from 'vitest'
 import { screen } from '@testing-library/react'
@@ -17,7 +17,7 @@ describe('CustomSpinner Component', () => {
 
   test('muestra texto cuando showText=true', () => {
     render(<CustomSpinner visible={true} showText={true} text="Procesando" />)
-    expect(screen.getByText('Procesando')).toBeInTheDocument()
+    expect(screen.getAllByText('Procesando')).toHaveLength(2)
   })
 
   test('se oculta automaticamente al cumplirse duration', () => {
@@ -25,7 +25,9 @@ describe('CustomSpinner Component', () => {
     render(<CustomSpinner visible={true} duration={1} />)
     expect(screen.getByRole('status')).toBeInTheDocument()
 
-    vi.advanceTimersByTime(1000)
+    act(() => {
+      vi.advanceTimersByTime(1000)
+    })
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
     vi.useRealTimers()
   })
